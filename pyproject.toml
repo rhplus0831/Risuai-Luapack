@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "risuai-luapack"
+version = "0.0.1"
+description = "Bundle, type-check, and test Risu Lua scripts off-platform"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = ["lupa>=2.0"]
+
+[project.optional-dependencies]
+dev = ["pytest>=7"]
+
+[tool.setuptools.packages.find]
+include = ["luapack*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
