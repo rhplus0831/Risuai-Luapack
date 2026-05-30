@@ -1,3 +1,6 @@
 bin
 __pycache__
 Refer
+dist/
+.pytest_cache/
+*.egg-info/

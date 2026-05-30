@@ -23,7 +23,7 @@ from typing import Optional
 
 from .emulator import Message, RisuEmulator, RisuState
 
-__all__ = ["load", "RisuEmulator", "RisuState", "Message"]
+__all__ = ["load", "load_pack", "RisuEmulator", "RisuState", "Message"]
 
 
 def load(bundle: str, state: Optional[RisuState] = None, **state_kwargs) -> RisuEmulator:
@@ -31,3 +31,15 @@ def load(bundle: str, state: Optional[RisuState] = None, **state_kwargs) -> Risu
     emu = RisuEmulator(state if state is not None else RisuState(**state_kwargs))
     emu.load(bundle)
     return emu
+
+
+def load_pack(pack_dir: str, state: Optional[RisuState] = None, **state_kwargs) -> RisuEmulator:
+    """Bundle a pack directory in memory and load the result, like Risu would.
+
+    Tests the actual amalgamated output (module require resolution, handler
+    registration), not a hand-written single file.
+    """
+    from . import bundler
+
+    bundle = bundler.build_pack(pack_dir)["bundle"]
+    return load(bundle, state=state, **state_kwargs)

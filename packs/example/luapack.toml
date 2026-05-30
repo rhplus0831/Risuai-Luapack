@@ -1,0 +1,6 @@
+[pack]
+name = "example"
+entry = "main"
+src = "src"
+out = "dist/bundle.lua"
+low_level_access = false
