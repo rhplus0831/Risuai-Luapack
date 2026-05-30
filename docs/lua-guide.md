@@ -42,6 +42,40 @@ end)
 
 Full mode table: [lua-api.md#entry-points](./lua-api.md#entry-points).
 
+## Chat buttons
+
+Risu chat text is rendered as sanitized HTML. To put a clickable button in a
+message, insert a normal HTML `<button>` tag into the chat text. Risu listens
+for two button attributes:
+
+- `risu-trigger="TriggerName"` runs a normal Risu trigger by name.
+- `risu-btn="payload"` runs Lua button scripts in `onButtonClick(id, data)`;
+  `data` is the attribute value.
+
+Use `class="button-default"` if you want the built-in Risu button styling. Risu
+prefixes chat CSS classes internally, so this becomes the styled
+`x-risu-button-default` class at display time.
+
+```lua
+function onStart(id)
+    addChat(id, 'char',
+        'Choose: <button class="button-default" risu-btn="inspect">Inspect</button>')
+end
+
+function onButtonClick(id, data)
+    if data == 'inspect' then
+        addChat(id, 'char', 'You clicked Inspect.')
+    end
+end
+```
+
+To run a non-Lua trigger instead, use `risu-trigger`:
+
+```lua
+addChat(id, 'char',
+    '<button class="button-default" risu-trigger="OpenMenu">Open menu</button>')
+```
+
 ## The `id` access key (the #1 gotcha)
 
 Every host call takes an opaque `id` as its **first argument** — the access key
