@@ -56,6 +56,16 @@ Use `class="button-default"` if you want the built-in Risu button styling. Risu
 prefixes chat CSS classes internally, so this becomes the styled
 `x-risu-button-default` class at display time.
 
+There are two common Lua patterns:
+
+- Use `risu-btn` when every button should enter one central
+  `onButtonClick(id, data)` handler and dispatch on the payload.
+- Use `risu-trigger` when the button should run a named manual trigger. If that
+  trigger is a Lua trigger, Risu runs the Lua script with mode set to the trigger
+  name, so a global function with the same name is called. This is the pattern
+  used by scripts that define handlers such as `btnToggleVN(id)` and render a
+  button with `risu-trigger="btnToggleVN"`.
+
 ```lua
 function onStart(id)
     addChat(id, 'char',
@@ -69,11 +79,24 @@ function onButtonClick(id, data)
 end
 ```
 
-To run a non-Lua trigger instead, use `risu-trigger`:
+To run a named manual trigger instead, use `risu-trigger`:
 
 ```lua
 addChat(id, 'char',
     '<button class="button-default" risu-trigger="OpenMenu">Open menu</button>')
+```
+
+For the global-function style, the trigger name and function name must match:
+
+```lua
+function btnToggleVN(id)
+    local mode = getChatVar(id, 'uiVnMode')
+    setChatVar(id, 'uiVnMode', mode == 'ON' and 'OFF' or 'ON')
+    reloadDisplay(id)
+end
+
+-- Render this in chat/display HTML:
+-- <button class="button-default" risu-trigger="btnToggleVN">VN</button>
 ```
 
 ## The `id` access key (the #1 gotcha)
