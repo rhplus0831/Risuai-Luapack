@@ -11,11 +11,19 @@ import argparse
 import os
 import subprocess
 import sys
+import urllib.error
+import urllib.request
 
 from . import bundler, docgen
 from .emulator import LuaSyntaxError, RisuEmulator
 
 _REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+# Single-file source fetch - no git, no full 186 MB clone.
+RISU_RAW_URL = (
+    "https://raw.githubusercontent.com/kwaroran/RisuAI/{ref}"
+    "/src/ts/process/scriptings.ts"
+)
 
 _TOML_TMPL = """[pack]
 name = "{name}"
@@ -129,6 +137,33 @@ def cmd_docs(args) -> int:
     return 0
 
 
+def cmd_sync_source(args) -> int:
+    ref = args.ref or docgen.RISU_REF
+    url = RISU_RAW_URL.format(ref=ref)
+    dest = docgen.DEFAULT_SCRIPTINGS
+    print(f"fetching {url}")
+    try:
+        with urllib.request.urlopen(url, timeout=30) as resp:
+            data = resp.read()
+    except urllib.error.HTTPError as exc:
+        print(f"fetch failed: HTTP {exc.code} for ref '{ref}' - is the ref correct?")
+        return 1
+    except Exception as exc:  # network / SSL / timeout
+        print(f"fetch failed: {exc}")
+        return 1
+    # Guard against writing a non-source 200 response (e.g. an HTML error page).
+    if b"declareAPI(" not in data:
+        print("fetch failed: response is not scriptings.ts (no declareAPI found); not writing.")
+        return 1
+    os.makedirs(os.path.dirname(dest), exist_ok=True)
+    with open(dest, "wb") as fh:
+        fh.write(data)
+    print(f"wrote {os.path.relpath(dest, _REPO_ROOT)} ({len(data)} bytes) @ {ref[:10]}")
+    if ref != docgen.RISU_REF:
+        print("note: not the pinned ref - run `python -m luapack docs` and pytest to inspect drift.")
+    return 0
+
+
 def _write(path: str, content: str) -> None:
     with open(path, "w", encoding="utf-8", newline="\n") as fh:
         fh.write(content)
@@ -151,6 +186,10 @@ def main(argv=None) -> int:
     pdocs = sub.add_parser("docs", help="regenerate docs/lua-api.md from Risu source")
     pdocs.add_argument("--check", action="store_true", help="fail if the file is stale")
     pdocs.set_defaults(func=cmd_docs)
+
+    psync = sub.add_parser("sync-source", help="fetch Risu's scriptings.ts (pinned by default)")
+    psync.add_argument("--ref", default=None, help="git ref/SHA (default: pinned RISU_REF)")
+    psync.set_defaults(func=cmd_sync_source)
 
     args = parser.parse_args(argv)
     return args.func(args)

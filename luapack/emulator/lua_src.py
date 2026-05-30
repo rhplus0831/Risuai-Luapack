@@ -136,7 +136,10 @@ end
 )
 
 # --- WRAPPER: verbatim from scriptings.ts luaCodeWrapper -------------------
-# Keep in sync with Refer/Risuai/src/ts/process/scriptings.ts (luaCodeWrapper).
+# The WRAPPER string below is a verbatim copy of `luaCodeWrapper` from RisuAI
+# (src/ts/process/scriptings.ts), Copyright (C) Kwaroran, licensed GPLv3.
+# Source: https://github.com/kwaroran/RisuAI  (see NOTICE).
+# Keep in sync with vendor/scriptings.ts, pinned at docgen.RISU_REF.
 WRAPPER = (
     """
 json = require 'json'

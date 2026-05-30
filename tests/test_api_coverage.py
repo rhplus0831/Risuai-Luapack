@@ -2,20 +2,18 @@
 
 Parses the `declareAPI('name', ...)` calls out of the vendored Risu source and
 asserts the emulator implements each one. If Risu adds or renames an API, this
-fails until the emulator catches up. Skipped when the reference checkout is
-absent (e.g. a packaged release without Refer/).
+fails until the emulator catches up. Reads the vendored, pinned copy at
+vendor/scriptings.ts (refresh with `python -m luapack sync-source`).
 """
 import os
 import re
 
 import pytest
 
+from luapack import docgen
 from luapack.emulator import RisuEmulator, RisuState
 
-_REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-_SCRIPTINGS = os.path.join(
-    _REPO, "Refer", "Risuai", "src", "ts", "process", "scriptings.ts"
-)
+_SCRIPTINGS = docgen.DEFAULT_SCRIPTINGS  # vendored, pinned copy of scriptings.ts
 
 
 def _declared_apis():
@@ -31,7 +29,7 @@ def _implemented_apis():
 
 @pytest.mark.skipif(
     not os.path.exists(_SCRIPTINGS),
-    reason="Risu reference checkout (Refer/Risuai) not present",
+    reason="vendored scriptings.ts not present",
 )
 def test_emulator_covers_every_declared_api():
     declared = _declared_apis()

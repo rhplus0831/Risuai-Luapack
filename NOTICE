@@ -1,0 +1,20 @@
+Risuai-Luapack
+Copyright (C) 2026 Risuai-Luapack contributors
+Licensed under the GNU General Public License v3.0 only (see LICENSE).
+
+This product includes third-party material:
+
+1. RisuAI — https://github.com/kwaroran/RisuAI
+   Copyright (C) Kwaroran. Licensed under GPLv3.
+   - vendor/scriptings.ts is vendored verbatim from RisuAI at commit
+     fc7811d548784deb6db2f6946a19a5b2d7fe50be
+     (src/ts/process/scriptings.ts). It is intentionally kept byte-identical to
+     upstream (LF line endings) so that `python -m luapack sync-source` is a
+     no-op at the pinned ref; for that reason no attribution header is inserted
+     into the file itself — this NOTICE is its attribution.
+   - The WRAPPER string in luapack/emulator/lua_src.py is a verbatim copy of
+     RisuAI's `luaCodeWrapper` from the same source file.
+
+2. json.lua — https://github.com/rxi/json.lua
+   Copyright (C) 2020 rxi. Licensed under the MIT License (the full MIT header
+   is retained in vendor/json.lua). This is the same json module RisuAI mounts.

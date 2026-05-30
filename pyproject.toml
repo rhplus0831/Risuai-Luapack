@@ -1,5 +1,5 @@
 [build-system]
-requires = ["setuptools>=61"]
+requires = ["setuptools>=77"]
 build-backend = "setuptools.build_meta"
 
 [project]
@@ -8,6 +8,8 @@ version = "0.0.1"
 description = "Bundle, type-check, and test Risu Lua scripts off-platform"
 readme = "README.md"
 requires-python = ">=3.11"
+license = "GPL-3.0-only"
+license-files = ["LICENSE"]
 dependencies = ["lupa>=2.0"]
 
 [project.optional-dependencies]

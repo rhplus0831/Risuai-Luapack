@@ -19,9 +19,16 @@ from typing import Dict, List
 from .emulator import lua_src
 
 _REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-DEFAULT_SCRIPTINGS = os.path.join(
-    _REPO_ROOT, "Refer", "Risuai", "src", "ts", "process", "scriptings.ts"
-)
+
+# The RisuAI commit the emulator and docs are validated against. `luapack
+# sync-source` fetches scriptings.ts at this ref by default; bump it to
+# deliberately re-check against newer Risu (see CI's upstream-drift job).
+RISU_REF = "fc7811d548784deb6db2f6946a19a5b2d7fe50be"
+
+# Source of truth for the API surface: a vendored, pinned copy of Risu's
+# scriptings.ts. It is committed (GPLv3, like luapack) so docs and the drift
+# tests work on a fresh clone. Refresh with `python -m luapack sync-source`.
+DEFAULT_SCRIPTINGS = os.path.join(_REPO_ROOT, "vendor", "scriptings.ts")
 
 # Entry-point modes (hand-encoded: small, semantic, rarely changes).
 MODES = [

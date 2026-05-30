@@ -78,7 +78,8 @@ luapack/            the Python package
   __main__.py       CLI: new / build / check / test / docs
 packs/example/      worked example pack
 docs/               guide + generated reference
-vendor/json.lua     rxi/json, byte-identical to Risu's
+vendor/json.lua     rxi/json.lua v0.1.2 (MIT); the module Risu mounts
+vendor/scriptings.ts  RisuAI source, pinned (GPLv3) — the API source of truth
 tests/              emulator, bundler, docgen, and drift tests
 setup.ps1           build bin\python (embedded CPython + lupa)
 luapack.cmd / .ps1  launchers that use bin\python
@@ -86,7 +87,31 @@ luapack.cmd / .ps1  launchers that use bin\python
 
 ## How it stays correct
 
-A vendored RisuAI checkout under `Refer/` is the source of truth. Tests parse it
-and fail if the emulator or the docs fall behind:
+The API surface is pinned to a specific RisuAI commit (`docgen.RISU_REF`) and
+vendored at `vendor/scriptings.ts`, so docs and tests are reproducible on a
+fresh clone. Two drift guards fail if the emulator or docs fall behind it:
 `tests/test_api_coverage.py` (every declared host API is emulated) and
 `tests/test_docgen.py` (the reference matches the source).
+
+To re-check against newer RisuAI:
+
+```sh
+python -m luapack sync-source --ref main   # fetch just scriptings.ts (no git)
+python -m pytest -q                         # drift guards now compare vs latest
+python -m luapack docs                      # regenerate the reference
+```
+
+CI runs this weekly (the `upstream-drift` job) and fails when Risu's Lua API
+moves, so you find out without watching upstream.
+
+## License
+
+luapack is Copyright (C) 2026 Risuai-Luapack contributors, licensed under the
+**GNU GPLv3** (see [LICENSE](LICENSE)), to match RisuAI. It includes code from
+other projects (full attribution in [NOTICE](NOTICE)):
+
+- `vendor/scriptings.ts` and the `luaCodeWrapper` copy in
+  `luapack/emulator/lua_src.py` are from
+  [RisuAI](https://github.com/kwaroran/RisuAI) (GPLv3, © Kwaroran), pinned at
+  commit `fc7811d5`.
+- `vendor/json.lua` is rxi's [json.lua](https://github.com/rxi/json.lua) (MIT).

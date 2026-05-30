@@ -3,6 +3,7 @@
 These double as worked examples of how to test a Risu Lua bundle.
 """
 import hashlib
+import json
 
 import pytest
 
@@ -49,7 +50,9 @@ def test_get_and_set_state_json_roundtrip(risu):
         end
     """)
     emu.run_mode("start")
-    assert emu.state.chat_vars["__counter"] == '{"n":5,"tags":["a","b"]}'
+    # json.encode key order is not stable (Lua randomizes string-key hashing),
+    # so compare structurally, not as a fixed string.
+    assert json.loads(emu.state.chat_vars["__counter"]) == {"n": 5, "tags": ["a", "b"]}
     assert emu.state.chat_vars["n"] == "5"
     assert emu.state.chat_vars["first"] == "a"
 

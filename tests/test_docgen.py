@@ -1,7 +1,6 @@
 """Docs must not drift: the committed reference must equal the generator output,
-and every host API Risu declares must appear in it.
-
-Skipped when the Risu reference checkout (Refer/) is absent.
+and every host API Risu declares must appear in it. Reads the vendored, pinned
+vendor/scriptings.ts.
 """
 import os
 
@@ -14,7 +13,7 @@ DOC = os.path.join(_REPO, "docs", "lua-api.md")
 
 pytestmark = pytest.mark.skipif(
     not os.path.exists(docgen.DEFAULT_SCRIPTINGS),
-    reason="Risu reference checkout (Refer/Risuai) not present",
+    reason="vendored scriptings.ts not present",
 )
 
 
