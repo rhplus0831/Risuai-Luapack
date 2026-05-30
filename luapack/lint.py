@@ -260,13 +260,18 @@ def check_source(rel_path: str, src: str) -> List[Dict]:
     for f in lint_names(src):
         findings.append({"file": rel_path, **f})
 
-    # 3. CBS in string literals
+    # 3. CBS in string literals. Only NAME issues (unknown-function typos) are
+    # reported here: a Lua string literal is often a fragment of a concatenated
+    # pattern (e.g. '{{raw::'..x..'}}'), so brace-balance within one literal is
+    # meaningless. `check-cbs` validates complete templates including braces.
     _code, strings = scan(src)
     cbs_names = cbs.load_cbs_names()
     for content_start, content in strings:
-        if "{{" not in content and "}}" not in content:
+        if "{{" not in content:
             continue
         for issue in cbs.validate(content, cbs_names):
+            if issue.get("kind") != "name":
+                continue
             line, col = _line_col(src, content_start + issue["offset"])
             findings.append({"file": rel_path, "line": line, "col": col,
                              "severity": issue["severity"], "code": "cbs",

@@ -91,7 +91,8 @@ def _check_name(inner: str, offset: int, names: Set[str], issues: List[Dict]) ->
     sep = _first_top_separator(inner)
     raw = (inner if sep < 0 else inner[:sep]).strip()
     if raw == "":
-        issues.append({"severity": "warning", "offset": offset, "message": "empty CBS '{{}}'"})
+        issues.append({"severity": "warning", "kind": "syntax", "offset": offset,
+                       "message": "empty CBS '{{}}'"})
         return
     if "{{" in raw:          # dynamic/nested name -- can't check statically
         return
@@ -103,10 +104,10 @@ def _check_name(inner: str, offset: int, names: Set[str], issues: List[Dict]) ->
         return
     suggestion = closest(raw.lower(), names, max_dist=2)
     if suggestion:
-        issues.append({"severity": "warning", "offset": offset,
+        issues.append({"severity": "warning", "kind": "name", "offset": offset,
                        "message": f"unknown CBS function '{raw}' - did you mean '{{{{{suggestion}}}}}'?"})
     else:
-        issues.append({"severity": "warning", "offset": offset,
+        issues.append({"severity": "warning", "kind": "name", "offset": offset,
                        "message": f"unknown CBS function '{raw}'"})
 
 
@@ -127,7 +128,8 @@ def validate(template: str, names: Optional[Set[str]] = None) -> List[Dict]:
             i += 2
         elif two == "}}":
             if not stack:
-                issues.append({"severity": "error", "offset": i, "message": "unmatched '}}'"})
+                issues.append({"severity": "error", "kind": "syntax", "offset": i,
+                               "message": "unmatched '}}'"})
             else:
                 start = stack.pop()
                 _check_name(template[start + 2:i], start, names, issues)
@@ -135,5 +137,6 @@ def validate(template: str, names: Optional[Set[str]] = None) -> List[Dict]:
         else:
             i += 1
     for start in stack:
-        issues.append({"severity": "error", "offset": start, "message": "unclosed '{{'"})
+        issues.append({"severity": "error", "kind": "syntax", "offset": start,
+                       "message": "unclosed '{{'"})
     return issues

@@ -97,6 +97,13 @@ def test_cbs_not_matched_in_comment_or_code():
     assert "cbs" not in _codes("-- {{getvarr}} in a comment\nfunction onStart(id) end")
 
 
+def test_cbs_pattern_fragment_not_flagged():
+    # gsub builds CBS-ish patterns by concatenation ('{{raw::'..x..'}}'); the
+    # unbalanced braces within a single string literal must NOT be reported.
+    src = "function onStart(id) local x='a' addChat(id,'char',('{{raw::'..x..'.}}')) end"
+    assert [f for f in lint.check_source("m.lua", src) if f["code"] == "cbs"] == []
+
+
 def test_syntax_error_reported_with_line():
     f = lint.check_source("m.lua", "function onStart(id)\n  this is not lua")
     assert any(x["code"] == "syntax" for x in f)
