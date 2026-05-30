@@ -12,7 +12,7 @@ import os
 import subprocess
 import sys
 
-from . import bundler
+from . import bundler, docgen
 from .emulator import LuaSyntaxError, RisuEmulator
 
 _REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -106,6 +106,29 @@ def cmd_new(args) -> int:
     return 0
 
 
+def cmd_docs(args) -> int:
+    if not os.path.exists(docgen.DEFAULT_SCRIPTINGS):
+        print(f"Risu source not found: {docgen.DEFAULT_SCRIPTINGS}")
+        return 1
+    generated = docgen.generate_from_repo()
+    out_path = os.path.join(_REPO_ROOT, "docs", "lua-api.md")
+    if args.check:
+        current = ""
+        if os.path.exists(out_path):
+            with open(out_path, "r", encoding="utf-8") as fh:
+                current = fh.read()
+        if current != generated:
+            print("docs/lua-api.md is stale; run: python -m luapack docs")
+            return 1
+        print("docs: up to date")
+        return 0
+    os.makedirs(os.path.dirname(out_path), exist_ok=True)
+    with open(out_path, "w", encoding="utf-8", newline="\n") as fh:
+        fh.write(generated)
+    print(f"wrote {os.path.relpath(out_path, _REPO_ROOT)}")
+    return 0
+
+
 def _write(path: str, content: str) -> None:
     with open(path, "w", encoding="utf-8", newline="\n") as fh:
         fh.write(content)
@@ -124,6 +147,10 @@ def main(argv=None) -> int:
         p = sub.add_parser(cmd, help=helptext)
         p.add_argument("path", nargs="?" if cmd != "new" else None, default=".")
         p.set_defaults(func=fn)
+
+    pdocs = sub.add_parser("docs", help="regenerate docs/lua-api.md from Risu source")
+    pdocs.add_argument("--check", action="store_true", help="fail if the file is stale")
+    pdocs.set_defaults(func=cmd_docs)
 
     args = parser.parse_args(argv)
     return args.func(args)
