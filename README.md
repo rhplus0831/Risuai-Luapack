@@ -15,13 +15,29 @@ with no compile feedback and no way to test behavior. Luapack fixes that:
 - **pytest harness** — write real behavioral tests against your script.
 - **Generated API reference** — kept in sync with Risu's source.
 
-## Requirements
+## Install
 
-- Python 3.11+ (3.13 tested)
-- `pip install -r requirements.txt` (`lupa`, `pytest`)
+### Windows — no system Python (recommended)
 
-A self-contained Windows build (embedded Python in `bin/` via `setup.ps1`) is
-planned so end-users need no toolchain.
+```powershell
+powershell -ExecutionPolicy Bypass -File setup.ps1
+```
+
+Downloads an embedded CPython plus `lupa` into `bin\python` (the lupa wheel
+bundles Lua, so no compiler/MSVC is needed). Then drive everything through the
+launcher:
+
+```powershell
+.\luapack.cmd build packs\example
+.\luapack.cmd test  packs\example
+```
+
+`.\luapack.ps1` works too. Re-run `setup.ps1 -Force` to rebuild.
+
+### Any OS — system Python
+
+- Python 3.11+ (3.13 tested), then `pip install -r requirements.txt`
+- Run with `python -m luapack ...`
 
 ## Quickstart
 
@@ -64,6 +80,8 @@ packs/example/      worked example pack
 docs/               guide + generated reference
 vendor/json.lua     rxi/json, byte-identical to Risu's
 tests/              emulator, bundler, docgen, and drift tests
+setup.ps1           build bin\python (embedded CPython + lupa)
+luapack.cmd / .ps1  launchers that use bin\python
 ```
 
 ## How it stays correct
