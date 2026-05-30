@@ -25,10 +25,18 @@ _REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # deliberately re-check against newer Risu (see CI's upstream-drift job).
 RISU_REF = "fc7811d548784deb6db2f6946a19a5b2d7fe50be"
 
-# Source of truth for the API surface: a vendored, pinned copy of Risu's
-# scriptings.ts. It is committed (GPLv3, like luapack) so docs and the drift
-# tests work on a fresh clone. Refresh with `python -m luapack sync-source`.
+# Source of truth for the API surface: vendored, pinned copies of Risu's
+# scriptings.ts (host API) and cbs.ts (CBS function names). Committed (GPLv3,
+# like luapack) so docs/lint/drift work on a fresh clone. Refresh with
+# `python -m luapack sync-source`.
 DEFAULT_SCRIPTINGS = os.path.join(_REPO_ROOT, "vendor", "scriptings.ts")
+DEFAULT_CBS = os.path.join(_REPO_ROOT, "vendor", "cbs.ts")
+
+# Risu files fetched by sync-source. `sentinel` rejects a non-source 200 body.
+VENDORED_SOURCES = [
+    {"raw": "src/ts/process/scriptings.ts", "dest": DEFAULT_SCRIPTINGS, "sentinel": "declareAPI("},
+    {"raw": "src/ts/cbs.ts", "dest": DEFAULT_CBS, "sentinel": "registerFunction("},
+]
 
 # Entry-point modes (hand-encoded: small, semantic, rarely changes).
 MODES = [

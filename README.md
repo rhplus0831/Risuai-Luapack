@@ -44,7 +44,8 @@ launcher:
 ```sh
 python -m luapack new mypack          # scaffold a pack
 # edit mypack/src/main.lua ...
-python -m luapack build mypack        # -> mypack/dist/bundle.lua (+ syntax check)
+python -m luapack check mypack        # validate: Lua compile + name + CBS lint
+python -m luapack build mypack        # -> mypack/dist/bundle.lua
 python -m luapack test  mypack        # run the pack's pytest tests
 # paste mypack/dist/bundle.lua into Risu's Lua trigger field
 ```

@@ -2,9 +2,9 @@
 # stable across platforms.
 * text=auto eol=lf
 
-# Must stay LF (matching raw.githubusercontent) so `luapack sync-source` is a
-# byte no-op at the pinned ref. Explicit so the contract isn't incidental.
-vendor/scriptings.ts text eol=lf
+# Vendored Risu sources must stay LF (matching raw.githubusercontent) so
+# `luapack sync-source` is a byte no-op at the pinned ref.
+vendor/*.ts text eol=lf
 
 # Windows batch files must stay CRLF for cmd.exe.
 *.cmd text eol=crlf

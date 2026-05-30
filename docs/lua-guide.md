@@ -174,9 +174,27 @@ Scaffold a fresh pack with `python -m luapack new <dir>`.
 ## CLI summary
 
 ```
-python -m luapack new   <dir>     scaffold a pack
-python -m luapack build [dir]     src/*.lua -> dist/bundle.lua (+ syntax check)
-python -m luapack check [dir]     bundle in memory + syntax check
-python -m luapack test  [dir]     run the pack's pytest tests
-python -m luapack docs            regenerate docs/lua-api.md from Risu source
+python -m luapack new   <dir>      scaffold a pack
+python -m luapack check [dir]      validate: Lua compile + name lint + CBS syntax
+python -m luapack check-cbs "..."  validate a single CBS template string
+python -m luapack build [dir]      src/*.lua -> dist/bundle.lua (+ syntax check)
+python -m luapack test  [dir]      run the pack's pytest tests
+python -m luapack docs             regenerate docs/lua-api.md from Risu source
+python -m luapack sync-source      refresh vendored Risu sources (pinned)
 ```
+
+## Static validation (`check`)
+
+`luapack check` is fast, static, and runs no behavior. It reports:
+
+- **Lua syntax** — per file, with line numbers.
+- **Name typos** — calls to host APIs that are one edit away from a real name
+  (`setChatVarr` → `setChatVar`), misspelled/miscased handlers (`onOuput`,
+  `onstart` — which silently never fire), invalid `listenEdit` types, and
+  shadowing of reserved globals (`function json(...)`).
+- **CBS** — every `{{...}}` in a string literal is checked for balanced/nested
+  braces and known function names (`{{getvarr}}` → did you mean `{{getvar}}`).
+
+Errors fail the command; likely-but-not-certain issues are warnings (use
+`--strict` to fail on those too). The API and CBS name lists come from the
+pinned Risu sources, so the lint tracks Risu like the docs do.

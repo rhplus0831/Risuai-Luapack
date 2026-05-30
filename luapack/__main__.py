@@ -14,16 +14,13 @@ import sys
 import urllib.error
 import urllib.request
 
-from . import bundler, docgen
+from . import bundler, cbs, docgen, lint
 from .emulator import LuaSyntaxError, RisuEmulator
 
 _REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-# Single-file source fetch - no git, no full 186 MB clone.
-RISU_RAW_URL = (
-    "https://raw.githubusercontent.com/kwaroran/RisuAI/{ref}"
-    "/src/ts/process/scriptings.ts"
-)
+# Source file fetch - no git, no full 186 MB clone.
+RISU_RAW_BASE = "https://raw.githubusercontent.com/kwaroran/RisuAI/{ref}/{path}"
 
 _TOML_TMPL = """[pack]
 name = "{name}"
@@ -82,8 +79,24 @@ def cmd_build(args) -> int:
 
 
 def cmd_check(args) -> int:
-    res = bundler.build_pack(args.path)
-    return _compile(res["bundle"])
+    findings = lint.check_pack(args.path)
+    for f in findings:
+        print(f"{f['file']}:{f['line']}:{f['col']}: {f['severity']}: {f['message']}  [{f['code']}]")
+    errors = sum(1 for f in findings if f["severity"] == "error")
+    warnings = sum(1 for f in findings if f["severity"] == "warning")
+    print(f"{errors} error(s), {warnings} warning(s)")
+    if errors or (args.strict and warnings):
+        return 1
+    return 0
+
+
+def cmd_check_cbs(args) -> int:
+    issues = cbs.validate(args.template)
+    for it in issues:
+        print(f"col {it['offset'] + 1}: {it['severity']}: {it['message']}")
+    if not issues:
+        print("CBS OK")
+    return 1 if any(it["severity"] == "error" for it in issues) else 0
 
 
 def cmd_test(args) -> int:
@@ -139,29 +152,35 @@ def cmd_docs(args) -> int:
 
 def cmd_sync_source(args) -> int:
     ref = args.ref or docgen.RISU_REF
-    url = RISU_RAW_URL.format(ref=ref)
-    dest = docgen.DEFAULT_SCRIPTINGS
-    print(f"fetching {url}")
-    try:
-        with urllib.request.urlopen(url, timeout=30) as resp:
-            data = resp.read()
-    except urllib.error.HTTPError as exc:
-        print(f"fetch failed: HTTP {exc.code} for ref '{ref}' - is the ref correct?")
-        return 1
-    except Exception as exc:  # network / SSL / timeout
-        print(f"fetch failed: {exc}")
-        return 1
-    # Guard against writing a non-source 200 response (e.g. an HTML error page).
-    if b"declareAPI(" not in data:
-        print("fetch failed: response is not scriptings.ts (no declareAPI found); not writing.")
-        return 1
-    os.makedirs(os.path.dirname(dest), exist_ok=True)
-    with open(dest, "wb") as fh:
-        fh.write(data)
-    print(f"wrote {os.path.relpath(dest, _REPO_ROOT)} ({len(data)} bytes) @ {ref[:10]}")
+    failures = 0
+    for spec in docgen.VENDORED_SOURCES:
+        url = RISU_RAW_BASE.format(ref=ref, path=spec["raw"])
+        dest = spec["dest"]
+        name = os.path.relpath(dest, _REPO_ROOT)
+        print(f"fetching {spec['raw']}")
+        try:
+            with urllib.request.urlopen(url, timeout=30) as resp:
+                data = resp.read()
+        except urllib.error.HTTPError as exc:
+            print(f"  failed: HTTP {exc.code} for ref '{ref}' - is the ref correct?")
+            failures += 1
+            continue
+        except Exception as exc:  # network / SSL / timeout
+            print(f"  failed: {exc}")
+            failures += 1
+            continue
+        # Guard against writing a non-source 200 response (e.g. an HTML page).
+        if spec["sentinel"].encode() not in data:
+            print(f"  failed: response is not source (no '{spec['sentinel']}'); not writing {name}.")
+            failures += 1
+            continue
+        os.makedirs(os.path.dirname(dest), exist_ok=True)
+        with open(dest, "wb") as fh:
+            fh.write(data)
+        print(f"  wrote {name} ({len(data)} bytes)")
     if ref != docgen.RISU_REF:
-        print("note: not the pinned ref - run `python -m luapack docs` and pytest to inspect drift.")
-    return 0
+        print("note: not the pinned ref - run pytest and `python -m luapack docs` to inspect drift.")
+    return 1 if failures else 0
 
 
 def _write(path: str, content: str) -> None:
@@ -175,13 +194,21 @@ def main(argv=None) -> int:
 
     for cmd, fn, helptext in (
         ("build", cmd_build, "bundle src/ -> dist/bundle.lua and syntax-check"),
-        ("check", cmd_check, "bundle in memory and syntax-check"),
         ("test", cmd_test, "run the pack's pytest tests"),
         ("new", cmd_new, "scaffold a new pack"),
     ):
         p = sub.add_parser(cmd, help=helptext)
         p.add_argument("path", nargs="?" if cmd != "new" else None, default=".")
         p.set_defaults(func=fn)
+
+    pcheck = sub.add_parser("check", help="validate Lua (compile + names) and CBS syntax")
+    pcheck.add_argument("path", nargs="?", default=".")
+    pcheck.add_argument("--strict", action="store_true", help="treat warnings as failures")
+    pcheck.set_defaults(func=cmd_check)
+
+    pcbs = sub.add_parser("check-cbs", help="validate a CBS template string")
+    pcbs.add_argument("template", help="the CBS string, e.g. \"{{getvar::hp}}\"")
+    pcbs.set_defaults(func=cmd_check_cbs)
 
     pdocs = sub.add_parser("docs", help="regenerate docs/lua-api.md from Risu source")
     pdocs.add_argument("--check", action="store_true", help="fail if the file is stale")

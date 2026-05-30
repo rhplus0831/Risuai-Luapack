@@ -6,14 +6,15 @@ This product includes third-party material:
 
 1. RisuAI — https://github.com/kwaroran/RisuAI
    Copyright (C) Kwaroran. Licensed under GPLv3.
-   - vendor/scriptings.ts is vendored verbatim from RisuAI at commit
-     fc7811d548784deb6db2f6946a19a5b2d7fe50be
-     (src/ts/process/scriptings.ts). It is intentionally kept byte-identical to
-     upstream (LF line endings) so that `python -m luapack sync-source` is a
-     no-op at the pinned ref; for that reason no attribution header is inserted
-     into the file itself — this NOTICE is its attribution.
+   - vendor/scriptings.ts (src/ts/process/scriptings.ts) and vendor/cbs.ts
+     (src/ts/cbs.ts) are vendored verbatim from RisuAI at commit
+     fc7811d548784deb6db2f6946a19a5b2d7fe50be. They are intentionally kept
+     byte-identical to upstream (LF line endings) so that
+     `python -m luapack sync-source` is a no-op at the pinned ref; for that
+     reason no attribution header is inserted into the files themselves — this
+     NOTICE is their attribution.
    - The WRAPPER string in luapack/emulator/lua_src.py is a verbatim copy of
-     RisuAI's `luaCodeWrapper` from the same source file.
+     RisuAI's `luaCodeWrapper` from scriptings.ts.
 
 2. json.lua — https://github.com/rxi/json.lua
    Copyright (C) 2020 rxi. Licensed under the MIT License (the full MIT header
