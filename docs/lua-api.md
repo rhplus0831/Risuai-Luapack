@@ -1,9 +1,9 @@
 # Risu Lua API Reference
 
-> Generated from `scriptings.ts` by `python -m luapack docs` — do not edit by hand.
+> API surface generated from `scriptings.ts` by `python -m luapack docs`; descriptions and entry-point summaries are curated — do not edit by hand.
 > Concepts, gotchas, and how-to are in [lua-guide.md](./lua-guide.md).
 
-Functions tagged _(await)_ return a promise; call `:await()` (the `LLM`/`axLLM`/`loadLoreBooks` helpers do this for you).
+Functions tagged _(await)_ return a promise; call `:await()` (the `LLM`/`axLLM`/`loadLoreBooks` helpers await and JSON-decode for you; image helpers await and return inlay strings).
 
 ## Entry points
 
@@ -18,38 +18,40 @@ Define the global / register the listener; Risu calls it per mode.
 | `editRequest` | `listenEdit('editRequest', fn)` | the outgoing request is built | transformed message array |
 | `editInput` | `listenEdit('editInput', fn)` | user input is processed | transformed text |
 | `editOutput` | `listenEdit('editOutput', fn)` | the model reply is processed | transformed text |
-| `editDisplay` | `listenEdit('editDisplay', fn)` | text is rendered (read-only tier) | transformed text |
+| `editDisplay` | `listenEdit('editDisplay', fn)` | text is rendered (restricted edit-display tier) | transformed text |
 | `<custom>` | `function <name>(id)` | run with mode='<name>' | value (`false` stops sending) |
+
+Notes: `listenEdit` handlers are chained in registration order. `editDisplay` uses a restricted edit-display key: it can write chat vars, but cannot mutate chat or character data. Edit listeners never receive low-level access.
 
 ## Helpers
 
-Provided by Risu's preamble. Prefer these over the raw `*Main` host calls — they handle JSON for you.
+Provided by Risu's preamble. Prefer these over the raw `*Main` host calls when they handle JSON for you; `log`, `cbs`, and image helpers are exceptions that return or pass plain values.
 
 | Helper | What it does |
 |--------|--------------|
-| `LLM(id, prompt, useMultimodal, options)` | Run a sub-request against the main model (low-level). Awaitable. |
-| `axLLM(id, prompt, useMultimodal, options)` | Run a sub-request against the auxiliary model (low-level). Awaitable. |
-| `getCharacterImage(id)` | Inlay string for the character image. Awaitable. |
-| `getChat(id, index)` | Get one chat message as a table `{role, data, time}` (0-based). |
+| `LLM(id, prompt, useMultimodal, options)` | Run a sub-request against the main model (low-level); roles accept `system`/`sys`, `user`, `assistant`/`bot`/`char`. |
+| `axLLM(id, prompt, useMultimodal, options)` | Run a sub-request against the auxiliary model (low-level); same prompt/options shape as `LLM`. |
+| `getCharacterImage(id)` | Return `{{inlayed::...}}` for the character image, or an empty string. Awaitable. |
+| `getChat(id, index)` | Get one chat message as a table `{role, data, time}` (0-based; negative indexes work like JS `Array.at`). |
 | `getFullChat(id)` | Get the whole chat as an array of `{role, data, time}`. |
 | `getLoreBooks(id, search)` | Find lorebook entries whose comment matches `search`. |
-| `getPersonaImage(id)` | Inlay string for the persona image. Awaitable. |
+| `getPersonaImage(id)` | Return `{{inlayed::...}}` for the persona image, or an empty string. Awaitable. |
 | `getState(id, name)` | Read a JSON-decoded state value (chat var, `__`-prefixed). |
-| `listenEdit(type, func)` | Register an edit-trigger handler (editRequest/Input/Output/Display). |
-| `loadLoreBooks(id)` | Load activated lorebooks within a token budget (low-level). |
+| `listenEdit(type, func)` | Register a chained edit-trigger handler (editRequest/Input/Output/Display). |
+| `loadLoreBooks(id)` | Load activated lorebooks and JSON-decode them (low-level, no reserve argument). |
 | `log(value)` | Print a value to the dev console (JSON-encoded). |
 | `setFullChat(id, value)` | Replace the whole chat from an array of `{role, data}`. |
 | `setState(id, name, value)` | Write a JSON-encoded state value (chat var, `__`-prefixed). |
 
 ## Host functions
 
-Injected globals. Every call takes the access-key `id` as its first argument (see the guide). Grouped by permission tier.
+Injected globals. Most calls take the access-key `id` as their first argument (exceptions include `cbs` and `logMain`; see the guide). Grouped by permission tier.
 
 ### Always available
 
 | Function | What it does |
 |----------|--------------|
-| `cbs(value)` | Expand a CBS `{{...}}` template string. |
+| `cbs(value)` | Expand a CBS `{{...}}` template string; variable-writing CBS does not run through this helper. |
 | `getAuthorsNote(id)` | Author's note for the chat. |
 | `getCharacterFirstMessage(id)` | Character's first message. |
 | `getCharacterImageMain(id)` _(await)_ | Raw `getCharacterImage`. |
@@ -72,24 +74,24 @@ Injected globals. Every call takes the access-key `id` as its first argument (se
 
 | Function | What it does |
 |----------|--------------|
-| `addChat(id, role, value)` | Append a message (role 'user' or 'char'). |
+| `addChat(id, role, value)` | Append a message (role `user`; any other role becomes `char`). |
 | `alertConfirm(id, value)` _(await)_ | Ask a yes/no question. Awaitable. |
 | `alertError(id, value)` | Show an error alert. |
 | `alertInput(id, value)` _(await)_ | Prompt for text input. Awaitable. |
 | `alertNormal(id, value)` | Show an info alert. |
 | `alertSelect(id, value)` _(await)_ | Prompt to pick from options. Awaitable. |
-| `cutChat(id, start, end)` | Keep only messages in [start, end). |
+| `cutChat(id, start, end)` | Keep only messages in `[start, end)`. |
 | `getBackgroundEmbedding(id)` | Character background HTML. |
 | `getDescription(id)` | Character description. |
 | `getTokens(id, value)` _(await)_ | Token count of a string. Awaitable. |
-| `insertChat(id, index, role, value)` | Insert a message at an index. |
+| `insertChat(id, index, role, value)` | Insert a message with JS `splice` semantics. |
 | `reloadChat(id, index)` | Trigger a re-render of one message. |
 | `reloadDisplay(id)` | Trigger a display refresh. |
-| `removeChat(id, index)` | Remove the message at an index. |
+| `removeChat(id, index)` | Remove the message at an index with JS `splice` semantics. |
 | `setBackgroundEmbedding(id, data)` | Set the character background HTML. |
 | `setCharacterFirstMessage(id, data)` | Set the character's first message. |
 | `setChat(id, index, value)` | Replace the text of the message at an index. |
-| `setChatRole(id, index, value)` | Set the role of the message at an index. |
+| `setChatRole(id, index, value)` | Set role to `user`; any other value becomes `char`. |
 | `setDescription(id, desc)` | Set the character description. |
 | `setFullChatMain(id, value)` | Raw `setFullChat` (takes a JSON string). |
 | `setName(id, name)` | Set the character name. |
@@ -109,8 +111,8 @@ Injected globals. Every call takes the access-key `id` as its first argument (se
 |----------|--------------|
 | `LLMMain(id, promptStr, useMultimodal, optionsStr)` _(await)_ | Raw `LLM` (JSON in, JSON out). |
 | `axLLMMain(id, promptStr, useMultimodal, optionsStr)` _(await)_ | Raw `axLLM` (JSON in, JSON out). |
-| `generateImage(id, value, negValue)` _(await)_ | Generate an image, returns an inlay (low-level). Awaitable. |
-| `loadLoreBooksMain(id, reserve)` _(await)_ | Raw `loadLoreBooks` (returns a JSON string). |
-| `request(id, url)` _(await)_ | HTTPS GET (≤120 chars, 5/min, low-level). Awaitable. |
+| `generateImage(id, value, negValue)` _(await)_ | Generate an image and return `{{inlay::...}}` (low-level). Awaitable. |
+| `loadLoreBooksMain(id, reserve)` _(await)_ | Raw `loadLoreBooks` with a reserve budget (returns a JSON string). |
+| `request(id, url)` _(await)_ | HTTPS GET (<=120 chars; current Risu code allows 6/min before 429; low-level); returns a JSON string. Awaitable. |
 | `similarity(id, source, value)` _(await)_ | Embedding similarity search (low-level). Awaitable. |
-| `simpleLLM(id, prompt)` _(await)_ | One-shot model call (low-level). Awaitable. |
+| `simpleLLM(id, prompt)` _(await)_ | One-shot user-prompt model call (low-level); returns `{success, result}`. Awaitable. |

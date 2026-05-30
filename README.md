@@ -1,6 +1,6 @@
 # Risuai-Luapack
 
-Author, bundle, type-check, and **test** [RisuAI](https://github.com/kwaroran/RisuAI)
+Author, bundle, syntax-check/lint, and **test** [RisuAI](https://github.com/kwaroran/RisuAI)
 Lua scripts off-platform.
 
 Risu runs character/trigger Lua as a single pasted string, in a sandboxed VM

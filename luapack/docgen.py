@@ -47,7 +47,7 @@ MODES = [
     ("editRequest", "listenEdit('editRequest', fn)", "the outgoing request is built", "transformed message array"),
     ("editInput", "listenEdit('editInput', fn)", "user input is processed", "transformed text"),
     ("editOutput", "listenEdit('editOutput', fn)", "the model reply is processed", "transformed text"),
-    ("editDisplay", "listenEdit('editDisplay', fn)", "text is rendered (read-only tier)", "transformed text"),
+    ("editDisplay", "listenEdit('editDisplay', fn)", "text is rendered (restricted edit-display tier)", "transformed text"),
     ("<custom>", "function <name>(id)", "run with mode='<name>'", "value (`false` stops sending)"),
 ]
 
@@ -56,28 +56,28 @@ DESCRIPTIONS: Dict[str, str] = {
     # helpers (luaCodeWrapper)
     "getState": "Read a JSON-decoded state value (chat var, `__`-prefixed).",
     "setState": "Write a JSON-encoded state value (chat var, `__`-prefixed).",
-    "getChat": "Get one chat message as a table `{role, data, time}` (0-based).",
+    "getChat": "Get one chat message as a table `{role, data, time}` (0-based; negative indexes work like JS `Array.at`).",
     "getFullChat": "Get the whole chat as an array of `{role, data, time}`.",
     "setFullChat": "Replace the whole chat from an array of `{role, data}`.",
     "log": "Print a value to the dev console (JSON-encoded).",
     "getLoreBooks": "Find lorebook entries whose comment matches `search`.",
-    "loadLoreBooks": "Load activated lorebooks within a token budget (low-level).",
-    "LLM": "Run a sub-request against the main model (low-level). Awaitable.",
-    "axLLM": "Run a sub-request against the auxiliary model (low-level). Awaitable.",
-    "getCharacterImage": "Inlay string for the character image. Awaitable.",
-    "getPersonaImage": "Inlay string for the persona image. Awaitable.",
-    "listenEdit": "Register an edit-trigger handler (editRequest/Input/Output/Display).",
+    "loadLoreBooks": "Load activated lorebooks and JSON-decode them (low-level, no reserve argument).",
+    "LLM": "Run a sub-request against the main model (low-level); roles accept `system`/`sys`, `user`, `assistant`/`bot`/`char`.",
+    "axLLM": "Run a sub-request against the auxiliary model (low-level); same prompt/options shape as `LLM`.",
+    "getCharacterImage": "Return `{{inlayed::...}}` for the character image, or an empty string. Awaitable.",
+    "getPersonaImage": "Return `{{inlayed::...}}` for the persona image, or an empty string. Awaitable.",
+    "listenEdit": "Register a chained edit-trigger handler (editRequest/Input/Output/Display).",
     # host functions
     "getChatVar": "Read a chat variable (string).",
     "setChatVar": "Write a chat variable.",
     "getGlobalVar": "Read a global chat variable.",
     "stopChat": "Stop the current send.",
-    "addChat": "Append a message (role 'user' or 'char').",
-    "insertChat": "Insert a message at an index.",
-    "removeChat": "Remove the message at an index.",
-    "cutChat": "Keep only messages in [start, end).",
+    "addChat": "Append a message (role `user`; any other role becomes `char`).",
+    "insertChat": "Insert a message with JS `splice` semantics.",
+    "removeChat": "Remove the message at an index with JS `splice` semantics.",
+    "cutChat": "Keep only messages in `[start, end)`.",
     "setChat": "Replace the text of the message at an index.",
-    "setChatRole": "Set the role of the message at an index.",
+    "setChatRole": "Set role to `user`; any other value becomes `char`.",
     "getChatLength": "Number of messages.",
     "getName": "Character name.",
     "setName": "Set the character name.",
@@ -98,14 +98,14 @@ DESCRIPTIONS: Dict[str, str] = {
     "alertInput": "Prompt for text input. Awaitable.",
     "alertSelect": "Prompt to pick from options. Awaitable.",
     "alertConfirm": "Ask a yes/no question. Awaitable.",
-    "request": "HTTPS GET (≤120 chars, 5/min, low-level). Awaitable.",
+    "request": "HTTPS GET (<=120 chars; current Risu code allows 6/min before 429; low-level); returns a JSON string. Awaitable.",
     "similarity": "Embedding similarity search (low-level). Awaitable.",
-    "generateImage": "Generate an image, returns an inlay (low-level). Awaitable.",
+    "generateImage": "Generate an image and return `{{inlay::...}}` (low-level). Awaitable.",
     "hash": "Hash a string. Awaitable.",
     "getTokens": "Token count of a string. Awaitable.",
     "sleep": "Wait N milliseconds. Awaitable.",
-    "cbs": "Expand a CBS `{{...}}` template string.",
-    "simpleLLM": "One-shot model call (low-level). Awaitable.",
+    "cbs": "Expand a CBS `{{...}}` template string; variable-writing CBS does not run through this helper.",
+    "simpleLLM": "One-shot user-prompt model call (low-level); returns `{success, result}`. Awaitable.",
     "reloadDisplay": "Trigger a display refresh.",
     "reloadChat": "Trigger a re-render of one message.",
     # raw *Main host calls — prefer the matching helper above
@@ -114,7 +114,7 @@ DESCRIPTIONS: Dict[str, str] = {
     "setFullChatMain": "Raw `setFullChat` (takes a JSON string).",
     "logMain": "Raw `log` (takes a JSON string).",
     "getLoreBooksMain": "Raw `getLoreBooks` (returns a JSON string).",
-    "loadLoreBooksMain": "Raw `loadLoreBooks` (returns a JSON string).",
+    "loadLoreBooksMain": "Raw `loadLoreBooks` with a reserve budget (returns a JSON string).",
     "getCharacterImageMain": "Raw `getCharacterImage`.",
     "getPersonaImageMain": "Raw `getPersonaImage`.",
     "LLMMain": "Raw `LLM` (JSON in, JSON out).",
@@ -199,12 +199,15 @@ def generate(scriptings_src: str, wrapper_src: str, async_names) -> str:
     out = []
     out.append("# Risu Lua API Reference")
     out.append("")
-    out.append("> Generated from `scriptings.ts` by `python -m luapack docs` — "
-               "do not edit by hand.")
+    out.append("> API surface generated from `scriptings.ts` by "
+               "`python -m luapack docs`; descriptions and entry-point "
+               "summaries are curated — do not edit by hand.")
     out.append("> Concepts, gotchas, and how-to are in [lua-guide.md](./lua-guide.md).")
     out.append("")
     out.append("Functions tagged _(await)_ return a promise; call `:await()` "
-               "(the `LLM`/`axLLM`/`loadLoreBooks` helpers do this for you).")
+               "(the `LLM`/`axLLM`/`loadLoreBooks` helpers await and "
+               "JSON-decode for you; image helpers await and return inlay "
+               "strings).")
     out.append("")
 
     out.append("## Entry points")
@@ -216,11 +219,17 @@ def generate(scriptings_src: str, wrapper_src: str, async_names) -> str:
     for mode, define, when, ret in MODES:
         out.append(f"| `{mode}` | `{define}` | {when} | {ret} |")
     out.append("")
+    out.append("Notes: `listenEdit` handlers are chained in registration order. "
+               "`editDisplay` uses a restricted edit-display key: it can write "
+               "chat vars, but cannot mutate chat or character data. "
+               "Edit listeners never receive low-level access.")
+    out.append("")
 
     out.append("## Helpers")
     out.append("")
     out.append("Provided by Risu's preamble. Prefer these over the raw `*Main` "
-               "host calls — they handle JSON for you.")
+               "host calls when they handle JSON for you; `log`, `cbs`, and "
+               "image helpers are exceptions that return or pass plain values.")
     out.append("")
     out.append("| Helper | What it does |")
     out.append("|--------|--------------|")
@@ -230,8 +239,9 @@ def generate(scriptings_src: str, wrapper_src: str, async_names) -> str:
 
     out.append("## Host functions")
     out.append("")
-    out.append("Injected globals. Every call takes the access-key `id` as its "
-               "first argument (see the guide). Grouped by permission tier.")
+    out.append("Injected globals. Most calls take the access-key `id` as their "
+               "first argument (exceptions include `cbs` and `logMain`; see "
+               "the guide). Grouped by permission tier.")
     out.append("")
     for tier in _TIER_ORDER:
         group = [a for a in apis if a["tier"] == tier]
