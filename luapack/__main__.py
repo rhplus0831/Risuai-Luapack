@@ -36,7 +36,7 @@ _MAIN_TMPL = """-- Entry module: Risu calls the global handlers you define here.
 -- Add more files under src/ and pull them in with require('name').
 
 function onStart(id)
-    -- runs when a chat begins
+    -- runs before the model request is sent
 end
 
 listenEdit('editOutput', function(id, value, meta)

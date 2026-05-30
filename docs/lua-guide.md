@@ -21,7 +21,7 @@ Risu wants.
 Risu runs your script in a **mode** and calls the matching handler:
 
 ```lua
-function onStart(id)    -- chat begins
+function onStart(id)    -- before the model request is sent
     addChat(id, 'char', 'Hello!')
 end
 

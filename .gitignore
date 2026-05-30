@@ -4,3 +4,4 @@ Refer
 dist/
 .pytest_cache/
 *.egg-info/
+.idea

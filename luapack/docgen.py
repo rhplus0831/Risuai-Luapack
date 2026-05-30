@@ -40,7 +40,7 @@ VENDORED_SOURCES = [
 
 # Entry-point modes (hand-encoded: small, semantic, rarely changes).
 MODES = [
-    ("start", "function onStart(id)", "a chat begins", "`false` stops sending"),
+    ("start", "function onStart(id)", "before the model request is sent", "`false` stops sending"),
     ("input", "function onInput(id)", "user input is submitted", "`false` stops sending"),
     ("output", "function onOutput(id)", "the model reply arrives", "`false` stops sending"),
     ("onButtonClick", "function onButtonClick(id, data)", "a chat button is clicked", "value"),
