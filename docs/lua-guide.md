@@ -203,15 +203,29 @@ setState(id, 'inventory', { 'sword', 'shield' })   -- stored at __inventory
 local items = getState(id, 'inventory')            -- back to a Lua table
 ```
 
-In current Risu, missing chat/global variables read back as `"null"`, so
-`getState` on a name that was never set decodes JSON `null` to Lua `nil`.
-Initialise before reading when your logic needs a table/number/string shape, and
-normalise both `"null"` and an empty string when writing scripts that also need
-to run in luapack's emulator.
+`getChatVar` first reads the current chat's script state. If no value has been
+written there, Risu falls back to the selected character's default variables and
+the template default variables. If nothing matches, missing chat/global variables
+read back as `"null"`, so `getState` on a name that was never set decodes JSON
+`null` to Lua `nil`. Initialise before reading when your logic needs a
+table/number/string shape, and normalise `"null"`, `nil`, and an empty string
+when writing scripts that also need to run in luapack's emulator:
+
+```lua
+local function getVar(id, key, default)
+    local v = getChatVar(id, key)
+    if v == nil or v == '' or v == 'null' then return default end
+    return v
+end
+```
 
 `getGlobalVar(id, key)` reads global chat variables. Risu's custom prompt
 toggles are stored there under `toggle_<key>`; module toggles are appended to the
-same toggle list. The sidebar toggle parser understands these forms:
+same toggle list. Lua currently has no `setGlobalVar` host API, so
+`setChatVar(id, 'toggle_x', '1')` writes a chat-local variable named
+`toggle_x`; it does not change the sidebar/global toggle value that
+`getGlobalVar(id, 'toggle_x')`, prompt `{{? toggle ...}}` conditions, or the
+sidebar toggle UI read. The sidebar toggle parser understands these forms:
 
 ```text
 key=Label                  checkbox; value toggles between "1" and "0"
@@ -221,9 +235,7 @@ key=Label=textarea         multi-line text input
 ```
 
 Decorative toggle rows also exist (`caption`, `divider`, `group`, `groupEnd`),
-but they do not create a stored value. Missing chat/global variables read back as
-`"null"` in Risu; scripts often normalize both `"null"` and an empty string when
-they are written to run in the emulator too.
+but they do not create a stored value.
 
 ## Lorebooks from Lua
 
@@ -346,7 +358,10 @@ global — that's how Risu finds them.
 - **Chat indices are 0-based.** `getChat(id, 0)` is the first message — they map
   straight to a JS array, unusual for Lua. Negative indices follow
   JavaScript's `Array.at`: `getChat(id, -1)` reads the last message. `setChat`
-  and `setChatRole` also use `Array.at`, so `-1` targets the last message.
+  and `setChatRole` also use `Array.at`, so `-1` targets the last message. There
+  is no Lua `getLastMessageId` host function in current Risu; use `-1` or
+  `getChatLength(id) - 1` when mutating the last message. `#getFullChat(id)` is
+  the message count, not a valid last index.
 - **Chat mutation uses JavaScript array semantics.** `cutChat(start, end)` keeps
   `[start, end)`, while `insertChat` and `removeChat` use JS `splice`. Message
   roles are only `user` or `char`; any other role passed to `addChat`,

@@ -55,10 +55,10 @@ Injected globals. Most calls take the access-key `id` as their first argument (e
 | `getAuthorsNote(id)` | Author's note for the chat. |
 | `getCharacterFirstMessage(id)` | Character's first message. |
 | `getCharacterImageMain(id)` _(await)_ | Raw `getCharacterImage`. |
-| `getCharacterLastMessage(id)` | Most recent character message. |
+| `getCharacterLastMessage(id)` | Most recent character-role message, or the character's first message if none exists. |
 | `getChatLength(id)` | Number of messages. |
 | `getChatMain(id, index)` | Raw `getChat` (returns a JSON string). |
-| `getChatVar(id, key)` | Read a chat variable (string; Risu returns `"null"` when missing). |
+| `getChatVar(id, key)` | Read a chat variable (string; falls back to character/template default variables, then `"null"`). |
 | `getFullChatMain(id)` | Raw `getFullChat` (returns a JSON string). |
 | `getGlobalVar(id, key)` | Read a global chat variable, including custom toggle values stored as `toggle_<key>`; missing values are `"null"`. |
 | `getLoreBooksMain(id, search)` | Raw `getLoreBooks` (returns a JSON string). |
@@ -66,7 +66,7 @@ Injected globals. Most calls take the access-key `id` as their first argument (e
 | `getPersonaDescription(id)` | Persona (user) description, CBS-parsed. |
 | `getPersonaImageMain(id)` _(await)_ | Raw `getPersonaImage`. |
 | `getPersonaName(id)` | Persona (user) name. |
-| `getUserLastMessage(id)` | Most recent user message. |
+| `getUserLastMessage(id)` | Most recent user-role message, or an empty string if none exists. |
 | `hash(id, value)` _(await)_ | Hash a string. Awaitable. |
 | `logMain(value)` | Raw `log` (takes a JSON string). |
 
@@ -90,8 +90,8 @@ Injected globals. Most calls take the access-key `id` as their first argument (e
 | `removeChat(id, index)` | Remove the message at an index with JS `splice` semantics. |
 | `setBackgroundEmbedding(id, data)` | Set the character background HTML rendered behind the chat. |
 | `setCharacterFirstMessage(id, data)` | Set the character's first message. |
-| `setChat(id, index, value)` | Replace the text of the message at an index; negative indexes work like JS `Array.at`. |
-| `setChatRole(id, index, value)` | Set role to `user`; any other value becomes `char`; negative indexes work like JS `Array.at`. |
+| `setChat(id, index, value)` | Replace the text of the message at an index; negative indexes work like JS `Array.at`; out-of-range indexes no-op. |
+| `setChatRole(id, index, value)` | Set role to `user`; any other value becomes `char`; negative indexes work like JS `Array.at`; out-of-range indexes no-op. |
 | `setDescription(id, desc)` | Set the character description. |
 | `setFullChatMain(id, value)` | Raw `setFullChat` (takes a JSON string). |
 | `setName(id, name)` | Set the character name. |
