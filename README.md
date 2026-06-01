@@ -1,116 +1,173 @@
 # Risuai-Luapack
 
-Author, bundle, syntax-check/lint, and **test** [RisuAI](https://github.com/kwaroran/RisuAI)
-Lua scripts off-platform.
+Risuai-Luapack is a local toolkit for building
+[RisuAI](https://github.com/kwaroran/RisuAI) Lua packs. It lets you write a pack
+as normal files, validate it before opening Risu, bundle it into the single Lua
+string Risu accepts, and test behavior with pytest.
 
-Risu runs character/trigger Lua as a single pasted string, in a sandboxed VM
-with no compile feedback and no way to test behavior. Luapack fixes that:
+Use it when a Risu Lua trigger has grown past "one pasted script" and you want
+source files, repeatable checks, and tests.
 
-- **Emulator** — reproduces Risu's Lua host environment in Python (via `lupa`,
-  Lua 5.4, matching Risu's wasmoon VM): the `luaCodeWrapper` preamble, all ~50
-  host functions, the three permission tiers, and the async `Promise`/`await`
-  model — with mockable LLM / HTTP / image / similarity calls.
-- **Bundler** — amalgamates a multi-file `src/*.lua` pack into the one string
-  Risu accepts, with working `require`.
-- **pytest harness** — write real behavioral tests against your script.
-- **Reference docs** — hand-authored, source-grounded pages for every CBS
-  function, hook, host API, and shared element (under `docs/`).
+## What It Provides
+
+- A pack scaffold with `luapack.toml`, `src/main.lua`, and a starter pytest.
+- A bundler for multi-file Lua packs that preserves `require("module")` between
+  files under `src/`.
+- A checker for Lua syntax, Risu host/helper names, event handler names,
+  `listenEdit` types, and CBS function names inside Lua strings.
+- A `check-cbs` command for validating one complete `{{...}}` template.
+- A Python emulator for behavior tests, including permission tiers, edit
+  listeners, async/await wrappers, chat state, and mockable low-level calls.
+- Reference docs for Risu hooks, host APIs, CBS functions, and shared runtime
+  concepts under [`docs/`](docs/).
 
 ## Install
 
-### Windows — no system Python (recommended)
+### Windows, Self-Contained
+
+If you do not want to manage Python yourself, run:
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File setup.ps1
 ```
 
-Downloads an embedded CPython plus `lupa` into `bin\python` (the lupa wheel
-bundles Lua, so no compiler/MSVC is needed). Then drive everything through the
-launcher:
+This prepares `bin\python`, installs the Python dependencies, and makes the
+launchers usable:
 
 ```powershell
+.\luapack.cmd check packs\example
 .\luapack.cmd build packs\example
 .\luapack.cmd test  packs\example
 ```
 
-`.\luapack.ps1` works too. Re-run `setup.ps1 -Force` to rebuild.
+`.\luapack.ps1` works the same way. Re-run `setup.ps1 -Force` to rebuild the
+embedded Python runtime.
 
-### Any OS — system Python
+### System Python
 
-- Python 3.11+ (3.13 tested), then `pip install -r requirements.txt`
-- Run with `python -m luapack ...`
+Use Python 3.11 or newer:
+
+```sh
+python -m pip install -e ".[dev]"
+python -m luapack check packs/example
+```
+
+If you prefer not to install the package in editable mode, run commands from the
+repo root after `python -m pip install -r requirements.txt`.
 
 ## Quickstart
 
+Create a new pack:
+
 ```sh
-python -m luapack new mypack          # scaffold a pack
-# edit mypack/src/main.lua ...
-python -m luapack check mypack        # validate: Lua compile + name + CBS lint
-python -m luapack build mypack        # -> mypack/dist/bundle.lua
-python -m luapack test  mypack        # run the pack's pytest tests
-# paste mypack/dist/bundle.lua into Risu's Lua trigger field
+python -m luapack new packs/my-pack
 ```
 
-Write tests like:
+Edit the generated Lua files, then run the normal loop:
+
+```sh
+python -m luapack check packs/my-pack --strict
+python -m luapack build packs/my-pack
+python -m luapack test  packs/my-pack
+```
+
+`build` writes `dist/bundle.lua` and `dist/bundle.lua.map.json` inside the pack.
+Paste `dist/bundle.lua` into Risu's Lua trigger field.
+
+On Windows with the self-contained setup, use `.\luapack.cmd` instead of
+`python -m luapack`.
+
+## Pack Layout
+
+A pack is just a directory with a config file, Lua source, and optional tests:
+
+```text
+my-pack/
+  luapack.toml
+  src/
+    main.lua
+    utils.lua
+  tests/
+    test_main.py
+  dist/
+    bundle.lua
+    bundle.lua.map.json
+```
+
+`luapack.toml` defaults to:
+
+```toml
+[pack]
+name = "my-pack"
+entry = "main"
+src = "src"
+out = "dist/bundle.lua"
+low_level_access = false
+```
+
+The entry module is loaded last. Define Risu handlers as globals there, for
+example `function onStart(id) ... end`, so Risu can dispatch them.
+
+For a minimal working example, see [`packs/example/`](packs/example/).
+
+## Command Reference
+
+| Command | Purpose |
+| --- | --- |
+| `new <dir>` | Create a new pack skeleton. |
+| `check [dir] [--strict]` | Validate Lua syntax, Risu names, handler names, `listenEdit` types, and CBS names in Lua strings. |
+| `check-cbs "<str>"` | Validate one complete CBS template string, including brace balance. |
+| `build [dir]` | Bundle `src/*.lua` into the configured output file and syntax-check the result. |
+| `test [dir]` | Run pytest tests from the pack's `tests/` directory. |
+| `sync-source [--ref <git-ref>]` | Refresh vendored Risu source files used by lint and drift tests. Mainly for maintainers. |
+
+## Testing Packs
+
+Tests load the real bundled pack and drive it through the emulator:
 
 ```python
 from luapack.testing import load_pack
 
+
 def test_greeting():
-    emu = load_pack("mypack", char_name="Rika")
+    emu = load_pack("packs/example", char_name="Rika")
     emu.run_mode("start")
     assert [m.data for m in emu.state.messages] == ["Hello, Rika!"]
 ```
 
-## Docs
+The emulator exposes Risu-style state through `emu.state`, and low-level APIs
+such as LLM, request, image generation, and similarity can be mocked through
+`RisuState` fields.
 
-- [docs/README.md](docs/README.md) — index into the reference: one page per CBS
-  function (`docs/cbs/`), hook (`docs/hooks/`), host API (`docs/api/`), and
-  shared element (`docs/element/`). Hand-authored, grounded in `Refer/Risuai`.
+## References
 
-## Layout
+- [`docs/README.md`](docs/README.md) indexes the Risu Lua and CBS reference.
+- [`docs/hooks/`](docs/hooks/) covers event and edit hooks.
+- [`docs/api/`](docs/api/) covers Lua host APIs and wrapper helpers.
+- [`docs/cbs/`](docs/cbs/) covers `{{...}}` Callback System functions.
+- [`docs/element/`](docs/element/) covers shared runtime concepts and data
+  shapes.
 
-```
-luapack/            the Python package
-  emulator/         lupa runtime, host API, RisuState
-  bundler.py        multi-file pack -> single string
-  vendored.py       pinned Risu source paths + declareAPI/helper parsers
-  testing.py        load() / load_pack() test helpers
-  __main__.py       CLI: new / build / check / test / sync-source
-packs/example/      worked example pack
-docs/               hand-authored reference (cbs/ hooks/ api/ element/)
-vendor/json.lua     rxi/json.lua v0.1.2 (MIT); the module Risu mounts
-vendor/scriptings.ts  RisuAI source, pinned (GPLv3) — the API source of truth
-tests/              emulator, bundler, lint, and the API-coverage drift test
-setup.ps1           build bin\python (embedded CPython + lupa)
-luapack.cmd / .ps1  launchers that use bin\python
-```
+## Maintainer Notes
 
-## How it stays correct
-
-The API surface is pinned to a specific RisuAI commit (`vendored.RISU_REF`) and
-vendored at `vendor/scriptings.ts`, so the lint and tests are reproducible on a
-fresh clone. A drift guard fails if the emulator falls behind it:
-`tests/test_api_coverage.py` asserts every declared host API is emulated.
-
-To re-check against newer RisuAI:
+The checker and emulator are compared against vendored, pinned RisuAI source
+files under [`vendor/`](vendor/). To inspect upstream drift:
 
 ```sh
-python -m luapack sync-source --ref main   # fetch just scriptings.ts (no git)
-python -m pytest -q                         # the drift guard now compares vs latest
+python -m luapack sync-source --ref main
+python -m pytest -q
 ```
 
-CI runs this weekly (the `upstream-drift` job) and fails when Risu's Lua API
-moves, so you find out without watching upstream.
+The drift test fails if Risu declares a host API that the emulator does not
+implement.
 
 ## License
 
-luapack is Copyright (C) 2026 Risuai-Luapack contributors, licensed under the
-**GNU GPLv3** (see [LICENSE](LICENSE)), to match RisuAI. It includes code from
-other projects (full attribution in [NOTICE](NOTICE)):
+Risuai-Luapack is licensed under the GNU GPLv3. See [`LICENSE`](LICENSE) and
+[`NOTICE`](NOTICE).
 
-- `vendor/scriptings.ts` and the `luaCodeWrapper` copy in
-  `luapack/emulator/lua_src.py` are from
-  [RisuAI](https://github.com/kwaroran/RisuAI) (GPLv3, © Kwaroran), pinned at
-  commit `fc7811d5`.
-- `vendor/json.lua` is rxi's [json.lua](https://github.com/rxi/json.lua) (MIT).
+Vendored sources include:
+
+- `vendor/scriptings.ts` and parts of `luapack/emulator/lua_src.py` from
+  [RisuAI](https://github.com/kwaroran/RisuAI), GPLv3.
+- `vendor/json.lua` from rxi's [json.lua](https://github.com/rxi/json.lua), MIT.
