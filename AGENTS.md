@@ -29,8 +29,8 @@ in this repo is usually doing one of two things:
 
 ## (A) Authoring a Risu Lua pack
 
-1. **Read [docs/lua-guide.md](docs/lua-guide.md) and
-   [docs/lua-api.md](docs/lua-api.md) first.** They cover the host API, the `id`
+1. **Read [docs/lua-guide.md](docs-refer/lua-guide.md) and
+   [docs/lua-api.md](docs-refer/lua-api.md) first.** They cover the host API, the `id`
    access-key convention, permission tiers, async/await, and CBS.
 2. `luapack new mypack`; put code in `mypack/src/*.lua` and `require()` between
    modules. See `packs/example/` for the pattern (tests included).

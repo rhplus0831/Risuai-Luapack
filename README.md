@@ -63,12 +63,12 @@ def test_greeting():
 
 ## Docs
 
-- [docs/lua-guide.md](docs/lua-guide.md) — how Risu Lua works: entry points, the
+- [docs/lua-guide.md](docs-refer/lua-guide.md) — how Risu Lua works: entry points, the
   `id` key, permission tiers, state, async, bundling, testing.
-- [docs/lua-risu-feature-notes.md](docs/lua-risu-feature-notes.md) — notes from
+- [docs/lua-risu-feature-notes.md](docs-refer/lua-risu-feature-notes.md) — notes from
   `Refer/Risuai` on Lua-relevant Risu data, Regex Scripts, background
   embedding, modules, assets, lorebooks, and memory.
-- [docs/lua-api.md](docs/lua-api.md) — generated reference of every helper and
+- [docs/lua-api.md](docs-refer/lua-api.md) — generated reference of every helper and
   host function. Regenerate with `python -m luapack docs`.
 
 ## Layout
