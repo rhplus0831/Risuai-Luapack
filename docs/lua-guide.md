@@ -1,7 +1,10 @@
 # Risu Lua scripting guide
 
 How Risu's Lua scripting actually works, and how to build/test a pack with
-luapack. For the exhaustive function list see [lua-api.md](./lua-api.md).
+luapack. For the exhaustive function list see [lua-api.md](./lua-api.md). For
+source-derived notes on Risu data surfaces, Regex Scripts, background
+embedding, modules, assets, and memory, see
+[lua-risu-feature-notes.md](./lua-risu-feature-notes.md).
 
 ## The model
 
@@ -41,6 +44,13 @@ end)
   `editDisplay` runs in a restricted tier (see below).
 - Custom functions are called when Risu runs Lua with a custom mode. This is
   how manual trigger buttons commonly reach functions such as `OpenMenu(id)`.
+
+Current Risu timing is worth knowing when you mutate chat. `onInput` runs before
+the submitted user text is stored; use `editInput` if you want to rewrite that
+text. `onStart` runs after the user message has been stored and before the chat
+history is sent to the model, so changing the last message there changes the
+upcoming request. `onOutput` runs after the assistant reply has been added, so
+changing the last message there changes the stored reply.
 
 You may register multiple `listenEdit` handlers for the same type. They run in
 registration order, each receiving the previous handler's return value. Keep the
@@ -117,6 +127,14 @@ end
 Risu's CBS `{{button::Text::TriggerName}}` helper emits this same
 `risu-trigger` HTML.
 
+For a `risu-trigger` click, Risu runs the named manual trigger and Lua trigger
+scripts are invoked with the trigger name as the custom mode. Lua then resolves a
+global with that exact name. Plain global functions are the normal pattern, but
+advanced scripts can synthesize handlers with an `_G` metatable, for example to
+serve generated names like `removeItem17`. Use that sparingly: static checks
+cannot see generated handler names, and a later real global definition with the
+same name wins.
+
 ## Display decoration: markers, regex, and background HTML
 
 Lua scripts often use plain marker text in chat messages as a handoff to the
@@ -151,6 +169,11 @@ scripts. That means Lua can write or rewrite marker text, and an `editdisplay`
 regex can decorate the result. Remember that `editDisplay` only changes the
 rendered display value; if you need to mutate stored chat data, use a safe
 handler such as `onOutput` or a manual trigger and call `setChat`.
+
+Normal rendered chat can also contain `<style>` tags. Risu sanitizes them,
+parses their CSS, prefixes class selectors with `x-risu-`, and scopes selectors
+under `.chattext`. This is useful for small display tweaks, but broad/persistent
+styling is usually easier to manage in background embedding.
 
 ## The `id` access key (the #1 gotcha)
 
@@ -218,6 +241,10 @@ local function getVar(id, key, default)
     return v
 end
 ```
+
+Because `setState` is a thin wrapper around `setChatVar`, it is allowed in
+`editDisplay` for display-only UI state such as expanded/collapsed panels or
+scale settings.
 
 `getGlobalVar(id, key)` reads global chat variables. Risu's custom prompt
 toggles are stored there under `toggle_<key>`; module toggles are appended to the
@@ -353,6 +380,10 @@ The preamble already defines these; redefining them breaks your script:
 reference. Your own handler names (`onStart`, `onOutput`, …) are expected to be
 global — that's how Risu finds them.
 
+Lua also silently overwrites earlier globals with later globals of the same
+name. This is sometimes intentional for versioned scripts, but duplicate handler
+names are easy to miss and `luapack check` currently does not warn about them.
+
 ## Other gotchas
 
 - **Chat indices are 0-based.** `getChat(id, 0)` is the first message — they map
@@ -366,6 +397,15 @@ global — that's how Risu finds them.
   `[start, end)`, while `insertChat` and `removeChat` use JS `splice`. Message
   roles are only `user` or `char`; any other role passed to `addChat`,
   `insertChat`, or `setChatRole` becomes `char`.
+- **Stored message `data` is a string.** `getChat` / `getFullChat` return Lua
+  tables like `{ role = 'user', data = '...', time = 0 }`, but `setChat`,
+  `addChat`, `insertChat`, and `setFullChat` should be given string `data`
+  values. Do not pass OpenAI-style `{ role, content }` objects to chat-mutation
+  APIs; that shape belongs to `editRequest` and `LLM` prompts.
+- **Refreshing is explicit for manual UI mutations.** After changing chat text,
+  use `reloadChat(id, index)` to re-render one message or `reloadDisplay(id)` to
+  refresh the wider chat/background display. These are safe-tier calls, so an
+  `editDisplay` listener cannot call them.
 - **Display HTML is sanitized.** Risu lets chat text include useful HTML such as
   buttons, but the display parser sanitizes tags and attributes. Private marker
   text is reliable as stored chat data; visible UI requires a display layer such
