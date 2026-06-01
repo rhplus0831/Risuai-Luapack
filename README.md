@@ -13,7 +13,8 @@ with no compile feedback and no way to test behavior. Luapack fixes that:
 - **Bundler** — amalgamates a multi-file `src/*.lua` pack into the one string
   Risu accepts, with working `require`.
 - **pytest harness** — write real behavioral tests against your script.
-- **Generated API reference** — kept in sync with Risu's source.
+- **Reference docs** — hand-authored, source-grounded pages for every CBS
+  function, hook, host API, and shared element (under `docs/`).
 
 ## Install
 
@@ -63,13 +64,9 @@ def test_greeting():
 
 ## Docs
 
-- [docs/lua-guide.md](docs-refer/lua-guide.md) — how Risu Lua works: entry points, the
-  `id` key, permission tiers, state, async, bundling, testing.
-- [docs/lua-risu-feature-notes.md](docs-refer/lua-risu-feature-notes.md) — notes from
-  `Refer/Risuai` on Lua-relevant Risu data, Regex Scripts, background
-  embedding, modules, assets, lorebooks, and memory.
-- [docs/lua-api.md](docs-refer/lua-api.md) — generated reference of every helper and
-  host function. Regenerate with `python -m luapack docs`.
+- [docs/README.md](docs/README.md) — index into the reference: one page per CBS
+  function (`docs/cbs/`), hook (`docs/hooks/`), host API (`docs/api/`), and
+  shared element (`docs/element/`). Hand-authored, grounded in `Refer/Risuai`.
 
 ## Layout
 
@@ -77,32 +74,30 @@ def test_greeting():
 luapack/            the Python package
   emulator/         lupa runtime, host API, RisuState
   bundler.py        multi-file pack -> single string
-  docgen.py         API reference generator
+  vendored.py       pinned Risu source paths + declareAPI/helper parsers
   testing.py        load() / load_pack() test helpers
-  __main__.py       CLI: new / build / check / test / docs
+  __main__.py       CLI: new / build / check / test / sync-source
 packs/example/      worked example pack
-docs/               guide + generated reference
+docs/               hand-authored reference (cbs/ hooks/ api/ element/)
 vendor/json.lua     rxi/json.lua v0.1.2 (MIT); the module Risu mounts
 vendor/scriptings.ts  RisuAI source, pinned (GPLv3) — the API source of truth
-tests/              emulator, bundler, docgen, and drift tests
+tests/              emulator, bundler, lint, and the API-coverage drift test
 setup.ps1           build bin\python (embedded CPython + lupa)
 luapack.cmd / .ps1  launchers that use bin\python
 ```
 
 ## How it stays correct
 
-The API surface is pinned to a specific RisuAI commit (`docgen.RISU_REF`) and
-vendored at `vendor/scriptings.ts`, so docs and tests are reproducible on a
-fresh clone. Two drift guards fail if the emulator or docs fall behind it:
-`tests/test_api_coverage.py` (every declared host API is emulated) and
-`tests/test_docgen.py` (the reference matches the source).
+The API surface is pinned to a specific RisuAI commit (`vendored.RISU_REF`) and
+vendored at `vendor/scriptings.ts`, so the lint and tests are reproducible on a
+fresh clone. A drift guard fails if the emulator falls behind it:
+`tests/test_api_coverage.py` asserts every declared host API is emulated.
 
 To re-check against newer RisuAI:
 
 ```sh
 python -m luapack sync-source --ref main   # fetch just scriptings.ts (no git)
-python -m pytest -q                         # drift guards now compare vs latest
-python -m luapack docs                      # regenerate the reference
+python -m pytest -q                         # the drift guard now compares vs latest
 ```
 
 CI runs this weekly (the `upstream-drift` job) and fails when Risu's Lua API

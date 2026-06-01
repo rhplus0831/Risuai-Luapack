@@ -1,4 +1,4 @@
-"""luapack CLI: build / check / test / new.
+"""luapack CLI: build / check / test / new / check-cbs / sync-source.
 
     python -m luapack build [pack_dir]   # bundle src/ -> dist/bundle.lua (+ compile)
     python -m luapack check [pack_dir]   # bundle in memory + syntax check
@@ -14,7 +14,7 @@ import sys
 import urllib.error
 import urllib.request
 
-from . import bundler, cbs, docgen, lint
+from . import bundler, cbs, lint, vendored
 from .emulator import LuaSyntaxError, RisuEmulator
 
 _REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -127,33 +127,10 @@ def cmd_new(args) -> int:
     return 0
 
 
-def cmd_docs(args) -> int:
-    if not os.path.exists(docgen.DEFAULT_SCRIPTINGS):
-        print(f"Risu source not found: {docgen.DEFAULT_SCRIPTINGS}")
-        return 1
-    generated = docgen.generate_from_repo()
-    out_path = os.path.join(_REPO_ROOT, "docs", "lua-api.md")
-    if args.check:
-        current = ""
-        if os.path.exists(out_path):
-            with open(out_path, "r", encoding="utf-8") as fh:
-                current = fh.read()
-        if current != generated:
-            print("docs/lua-api.md is stale; run: python -m luapack docs")
-            return 1
-        print("docs: up to date")
-        return 0
-    os.makedirs(os.path.dirname(out_path), exist_ok=True)
-    with open(out_path, "w", encoding="utf-8", newline="\n") as fh:
-        fh.write(generated)
-    print(f"wrote {os.path.relpath(out_path, _REPO_ROOT)}")
-    return 0
-
-
 def cmd_sync_source(args) -> int:
-    ref = args.ref or docgen.RISU_REF
+    ref = args.ref or vendored.RISU_REF
     failures = 0
-    for spec in docgen.VENDORED_SOURCES:
+    for spec in vendored.VENDORED_SOURCES:
         url = RISU_RAW_BASE.format(ref=ref, path=spec["raw"])
         dest = spec["dest"]
         name = os.path.relpath(dest, _REPO_ROOT)
@@ -178,8 +155,8 @@ def cmd_sync_source(args) -> int:
         with open(dest, "wb") as fh:
             fh.write(data)
         print(f"  wrote {name} ({len(data)} bytes)")
-    if ref != docgen.RISU_REF:
-        print("note: not the pinned ref - run pytest and `python -m luapack docs` to inspect drift.")
+    if ref != vendored.RISU_REF:
+        print("note: not the pinned ref - run pytest to inspect drift against the new source.")
     return 1 if failures else 0
 
 
@@ -209,10 +186,6 @@ def main(argv=None) -> int:
     pcbs = sub.add_parser("check-cbs", help="validate a CBS template string")
     pcbs.add_argument("template", help="the CBS string, e.g. \"{{getvar::hp}}\"")
     pcbs.set_defaults(func=cmd_check_cbs)
-
-    pdocs = sub.add_parser("docs", help="regenerate docs/lua-api.md from Risu source")
-    pdocs.add_argument("--check", action="store_true", help="fail if the file is stale")
-    pdocs.set_defaults(func=cmd_docs)
 
     psync = sub.add_parser("sync-source", help="fetch Risu's scriptings.ts (pinned by default)")
     psync.add_argument("--ref", default=None, help="git ref/SHA (default: pinned RISU_REF)")

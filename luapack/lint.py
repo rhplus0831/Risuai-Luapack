@@ -15,7 +15,7 @@ import os
 import re
 from typing import Dict, List, Optional, Set, Tuple
 
-from . import bundler, cbs, docgen
+from . import bundler, cbs, vendored
 from .emulator import RisuEmulator, lua_src
 from .emulator.runtime import LuaSyntaxError
 
@@ -138,9 +138,9 @@ _api_cache: Optional[Tuple[Set[str], Set[str]]] = None
 def _api_and_helper_names() -> Tuple[Set[str], Set[str]]:
     global _api_cache
     if _api_cache is None:
-        with open(docgen.DEFAULT_SCRIPTINGS, "r", encoding="utf-8") as fh:
-            apis = {a["name"] for a in docgen.parse_host_apis(fh.read())}
-        helpers = {h["name"] for h in docgen.parse_helpers(lua_src.WRAPPER)}
+        with open(vendored.DEFAULT_SCRIPTINGS, "r", encoding="utf-8") as fh:
+            apis = {a["name"] for a in vendored.parse_host_apis(fh.read())}
+        helpers = {h["name"] for h in vendored.parse_helpers(lua_src.WRAPPER)}
         _api_cache = (apis, helpers)
     return _api_cache
 

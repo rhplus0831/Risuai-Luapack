@@ -11,7 +11,8 @@ Three pieces are assembled around the user's bundle, in order:
 3. ``DISPATCHER`` - mirrors the ``switch(mode)`` entry-point dispatch in
                     ``runScripted`` so Python can drive a single mode call.
 
-The WRAPPER must stay in sync with Risu's source; ``docgen``/tests diff it.
+The WRAPPER must stay in sync with Risu's source; the emulator-coverage test
+(``tests/test_api_coverage.py``) diffs it against the vendored ``scriptings.ts``.
 """
 
 # --- async host functions -------------------------------------------------
@@ -139,7 +140,7 @@ end
 # The WRAPPER string below is a verbatim copy of `luaCodeWrapper` from RisuAI
 # (src/ts/process/scriptings.ts), Copyright (C) Kwaroran, licensed GPLv3.
 # Source: https://github.com/kwaroran/RisuAI  (see NOTICE).
-# Keep in sync with vendor/scriptings.ts, pinned at docgen.RISU_REF.
+# Keep in sync with vendor/scriptings.ts, pinned at vendored.RISU_REF.
 WRAPPER = (
     """
 json = require 'json'

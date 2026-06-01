@@ -10,10 +10,10 @@ import re
 
 import pytest
 
-from luapack import docgen
+from luapack import vendored
 from luapack.emulator import RisuEmulator, RisuState
 
-_SCRIPTINGS = docgen.DEFAULT_SCRIPTINGS  # vendored, pinned copy of scriptings.ts
+_SCRIPTINGS = vendored.DEFAULT_SCRIPTINGS  # vendored, pinned copy of scriptings.ts
 
 
 def _declared_apis():

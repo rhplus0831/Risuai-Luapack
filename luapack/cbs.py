@@ -10,7 +10,7 @@ from __future__ import annotations
 import re
 from typing import Dict, List, Optional, Set
 
-from . import docgen
+from . import vendored
 
 _IDENT_RE = re.compile(r"^[A-Za-z_][A-Za-z0-9_]*$")
 # Leading chars that mark a block / special construct ({{#if}}, {{/if}},
@@ -39,7 +39,7 @@ def load_cbs_names(path: Optional[str] = None) -> Set[str]:
     global _names_cache
     if path is None and _names_cache is not None:
         return _names_cache
-    with open(path or docgen.DEFAULT_CBS, "r", encoding="utf-8") as fh:
+    with open(path or vendored.DEFAULT_CBS, "r", encoding="utf-8") as fh:
         names = parse_cbs_names(fh.read())
     if path is None:
         _names_cache = names
