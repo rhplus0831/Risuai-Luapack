@@ -54,7 +54,7 @@ MODES = [
 # Curated one-liners. Functions without an entry just show their signature.
 DESCRIPTIONS: Dict[str, str] = {
     # helpers (luaCodeWrapper)
-    "getState": "Read a JSON-decoded state value (chat var, `__`-prefixed).",
+    "getState": "Read a JSON-decoded state value (chat var, `__`-prefixed; missing Risu values decode to Lua nil).",
     "setState": "Write a JSON-encoded state value (chat var, `__`-prefixed).",
     "getChat": "Get one chat message as a table `{role, data, time}` (0-based; negative indexes work like JS `Array.at`).",
     "getFullChat": "Get the whole chat as an array of `{role, data, time}`.",
@@ -68,9 +68,9 @@ DESCRIPTIONS: Dict[str, str] = {
     "getPersonaImage": "Return `{{inlayed::...}}` for the persona image, or an empty string. Awaitable.",
     "listenEdit": "Register a chained edit-trigger handler (editRequest/Input/Output/Display).",
     # host functions
-    "getChatVar": "Read a chat variable (string).",
+    "getChatVar": "Read a chat variable (string; Risu returns `\"null\"` when missing).",
     "setChatVar": "Write a chat variable.",
-    "getGlobalVar": "Read a global chat variable, including custom toggle values stored as `toggle_<key>`.",
+    "getGlobalVar": "Read a global chat variable, including custom toggle values stored as `toggle_<key>`; missing values are `\"null\"`.",
     "stopChat": "Stop the current send.",
     "addChat": "Append a message (role `user`; any other role becomes `char`).",
     "insertChat": "Insert a message with JS `splice` semantics.",
@@ -90,9 +90,9 @@ DESCRIPTIONS: Dict[str, str] = {
     "getAuthorsNote": "Author's note for the chat.",
     "getCharacterLastMessage": "Most recent character message.",
     "getUserLastMessage": "Most recent user message.",
-    "getBackgroundEmbedding": "Character background HTML.",
-    "setBackgroundEmbedding": "Set the character background HTML.",
-    "upsertLocalLoreBook": "Create/replace a local lorebook entry.",
+    "getBackgroundEmbedding": "Character background HTML rendered behind the chat.",
+    "setBackgroundEmbedding": "Set the character background HTML rendered behind the chat.",
+    "upsertLocalLoreBook": "Create/replace a local lorebook entry; options include `alwaysActive`, `insertOrder`, `key`, `secondKey`, `regex`.",
     "alertNormal": "Show an info alert.",
     "alertError": "Show an error alert.",
     "alertInput": "Prompt for text input. Awaitable.",

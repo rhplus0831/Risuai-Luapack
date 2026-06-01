@@ -117,6 +117,41 @@ end
 Risu's CBS `{{button::Text::TriggerName}}` helper emits this same
 `risu-trigger` HTML.
 
+## Display decoration: markers, regex, and background HTML
+
+Lua scripts often use plain marker text in chat messages as a handoff to the
+display layer:
+
+```text
+[[panel:data]]
+[[contract:data]]
+<custom-console>
+```
+
+Those markers are only chat text by themselves. They become panels, console views,
+popups, or other UI only when another display layer transforms them.
+The two common layers are:
+
+- **Background embedding** — `getBackgroundEmbedding(id)` /
+  `setBackgroundEmbedding(id, html)` read and write the selected character's
+  background HTML. Module background embeddings are appended separately by Risu.
+  Background HTML is rendered behind the chat, CBS-parsed, allowed to use
+  additional-asset tokens, then passed through the same display parser/sanitizer
+  path. `<style>` tags are allowed, but selectors are scoped under `.chattext`
+  and class selectors are internally prefixed with `x-risu-`.
+- **Regex scripts** — an `editdisplay` regex script can replace marker text with
+  Markdown/HTML without changing the stored chat message. This is the usual way
+  to turn markers such as `[[panel:data]]` into a visible display panel. Regex
+  replacements can use JavaScript replacement captures (`$1`, `$&`, `$<name>`)
+  and Risu's flag actions such as `<cbs>`, `<move_top>`, `<move_bottom>`,
+  `<inject>`, `<repeat_back>`, and `<order n>`.
+
+For normal chat display, Lua `editDisplay` listeners run before display regex
+scripts. That means Lua can write or rewrite marker text, and an `editdisplay`
+regex can decorate the result. Remember that `editDisplay` only changes the
+rendered display value; if you need to mutate stored chat data, use a safe
+handler such as `onOutput` or a manual trigger and call `setChat`.
+
 ## The `id` access key (the #1 gotcha)
 
 Most host calls take an opaque `id` as their **first argument** — the access key
@@ -168,8 +203,11 @@ setState(id, 'inventory', { 'sword', 'shield' })   -- stored at __inventory
 local items = getState(id, 'inventory')            -- back to a Lua table
 ```
 
-`getState` on a name that was never set will error (it decodes an empty string),
-so initialise before reading.
+In current Risu, missing chat/global variables read back as `"null"`, so
+`getState` on a name that was never set decodes JSON `null` to Lua `nil`.
+Initialise before reading when your logic needs a table/number/string shape, and
+normalise both `"null"` and an empty string when writing scripts that also need
+to run in luapack's emulator.
 
 `getGlobalVar(id, key)` reads global chat variables. Risu's custom prompt
 toggles are stored there under `toggle_<key>`; module toggles are appended to the
@@ -223,6 +261,22 @@ Lua `cbs()` is for expansion, not side effects. Variable-writing CBS functions
 such as `{{setvar}}` and `{{addvar}}` require Risu's parser to run with
 `runVar=true`, and the Lua helper does not pass that flag.
 
+### Additional asset tokens
+
+Risu's display/background parser also expands additional-asset tokens in chat
+text and background HTML:
+
+```text
+{{raw::assetName}} / {{path::assetName}}  -> asset path
+{{image::assetName}} / {{img::assetName}} -> image HTML
+{{video::assetName}} / {{audio::assetName}}
+{{bg::assetName}} / {{bgm::assetName}}
+{{emotion::emotionName}}
+```
+
+These are display helpers, not model-request attachments. For Lua LLM
+multimodal extraction, use inlay tokens as described below.
+
 ## Async / `await`
 
 Risu's VM injects a `Promise`. Functions that hit the model/network/disk return
@@ -264,6 +318,20 @@ helpers.
 prompt and returns a result object directly. `request(id, url):await()` returns
 a JSON string, so decode it with `json.decode`.
 
+When a manual/custom trigger needs to call awaitable APIs such as `alertInput`,
+assign an async-wrapped global function:
+
+```lua
+RenameStatus = async(function(id)
+    local name = alertInput(id, 'New label?'):await()
+    if name and name ~= '' then
+        setChatVar(id, 'status_label', name)
+    end
+end)
+```
+
+Forgetting `:await()` leaves you with a Promise object, not the user's answer.
+
 ## Reserved globals — don't shadow these
 
 The preamble already defines these; redefining them breaks your script:
@@ -284,10 +352,11 @@ global — that's how Risu finds them.
   roles are only `user` or `char`; any other role passed to `addChat`,
   `insertChat`, or `setChatRole` becomes `char`.
 - **Display HTML is sanitized.** Risu lets chat text include useful HTML such as
-  buttons, but the display parser sanitizes tags and attributes. If you store
-  private marker tags for your own scripts, treat them as raw chat-data markers,
-  not as guaranteed rendered HTML. `<Thoughts>...</Thoughts>` is a special case:
-  Risu converts it to a collapsible details block for display.
+  buttons, but the display parser sanitizes tags and attributes. Private marker
+  text is reliable as stored chat data; visible UI requires a display layer such
+  as `editDisplay`, an `editdisplay` regex script, or background HTML.
+  `<Thoughts>...</Thoughts>` is a special case: Risu converts it to a
+  collapsible details block for display.
 - **`request` is restricted:** HTTPS only, URL ≤ 120 chars, Risu's current code
   allows 6 calls/minute before returning 429, and some hosts are banned. It
   returns a JSON string `{status, data}` — decode it. The luapack emulator

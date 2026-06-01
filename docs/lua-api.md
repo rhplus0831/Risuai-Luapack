@@ -36,7 +36,7 @@ Provided by Risu's preamble. Prefer these over the raw `*Main` host calls when t
 | `getFullChat(id)` | Get the whole chat as an array of `{role, data, time}`. |
 | `getLoreBooks(id, search)` | Find local, character-global, and enabled-module lorebook entries whose `comment` exactly matches `search`; returned `content` is CBS-parsed. |
 | `getPersonaImage(id)` | Return `{{inlayed::...}}` for the persona image, or an empty string. Awaitable. |
-| `getState(id, name)` | Read a JSON-decoded state value (chat var, `__`-prefixed). |
+| `getState(id, name)` | Read a JSON-decoded state value (chat var, `__`-prefixed; missing Risu values decode to Lua nil). |
 | `listenEdit(type, func)` | Register a chained edit-trigger handler (editRequest/Input/Output/Display). |
 | `loadLoreBooks(id)` | Load activated lorebooks and JSON-decode them (low-level, no reserve argument). |
 | `log(value)` | Print a value to the dev console (JSON-encoded). |
@@ -58,9 +58,9 @@ Injected globals. Most calls take the access-key `id` as their first argument (e
 | `getCharacterLastMessage(id)` | Most recent character message. |
 | `getChatLength(id)` | Number of messages. |
 | `getChatMain(id, index)` | Raw `getChat` (returns a JSON string). |
-| `getChatVar(id, key)` | Read a chat variable (string). |
+| `getChatVar(id, key)` | Read a chat variable (string; Risu returns `"null"` when missing). |
 | `getFullChatMain(id)` | Raw `getFullChat` (returns a JSON string). |
-| `getGlobalVar(id, key)` | Read a global chat variable, including custom toggle values stored as `toggle_<key>`. |
+| `getGlobalVar(id, key)` | Read a global chat variable, including custom toggle values stored as `toggle_<key>`; missing values are `"null"`. |
 | `getLoreBooksMain(id, search)` | Raw `getLoreBooks` (returns a JSON string). |
 | `getName(id)` | Character name. |
 | `getPersonaDescription(id)` | Persona (user) description, CBS-parsed. |
@@ -81,14 +81,14 @@ Injected globals. Most calls take the access-key `id` as their first argument (e
 | `alertNormal(id, value)` | Show an info alert. |
 | `alertSelect(id, value)` _(await)_ | Prompt to pick from options. Awaitable. |
 | `cutChat(id, start, end)` | Keep only messages in `[start, end)`. |
-| `getBackgroundEmbedding(id)` | Character background HTML. |
+| `getBackgroundEmbedding(id)` | Character background HTML rendered behind the chat. |
 | `getDescription(id)` | Character description. |
 | `getTokens(id, value)` _(await)_ | Token count of a string. Awaitable. |
 | `insertChat(id, index, role, value)` | Insert a message with JS `splice` semantics. |
 | `reloadChat(id, index)` | Trigger a re-render of one message. |
 | `reloadDisplay(id)` | Trigger a display refresh. |
 | `removeChat(id, index)` | Remove the message at an index with JS `splice` semantics. |
-| `setBackgroundEmbedding(id, data)` | Set the character background HTML. |
+| `setBackgroundEmbedding(id, data)` | Set the character background HTML rendered behind the chat. |
 | `setCharacterFirstMessage(id, data)` | Set the character's first message. |
 | `setChat(id, index, value)` | Replace the text of the message at an index; negative indexes work like JS `Array.at`. |
 | `setChatRole(id, index, value)` | Set role to `user`; any other value becomes `char`; negative indexes work like JS `Array.at`. |
@@ -97,7 +97,7 @@ Injected globals. Most calls take the access-key `id` as their first argument (e
 | `setName(id, name)` | Set the character name. |
 | `sleep(id, time)` _(await)_ | Wait N milliseconds. Awaitable. |
 | `stopChat(id)` | Stop the current send. |
-| `upsertLocalLoreBook(id, name, content, options)` | Create/replace a local lorebook entry. |
+| `upsertLocalLoreBook(id, name, content, options)` | Create/replace a local lorebook entry; options include `alwaysActive`, `insertOrder`, `key`, `secondKey`, `regex`. |
 
 ### Safe or edit-display
 
