@@ -1,93 +1,67 @@
 # AGENTS.md
 
-Risuai-Luapack lets you author, validate, bundle, and test
-[RisuAI](https://github.com/kwaroran/RisuAI) Lua scripts off-platform. An agent
-in this repo is usually doing one of two things:
+Risuai-Luapack lets agents author, validate, bundle, and behavior-test
+[RisuAI](https://github.com/kwaroran/RisuAI) Lua packs outside Risu. Use this
+guide when working on a pack with `luapack`.
 
-- **(A) Authoring a Risu Lua pack** — writing `.lua`, validating it, bundling to
-  one string to paste into Risu.
-- **(B) Developing luapack itself** — the emulator, bundler, linter, docs.
+## Start with the references
 
-## Setup
+- Read [docs/README.md](docs/README.md) before using a hook, host API, CBS
+  function, or shared runtime concept. It links to one page per item under
+  `docs/hooks/`, `docs/api/`, `docs/cbs/`, and `docs/element/`.
+- Use [packs/example/](packs/example/) as the minimal pack pattern: Lua code in
+  `src/*.lua`, `require()` between modules, and pytest tests under `tests/`.
+- When a detail matters, prefer the specific reference page over memory. The
+  docs cover access keys, permission tiers, async/await, CBS parsing, chat
+  message shapes, and hook timing.
 
-- Python 3.11+. `pip install -r requirements.txt` (lupa, pytest).
-- Windows, no toolchain: `powershell -ExecutionPolicy Bypass -File setup.ps1`,
-  then use `.\luapack.cmd ...` instead of `python -m luapack ...`.
-- Run the test suite: `python -m pytest -q` (keep it green).
+## CLI
 
-## CLI (`python -m luapack <cmd>`)
+Use the available luapack launcher for the workspace. The command surface is:
 
 | Command | Purpose |
 |---------|---------|
-| `new <dir>` | scaffold a pack |
-| `check [dir] [--strict]` | validate: Lua compile + name lint + CBS syntax (no behavior) |
-| `check-cbs "<str>"` | validate one CBS `{{...}}` template string |
-| `build [dir]` | bundle `src/*.lua` -> `dist/bundle.lua` (paste into Risu) |
-| `test [dir]` | run the pack's pytest tests |
-| `sync-source [--ref main]` | refresh vendored Risu sources (pinned by default) |
+| `new <dir>` | Scaffold a pack with `luapack.toml`, `src/main.lua`, and a starter test. |
+| `check [dir] [--strict]` | Validate Lua syntax, Risu host/helper names, handler names, `listenEdit` types, and CBS function names inside Lua strings. |
+| `check-cbs "<str>"` | Validate one complete CBS `{{...}}` template string, including brace balance. |
+| `build [dir]` | Bundle `src/*.lua` into `dist/bundle.lua` and syntax-check the bundled output. |
+| `test [dir]` | Run the pack's pytest tests. |
 
-## (A) Authoring a Risu Lua pack
+## Pack workflow
 
-1. **Read [docs/README.md](docs/README.md) first** — the index into the
-   hand-authored reference for CBS (`docs/cbs/`), hooks (`docs/hooks/`), host
-   APIs (`docs/api/`), and shared elements (`docs/element/`). It covers the host
-   API, the `id` access-key convention, permission tiers, async/await, and CBS.
-2. `luapack new mypack`; put code in `mypack/src/*.lua` and `require()` between
-   modules. See `packs/example/` for the pattern (tests included).
-3. Risu rules that bite if ignored:
-   - **Event/button handlers must be GLOBAL functions** — Risu dispatches by
-     global name. A top-level `function onStart(id)` inside a module stays
-     global in the bundle, which is what you want. Don't wrap handlers in a
-     module table.
-   - Every host call takes the access-key **`id` as its first argument**.
-   - **Low-level** APIs (LLM/request/similarity/image) need `lowLevelAccess`.
-   - **Chat indices are 0-based.**
-4. `luapack check mypack` (fix findings) -> `luapack build mypack` -> paste
-   `mypack/dist/bundle.lua` into Risu's Lua trigger field.
-5. Behavior-test with pytest via `luapack.testing.load` / `load_pack`
-   (see `packs/example/tests/`).
+1. Create or inspect the pack's `luapack.toml`. The defaults are `src/` for
+   source files, `main` as the entry module, and `dist/bundle.lua` as output.
+2. Put pack code in `src/*.lua`. The entry module is loaded last, so global
+   handlers defined there are visible to Risu.
+3. Run `luapack check <pack>` and fix findings before building.
+4. Run `luapack build <pack>` and paste the generated `dist/bundle.lua` into
+   Risu's Lua trigger field.
+5. Add behavior tests with `luapack.testing.load` or `load_pack`, then run
+   `luapack test <pack>`.
 
-## (B) Developing luapack
+## Risu Lua rules to keep in mind
 
-Layout:
+- Event and button handlers must be global functions. Risu dispatches by global
+  name, so define handlers like `function onStart(id)` rather than hiding them
+  inside a module table.
+- Most host API calls take the access key `id` as their first argument. Check
+  the API page for exceptions such as `cbs(value)` and `log(value)`.
+- Low-level APIs such as LLM, request, similarity, and image generation require
+  `low_level_access = true` in `luapack.toml` and low-level access enabled for
+  the character or trigger inside Risu.
+- Chat indices are 0-based.
+- Edit listeners are registered with `listenEdit(type, func)`, where `type` is
+  `editInput`, `editOutput`, `editRequest`, or `editDisplay`.
+- Some host calls are asynchronous in Risu. Use the documented `async()` /
+  `await` pattern from [docs/element/promise-async.md](docs/element/promise-async.md)
+  when a referenced API page says a call returns a promise.
 
-- `luapack/emulator/` — lupa (Lua 5.4) runtime, host-API mocks, `RisuState`,
-  the synchronous Promise shim + a verbatim copy of Risu's `luaCodeWrapper`
-  (`lua_src.py`).
-- `luapack/bundler.py` — multi-file pack -> single string.
-- `luapack/cbs.py`, `luapack/lint.py` — CBS + Lua name validation.
-- `luapack/vendored.py` — pinned Risu source paths, `RISU_REF`, and the
-  `declareAPI`/helper parsers that feed lint, `sync-source`, and the drift guard.
-- `luapack/testing.py`, `luapack/__main__.py`.
-- `vendor/` — pinned RisuAI sources (`scriptings.ts`, `cbs.ts`) + rxi `json.lua`.
-  **This is the source of truth** for the host API and CBS name lists.
-- `tests/` — emulator, bundler, lint + the API-coverage drift guard.
+## Testing packs
 
-## Conventions and gotchas (read before editing)
-
-- **ASCII-only console output.** `print()` of non-ASCII (em-dash, `≤`, emoji)
-  raises `UnicodeEncodeError` and crashes the CLI on cp949 (Korean) Windows
-  consoles. Non-ASCII is fine in files written with `encoding="utf-8"` (e.g.
-  the docs under `docs/`).
-- **`vendor/*.ts` is pinned** to `vendored.RISU_REF` and committed. Don't
-  hand-edit; refresh with `luapack sync-source`. The API/CBS name lists and
-  lint all derive from it, so the tooling tracks Risu.
-- **`docs/` is hand-authored** — source-grounded reference pages for CBS, hooks,
-  APIs, and elements. Ground new pages in `Refer/Risuai`; keep `docs/README.md`
-  in sync when you add or rename a page.
-- **Drift guard** (`tests/test_api_coverage.py`) keeps the emulator in sync with
-  the pinned Risu source. The CI `upstream-drift` job re-checks against latest
-  Risu weekly.
-- **Line endings:** `.gitattributes` enforces LF; vendored `.ts` must stay LF so
-  `sync-source` is a byte no-op. `.cmd` stays CRLF.
-- **License:** GPLv3 (matches RisuAI). See [NOTICE](NOTICE) for third-party
-  attribution. Keep `print` output and new files compatible.
-
-## Before committing
-
-- `python -m pytest -q` is green.
-- If you changed the emulator's host API or the wrapper, confirm the
-  API-coverage drift guard (`tests/test_api_coverage.py`) still passes.
-- If you changed Lua behavior, CBS, hooks, or the host API, update the matching
-  pages under `docs/` (and `docs/README.md`).
-- Never commit `bin/`, `dist/`, or `Refer/` (all gitignored).
+- Tests should drive the pack through the emulator, not by calling helper
+  functions in isolation when hook behavior matters.
+- Load the pack with `luapack.testing.load_pack`, set up state through the
+  emulator helpers, then call modes such as `emu.run_mode("start")` or
+  `emu.run_mode("editOutput", data="...")`.
+- Mock low-level calls in tests when a pack uses LLM, request, image, or
+  similarity APIs.
