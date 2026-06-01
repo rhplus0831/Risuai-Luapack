@@ -1,9 +1,9 @@
 # API: `log(value)`
 
-- **Layer:** Preamble helper (defined in `luaCodeWrapper`, not `declareAPI`)
-- **Permission tier:** Always available (no key guard)
-- **Async:** no
-- **Source:** `Refer/Risuai/src/ts/process/scriptings.ts` (`luaCodeWrapper` -> `function log`)
+- Layer: Preamble helper (defined in `luaCodeWrapper`, not `declareAPI`)
+- Permission tier: Always available (no key guard)
+- Async: no
+- Source: `Refer/Risuai/src/ts/process/scriptings.ts` (`luaCodeWrapper` -> `function log`)
 
 Logs any Lua value to the developer console by JSON-encoding it.
 
@@ -13,7 +13,7 @@ Logs any Lua value to the developer console by JSON-encoding it.
 log(value)
 ```
 
-Note: `log` does **not** take an access key — it is a convenience wrapper.
+Note: `log` does not take an access key — it is a convenience wrapper.
 
 ## Parameters
 

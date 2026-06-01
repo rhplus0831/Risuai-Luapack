@@ -1,9 +1,9 @@
 # API: `logMain(value)`
 
-- **Layer:** Host API (`declareAPI`)
-- **Permission tier:** Always available (no key guard)
-- **Async:** no
-- **Source:** `Refer/Risuai/src/ts/process/scriptings.ts` (`declareAPI('logMain', ...)`)
+- Layer: Host API (`declareAPI`)
+- Permission tier: Always available (no key guard)
+- Async: no
+- Source: `Refer/Risuai/src/ts/process/scriptings.ts` (`declareAPI('logMain', ...)`)
 
 Raw console logger: prints a parsed JSON string to the developer console.
 
@@ -13,14 +13,14 @@ Raw console logger: prints a parsed JSON string to the developer console.
 logMain(value)
 ```
 
-Note: `logMain` does **not** take an access key. It is the only low-level
+Note: `logMain` does not take an access key. It is the only low-level
 logging primitive; most packs call [`log`](log.md) instead.
 
 ## Parameters
 
 | Param | Type | Description |
 |-------|------|-------------|
-| `value` | string | A **JSON string**. The host runs `console.log(JSON.parse(value))`, so passing a non-JSON string will throw inside `JSON.parse`. |
+| `value` | string | A JSON string. The host runs `console.log(JSON.parse(value))`, so passing a non-JSON string will throw inside `JSON.parse`. |
 
 Because of the `JSON.parse`, you almost always want the [`log`](log.md) helper,
 which `json.encode`s its argument for you before calling `logMain`.

@@ -1,9 +1,9 @@
 # CBS: `{{not::a}}`
 
-- **Layer:** CBS function
-- **Category:** logic
-- **Aliases:** none
-- **Source:** `Refer/Risuai/src/ts/cbs.ts` (`not`)
+- Layer: CBS function
+- Category: logic
+- Aliases: none
+- Source: `Refer/Risuai/src/ts/cbs.ts` (`not`)
 
 Logical NOT of a boolean value.
 

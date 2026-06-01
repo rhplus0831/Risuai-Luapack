@@ -1,9 +1,9 @@
 # API: `getChat(id, index)`
 
-- **Layer:** Preamble helper (wraps [`getChatMain`](getChatMain.md))
-- **Permission tier:** Always available (inherits `getChatMain`)
-- **Async:** no
-- **Source:** `Refer/Risuai/src/ts/process/scriptings.ts` (`luaCodeWrapper`, `function getChat`)
+- Layer: Preamble helper (wraps [`getChatMain`](getChatMain.md))
+- Permission tier: Always available (inherits `getChatMain`)
+- Async: no
+- Source: `Refer/Risuai/src/ts/process/scriptings.ts` (`luaCodeWrapper`, `function getChat`)
 
 Returns one chat message as a decoded Lua table `{role, data, time}`.
 
@@ -22,7 +22,7 @@ getChat(id, index)
 
 ## Returns
 
-A Lua **table** `{ role = 'user'|'char', data = '<string>', time = <number> }`.
+A Lua table `{ role = 'user'|'char', data = '<string>', time = <number> }`.
 This is a thin wrapper: the helper calls `getChatMain(id, index)` and runs
 `json.decode` on the result. For an out-of-range index the raw call returns the
 JSON string `null`, so the helper returns Lua `nil` — always guard with

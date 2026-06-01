@@ -1,16 +1,16 @@
 # Hook: `onInput` (mode `input`)
 
-- **Layer:** Hook (event mode)
-- **Define:** global `function onInput(id)`
-- **Fires:** when the user submits input, **before** that text is stored as the user message
-- **Permission tier:** Safe (plus low-level if the character has `lowLevelAccess`)
-- **Source:** `Refer/Risuai/src/ts/process/scriptings.ts` (mode dispatch in `runScripted`)
+- Layer: Hook (event mode)
+- Define: global `function onInput(id)`
+- Fires: when the user submits input, before that text is stored as the user message
+- Permission tier: Safe (plus low-level if the character has `lowLevelAccess`)
+- Source: `Refer/Risuai/src/ts/process/scriptings.ts` (mode dispatch in `runScripted`)
 
 `onInput` runs at the very start of a send, the moment the user submits text.
 
 ## When it fires
 
-Risu invokes `onInput` when the user submits input, **before** the submitted
+Risu invokes `onInput` when the user submits input, before the submitted
 text has been stored as a message in the chat. This is the earliest entry point
 in the send pipeline.
 
@@ -26,7 +26,7 @@ the submitted string and returns the version Risu stores.
 
 ## How to handle
 
-Define a **global** function named `onInput`. Risu dispatches by global name, so
+Define a global function named `onInput`. Risu dispatches by global name, so
 it must not live inside a module table.
 
 ```lua
@@ -43,16 +43,16 @@ end
 
 ## Return value
 
-Return `false` to **stop the send** (Risu sets `stopSending`). Any other return
+Return `false` to stop the send (Risu sets `stopSending`). Any other return
 value (including `nil`) lets the send proceed.
 
-## What you can / cannot do here
+## Capabilities
 
-- **Can:** read/write chat variables, mutate the existing chat
+- Can: read/write chat variables, mutate the existing chat
   ([`addChat`](../api/addChat.md), [`setChat`](../api/setChat.md)), read/write
   character fields, and call low-level APIs ([`LLM`](../api/LLM.md),
-  [`request`](../api/request.md)) **if** the character has `lowLevelAccess`.
-- **Cannot:** see or modify the just-submitted text as a stored message — it has
+  [`request`](../api/request.md)) if the character has `lowLevelAccess`.
+- Cannot: see or modify the just-submitted text as a stored message — it has
   not been written yet. Rewriting the submitted text is the job of
   [`editInput`](editInput.md). Use `onInput` for side effects (gating the send,
   updating counters) that should run before the message lands.

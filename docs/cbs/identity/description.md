@@ -1,9 +1,9 @@
 # CBS: `{{description}}`
 
-- **Layer:** CBS function
-- **Category:** identity
-- **Aliases:** `chardesc`
-- **Source:** `Refer/Risuai/src/ts/cbs.ts` (`description`)
+- Layer: CBS function
+- Category: identity
+- Aliases: `chardesc`
+- Source: `Refer/Risuai/src/ts/cbs.ts` (`description`)
 
 Returns the current character's description field.
 
@@ -24,8 +24,8 @@ Returns the current character's description field.
 Reads the `desc` (description) field of the active character (the one passed in
 the matcher argument, otherwise the selected character) and returns it after
 running it through Risu's chat parser, so any CBS templates inside the
-description are expanded. For a **group chat** the character has type `group` and
-this returns an **empty string**.
+description are expanded. For a group chat the character has type `group` and
+this returns an empty string.
 
 ## Example
 

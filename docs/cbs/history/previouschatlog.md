@@ -1,9 +1,9 @@
 # CBS: `{{previouschatlog::index}}`
 
-- **Layer:** CBS function
-- **Category:** history
-- **Aliases:** `previous_chat_log`
-- **Source:** `Refer/Risuai/src/ts/cbs.ts` (`previouschatlog`)
+- Layer: CBS function
+- Category: history
+- Aliases: `previous_chat_log`
+- Source: `Refer/Risuai/src/ts/cbs.ts` (`previouschatlog`)
 
 Returns the content of the message at a given chat index.
 
@@ -21,7 +21,7 @@ Returns the content of the message at a given chat index.
 
 ## Behavior
 
-Returns the `data` (text content) of the message at the given **0-based** index
+Returns the `data` (text content) of the message at the given 0-based index
 in the current chat. The argument is coerced to a number. If the index is out of
 range (or no character/chat is selected), it returns the literal string
 `"Out of range"`. The content is returned as stored and is not re-parsed.

@@ -1,10 +1,10 @@
 # Element: Inlay tokens (`{{inlay::}}`, `{{inlayed::}}`, `{{inlayeddata::}}`)
 
-- **Kind:** Element (display token)
-- **Source:** `Refer/Risuai/src/ts/parser/parser.svelte.ts` (`parseInlayAssets`), `Refer/Risuai/src/ts/process/scriptings.ts` (`generateImage`, `getCharacterImageMain`, `getPersonaImageMain`, the `useMultimodal` extractor in `LLMMain`/`axLLMMain`)
+- Kind: Element (display token)
+- Source: `Refer/Risuai/src/ts/parser/parser.svelte.ts` (`parseInlayAssets`), `Refer/Risuai/src/ts/process/scriptings.ts` (`generateImage`, `getCharacterImageMain`, `getPersonaImageMain`, the `useMultimodal` extractor in `LLMMain`/`axLLMMain`)
 
 Tokens that reference files in Risu's inlay storage. They render as media for
-display **and** can be attached as multimodal input to LLM calls — unlike
+display and can be attached as multimodal input to LLM calls — unlike
 [asset display tokens](asset-tokens.md).
 
 ## What it is
@@ -24,8 +24,8 @@ Lua image APIs return these tokens:
   [`getPersonaImage`](../api/getPersonaImage.md) return `{{inlayed::<id>}}`.
 
 `{{inlayeddata::<id>}}` is not produced by a Lua getter directly, but it is
-recognized everywhere inlay tokens are parsed and is the assistant-side
-multimodal form (see below).
+recognized everywhere inlay tokens are parsed. It is the only inlay form that
+assistant messages attach as multimodal input.
 
 ## Display rendering
 
@@ -46,8 +46,8 @@ image inlays render as empty.
 
 When [`LLM`](../api/LLM.md) / [`axLLM`](../api/axLLM.md) run with
 `useMultimodal = true`, each message's content is scanned with
-`/{{(inlay|inlayed|inlayeddata)::(.+?)}}/g`. The matched token text is **removed
-from the content**, the referenced blob is loaded with `getInlayAsset`, and it
+`/{{(inlay|inlayed|inlayeddata)::(.+?)}}/g`. The matched token text is removed
+from the content, the referenced blob is loaded with `getInlayAsset`, and it
 is attached to the request as a `MultiModal` entry. Which tokens attach depends
 on the message role:
 

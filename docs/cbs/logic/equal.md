@@ -1,9 +1,9 @@
 # CBS: `{{equal::a::b}}`
 
-- **Layer:** CBS function
-- **Category:** logic
-- **Aliases:** none
-- **Source:** `Refer/Risuai/src/ts/cbs.ts` (`equal`)
+- Layer: CBS function
+- Category: logic
+- Aliases: none
+- Source: `Refer/Risuai/src/ts/cbs.ts` (`equal`)
 
 Tests two values for exact string equality.
 

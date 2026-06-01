@@ -1,9 +1,9 @@
 # CBS: `{{emotionlist}}`
 
-- **Layer:** CBS function
-- **Category:** assets
-- **Aliases:** none
-- **Source:** `Refer/Risuai/src/ts/cbs.ts` (`emotionlist`)
+- Layer: CBS function
+- Category: assets
+- Aliases: none
+- Source: `Refer/Risuai/src/ts/cbs.ts` (`emotionlist`)
 
 Returns a JSON array of the current character's emotion image names.
 
@@ -20,7 +20,7 @@ This token takes no arguments.
 ## Behavior
 
 Reads the selected character's `emotionImages` and returns a JSON array
-(`makeArray`) containing only the **first element of each entry** — the emotion
+(`makeArray`) containing only the first element of each entry — the emotion
 name — never the image path or data. `emotionImages` is stored as `[name, path]`
 pairs, so the result is `["happy","sad",...]`.
 

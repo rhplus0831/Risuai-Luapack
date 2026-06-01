@@ -1,11 +1,11 @@
 # API: `LLM(id, prompt, useMultimodal, options)`
 
-- **Layer:** Preamble helper (defined in `luaCodeWrapper`)
-- **Permission tier:** Low-level (requires `lowLevelAccess`)
-- **Async:** yes (`:await()`)
-- **Source:** `Refer/Risuai/src/ts/process/scriptings.ts` (`function LLM` in `luaCodeWrapper`, wrapping `declareAPI('LLMMain', ...)`)
+- Layer: Preamble helper (defined in `luaCodeWrapper`)
+- Permission tier: Low-level (requires `lowLevelAccess`)
+- Async: yes (`:await()`)
+- Source: `Refer/Risuai/src/ts/process/scriptings.ts` (`function LLM` in `luaCodeWrapper`, wrapping `declareAPI('LLMMain', ...)`)
 
-Runs a sub-request against the chat's **main** model and returns the decoded
+Runs a sub-request against the chat's main model and returns the decoded
 result. This is the high-level convenience wrapper over the raw
 [`LLMMain`](LLMMain.md): it JSON-encodes the prompt and options for you, awaits
 the host call, and JSON-decodes the `{ success, result }` reply back into a Lua
@@ -48,8 +48,8 @@ A Promise. After `:await()`, a Lua table `{ success = <bool>, result = <string> 
 
 Low-level tier — the raw `LLMMain` no-ops (returns `nil`, which then fails to
 JSON-decode) unless `id` is in `ScriptingLowLevelIds`. That set is granted only
-to safe-mode runs **when the character/module has `lowLevelAccess` enabled**. It
-is **never** available to edit listeners ([`editRequest`](../hooks/editRequest.md),
+to safe-mode runs when the character/module has `lowLevelAccess` enabled. It
+is never available to edit listeners ([`editRequest`](../hooks/editRequest.md),
 [`editInput`](../hooks/editInput.md), [`editOutput`](../hooks/editOutput.md),
 [`editDisplay`](../hooks/editDisplay.md)), which always run with low-level access
 forced off. See [access key & permission tiers](../element/access-key.md).
@@ -59,7 +59,7 @@ forced off. See [access key & permission tiers](../element/access-key.md).
 - [Promise / await](../element/promise-async.md) — the call is async; you must
   `:await()` it inside an `async` context.
 - [Chat message](../element/chat-message.md) — the prompt uses the OpenAI-style
-  `{ role, content }` shape, **not** Risu's stored `{ role, data }` shape.
+  `{ role, content }` shape, not Risu's stored `{ role, data }` shape.
 - [Inlay tokens](../element/inlay-tokens.md) — when `useMultimodal = true`,
   `{{inlay::}}` / `{{inlayed::}}` / `{{inlayeddata::}}` tokens are pulled out of
   the content and attached as images.

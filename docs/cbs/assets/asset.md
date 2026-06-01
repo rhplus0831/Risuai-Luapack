@@ -1,9 +1,9 @@
 # CBS: `{{asset::name}}`
 
-- **Layer:** CBS function (display token)
-- **Category:** assets
-- **Aliases:** none
-- **Source:** `Refer/Risuai/src/ts/parser/parser.svelte.ts` (`parseAdditionalAssets`)
+- Layer: CBS function (display token)
+- Category: assets
+- Aliases: none
+- Source: `Refer/Risuai/src/ts/parser/parser.svelte.ts` (`parseAdditionalAssets`)
 
 Renders a character/module asset as an image or a video, chosen by file
 extension.

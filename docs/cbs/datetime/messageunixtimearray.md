@@ -1,9 +1,9 @@
 # CBS: `{{messageunixtimearray}}`
 
-- **Layer:** CBS function
-- **Category:** datetime
-- **Aliases:** `message_unixtime_array`
-- **Source:** `Refer/Risuai/src/ts/cbs.ts` (`messageunixtimearray`)
+- Layer: CBS function
+- Category: datetime
+- Aliases: `message_unixtime_array`
+- Source: `Refer/Risuai/src/ts/cbs.ts` (`messageunixtimearray`)
 
 Returns every message timestamp in the current chat as a JSON array.
 
@@ -22,7 +22,7 @@ Returns every message timestamp in the current chat as a JSON array.
 ## Behavior
 
 Maps over every message in the current chat and emits its `time` value (a unix
-timestamp in **milliseconds**) as a JSON array built with Risu's `makeArray`
+timestamp in milliseconds) as a JSON array built with Risu's `makeArray`
 helper. Messages that have no stored `time` (sent in older Risu versions) appear
 as `0`. The order matches the chat's message order, so element index `i`
 corresponds to message index `i`.

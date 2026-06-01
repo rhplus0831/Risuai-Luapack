@@ -1,9 +1,9 @@
 # CBS: `{{element::json::key1::key2::...}}`
 
-- **Layer:** CBS function
-- **Category:** dict
-- **Aliases:** `ele`
-- **Source:** `Refer/Risuai/src/ts/cbs.ts` (`element`)
+- Layer: CBS function
+- Category: dict
+- Aliases: `ele`
+- Source: `Refer/Risuai/src/ts/cbs.ts` (`element`)
 
 Walks a path of keys/indices into a nested JSON value and returns what it finds.
 

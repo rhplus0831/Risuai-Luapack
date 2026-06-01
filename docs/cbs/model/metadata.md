@@ -1,9 +1,9 @@
 # CBS: `{{metadata::key}}`
 
-- **Layer:** CBS function
-- **Category:** model
-- **Aliases:** none
-- **Source:** `Refer/Risuai/src/ts/cbs.ts` (`metadata`)
+- Layer: CBS function
+- Category: model
+- Aliases: none
+- Source: `Refer/Risuai/src/ts/cbs.ts` (`metadata`)
 
 Returns a piece of system / application metadata selected by `key`.
 
@@ -17,7 +17,7 @@ Returns a piece of system / application metadata selected by `key`.
 
 | # | Name | Required | Description |
 |---|------|----------|-------------|
-| 1 | `key` | yes | The metadata field to read (case-insensitive; see the table below). |
+| 1 | `key` | yes | Case-insensitive metadata key. Must be one of the recognized keys listed in "Behavior". |
 
 ## Behavior
 

@@ -1,9 +1,9 @@
 # CBS: `{{role}}`
 
-- **Layer:** CBS function
-- **Category:** context
-- **Aliases:** none
-- **Source:** `Refer/Risuai/src/ts/cbs.ts` (`role`)
+- Layer: CBS function
+- Category: context
+- Aliases: none
+- Source: `Refer/Risuai/src/ts/cbs.ts` (`role`)
 
 Returns the role of the current message.
 

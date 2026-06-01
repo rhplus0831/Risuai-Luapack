@@ -1,9 +1,9 @@
 # CBS: `{{messageidleduration}}`
 
-- **Layer:** CBS function
-- **Category:** datetime
-- **Aliases:** `message_idle_duration`
-- **Source:** `Refer/Risuai/src/ts/cbs.ts` (`messageidleduration`)
+- Layer: CBS function
+- Category: datetime
+- Aliases: `message_idle_duration`
+- Source: `Refer/Risuai/src/ts/cbs.ts` (`messageidleduration`)
 
 Returns the elapsed time between the current user message and the previous user
 message (HH:MM:SS).

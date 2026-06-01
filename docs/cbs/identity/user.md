@@ -1,9 +1,9 @@
 # CBS: `{{user}}`
 
-- **Layer:** CBS function
-- **Category:** identity
-- **Aliases:** none
-- **Source:** `Refer/Risuai/src/ts/cbs.ts` (`user`)
+- Layer: CBS function
+- Category: identity
+- Aliases: none
+- Source: `Refer/Risuai/src/ts/cbs.ts` (`user`)
 
 Returns the active user/persona name.
 

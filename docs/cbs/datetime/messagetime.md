@@ -1,9 +1,9 @@
 # CBS: `{{messagetime}}`
 
-- **Layer:** CBS function
-- **Category:** datetime
-- **Aliases:** `message_time`
-- **Source:** `Refer/Risuai/src/ts/cbs.ts` (`messagetime`)
+- Layer: CBS function
+- Category: datetime
+- Aliases: `message_time`
+- Source: `Refer/Risuai/src/ts/cbs.ts` (`messagetime`)
 
 Returns the local time at which the current message was sent (HH:MM:SS).
 

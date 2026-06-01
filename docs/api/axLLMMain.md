@@ -1,11 +1,11 @@
 # API: `axLLMMain(id, promptStr, useMultimodal, optionsStr)`
 
-- **Layer:** Host API (`declareAPI`)
-- **Permission tier:** Low-level (requires `lowLevelAccess`)
-- **Async:** yes (`:await()`)
-- **Source:** `Refer/Risuai/src/ts/process/scriptings.ts` (`declareAPI('axLLMMain', ...)`)
+- Layer: Host API (`declareAPI`)
+- Permission tier: Low-level (requires `lowLevelAccess`)
+- Async: yes (`:await()`)
+- Source: `Refer/Risuai/src/ts/process/scriptings.ts` (`declareAPI('axLLMMain', ...)`)
 
-The **raw** auxiliary-model sub-request: JSON string in, JSON string out. Routes
+The raw auxiliary-model sub-request: JSON string in, JSON string out. Routes
 to the `'otherAx'` (auxiliary) model. Behaves exactly like
 [`LLMMain`](LLMMain.md) except for the target model. Prefer the [`axLLM`](axLLM.md)
 preamble helper, which handles JSON for you.
@@ -27,15 +27,15 @@ axLLMMain(id, promptStr, useMultimodal, optionsStr)   -- returns a Promise; call
 
 ## Returns
 
-A Promise resolving to a **JSON string** `{"success": <bool>, "result": <string>}`.
+A Promise resolving to a JSON string `{"success": <bool>, "result": <string>}`.
 Decode it with `json.decode`. On a `fail`/`multiline` result, `success` is
 `false`.
 
 ## Permission
 
 Low-level tier — the call no-ops unless `id` is in `ScriptingLowLevelIds`,
-granted only to safe-mode runs **when the character/module has `lowLevelAccess`
-enabled**. It is **never** available to edit listeners
+granted only to safe-mode runs when the character/module has `lowLevelAccess`
+enabled. It is never available to edit listeners
 ([`editRequest`](../hooks/editRequest.md), [`editInput`](../hooks/editInput.md),
 [`editOutput`](../hooks/editOutput.md), [`editDisplay`](../hooks/editDisplay.md)),
 which run with low-level access forced off. See

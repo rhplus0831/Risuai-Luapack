@@ -1,12 +1,12 @@
 # API: `getLoreBooksMain(id, search)`
 
-- **Layer:** Host API (`declareAPI`)
-- **Permission tier:** Always available
-- **Async:** no
-- **Source:** `Refer/Risuai/src/ts/process/scriptings.ts` (`declareAPI('getLoreBooksMain', ...)`)
+- Layer: Host API (`declareAPI`)
+- Permission tier: Always available
+- Async: no
+- Source: `Refer/Risuai/src/ts/process/scriptings.ts` (`declareAPI('getLoreBooksMain', ...)`)
 
-The **raw** host call behind [`getLoreBooks`](getLoreBooks.md): same exact
-`comment` lookup across the three lore scopes, but returns a **JSON string**
+The raw host call behind [`getLoreBooks`](getLoreBooks.md): same exact
+`comment` lookup across the three lore scopes, but returns a JSON string
 rather than a decoded table. Prefer the [`getLoreBooks`](getLoreBooks.md)
 preamble helper, which decodes for you.
 
@@ -25,7 +25,7 @@ getLoreBooksMain(id, search)
 
 ## Returns
 
-A **JSON string** encoding an array of matching
+A JSON string encoding an array of matching
 [lorebook entries](../element/lorebook-entry.md), each with `content` already
 CBS-parsed in the selected-character context. Decode it with `json.decode`. If
 the selected character is not of type `character`, the call returns nothing
@@ -34,7 +34,7 @@ enabled-module lore.
 
 ## Permission
 
-Always available — there is **no guard** on this call, so it works for any
+Always available — there is no guard on this call, so it works for any
 access key regardless of tier (including from edit listeners). It is *not*
 gated behind `lowLevelAccess`. See
 [access key & permission tiers](../element/access-key.md).

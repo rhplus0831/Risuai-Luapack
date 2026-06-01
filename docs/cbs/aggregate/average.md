@@ -1,9 +1,9 @@
 # CBS: `{{average::...}}`
 
-- **Layer:** CBS function
-- **Category:** aggregate
-- **Aliases:** none
-- **Source:** `Refer/Risuai/src/ts/cbs.ts` (`average`)
+- Layer: CBS function
+- Category: aggregate
+- Aliases: none
+- Source: `Refer/Risuai/src/ts/cbs.ts` (`average`)
 
 Returns the arithmetic mean of a set of numbers.
 
@@ -18,7 +18,7 @@ Returns the arithmetic mean of a set of numbers.
 
 | # | Name | Required | Description |
 |---|------|----------|-------------|
-| 1.. | values | yes | One or more numbers, **or** a single JSON array of values. |
+| 1.. | values | yes | One or more numbers, or a single JSON array of values. |
 
 ## Behavior
 
@@ -26,7 +26,7 @@ When more than one argument is supplied, the arguments themselves are the list;
 when a single argument is supplied it is parsed as a JSON array (`parseArray`)
 and its elements are the list. Each value is coerced with `Number`; any value
 that is `NaN` is treated as `0`. The function sums the coerced values and divides
-by the **count of list entries** (`val.length`), rendering the result as a
+by the count of list entries (`val.length`), rendering the result as a
 string.
 
 Note the divisor is the number of entries, including any that were coerced to

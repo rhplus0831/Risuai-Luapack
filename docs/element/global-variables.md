@@ -1,7 +1,7 @@
 # Element: Global variables (read-only from Lua)
 
-- **Kind:** Element (data structure)
-- **Source:** `Refer/Risuai/src/ts/parser/chatVar.svelte.ts` (`getGlobalChatVar`), `Refer/Risuai/src/ts/process/scriptings.ts` (`getGlobalVar` declaration)
+- Kind: Element (data structure)
+- Source: `Refer/Risuai/src/ts/parser/chatVar.svelte.ts` (`getGlobalChatVar`), `Refer/Risuai/src/ts/process/scriptings.ts` (`getGlobalVar` declaration)
 
 Cross-chat string variables stored in the database, readable from Lua but not
 writable.
@@ -22,7 +22,7 @@ string `"null"` in Lua (not `nil`, not `""`).
 
 ## No Lua setter
 
-There is **no Lua host API to write a global variable.** Risu declares only
+There is no Lua host API to write a global variable. Risu declares only
 `getGlobalVar`; there is no `setGlobalVar`. Globals are written by the user
 through Risu's UI (notably the prompt-toggle sidebar) and by CBS. If a Lua
 script needs writable persistent state, use [chat variables](chat-variables.md)

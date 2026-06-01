@@ -1,9 +1,9 @@
 # CBS: `{{xordecrypt::b64}}`
 
-- **Layer:** CBS function
-- **Category:** encoding
-- **Aliases:** `xordecode`, `xord`
-- **Source:** `Refer/Risuai/src/ts/cbs.ts` (`xordecrypt`)
+- Layer: CBS function
+- Category: encoding
+- Aliases: `xordecode`, `xord`
+- Source: `Refer/Risuai/src/ts/cbs.ts` (`xordecrypt`)
 
 Reverses [`{{xor}}`](xor.md): base64-decodes, then XORs each byte with `0xFF`.
 

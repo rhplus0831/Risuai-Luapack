@@ -1,9 +1,9 @@
 # CBS: `{{filter::array::type}}`
 
-- **Layer:** CBS function
-- **Category:** dict
-- **Aliases:** none
-- **Source:** `Refer/Risuai/src/ts/cbs.ts` (`filter`)
+- Layer: CBS function
+- Category: dict
+- Aliases: none
+- Source: `Refer/Risuai/src/ts/cbs.ts` (`filter`)
 
 Filters a JSON array, removing empty and/or duplicate entries.
 
@@ -25,10 +25,10 @@ Filters a JSON array, removing empty and/or duplicate entries.
 Parses `array` as a JSON array and returns a new JSON array (via `makeArray`)
 containing only the elements that pass the filter chosen by `type`:
 
-- **`all`** — keep elements that are non-empty **and** the first occurrence of
+- `all` — keep elements that are non-empty and the first occurrence of
   their value (drops empties and duplicates).
-- **`nonempty`** — keep elements that are not the empty string.
-- **`unique`** — keep only the first occurrence of each value (drops
+- `nonempty` — keep elements that are not the empty string.
+- `unique` — keep only the first occurrence of each value (drops
   duplicates).
 
 An unrecognized `type` falls back to `all`. Emptiness is tested as `f !== ''`

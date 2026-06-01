@@ -1,11 +1,11 @@
 # API: `LLMMain(id, promptStr, useMultimodal, optionsStr)`
 
-- **Layer:** Host API (`declareAPI`)
-- **Permission tier:** Low-level (requires `lowLevelAccess`)
-- **Async:** yes (`:await()`)
-- **Source:** `Refer/Risuai/src/ts/process/scriptings.ts` (`declareAPI('LLMMain', ...)`)
+- Layer: Host API (`declareAPI`)
+- Permission tier: Low-level (requires `lowLevelAccess`)
+- Async: yes (`:await()`)
+- Source: `Refer/Risuai/src/ts/process/scriptings.ts` (`declareAPI('LLMMain', ...)`)
 
-The **raw** main-model sub-request: JSON string in, JSON string out. Routes to
+The raw main-model sub-request: JSON string in, JSON string out. Routes to
 the `'model'` (main) model. Prefer the [`LLM`](LLM.md) preamble helper, which
 JSON-encodes the prompt/options and JSON-decodes the reply for you. Call this
 directly only if you need to control the JSON yourself.
@@ -27,15 +27,15 @@ LLMMain(id, promptStr, useMultimodal, optionsStr)   -- returns a Promise; call :
 
 ## Returns
 
-A Promise resolving to a **JSON string** `{"success": <bool>, "result": <string>}`.
+A Promise resolving to a JSON string `{"success": <bool>, "result": <string>}`.
 Decode it with `json.decode`. On a `fail`/`multiline` result, `success` is
 `false` and `result` holds the error or partial text.
 
 ## Permission
 
 Low-level tier — the call no-ops (returns `nil`) unless `id` is in
-`ScriptingLowLevelIds`, which is granted only to safe-mode runs **when the
-character/module has `lowLevelAccess` enabled**. It is **never** available to
+`ScriptingLowLevelIds`, which is granted only to safe-mode runs when the
+character/module has `lowLevelAccess` enabled. It is never available to
 edit listeners ([`editRequest`](../hooks/editRequest.md),
 [`editInput`](../hooks/editInput.md), [`editOutput`](../hooks/editOutput.md),
 [`editDisplay`](../hooks/editDisplay.md)), which run with low-level access forced

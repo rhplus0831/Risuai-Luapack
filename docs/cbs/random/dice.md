@@ -1,9 +1,9 @@
 # CBS: `{{dice::XdY}}`
 
-- **Layer:** CBS function
-- **Category:** random
-- **Aliases:** none
-- **Source:** `Refer/Risuai/src/ts/cbs.ts` (`dice`)
+- Layer: CBS function
+- Category: random
+- Aliases: none
+- Source: `Refer/Risuai/src/ts/cbs.ts` (`dice`)
 
 Rolls dice in `XdY` notation and returns the sum.
 
@@ -27,7 +27,7 @@ both with `Number`. If either is `NaN`, the function returns the literal string
 (an integer in `[1, Y]`), sums them, and returns the total as a string.
 
 Rolling uses `Math.random()`, so the result is true random and re-rolls on each
-parse. Unlike [`{{roll}}`](roll.md) there is **no** default — the notation must
+parse. Unlike [`{{roll}}`](roll.md) there is no default — the notation must
 contain a `d`, and a missing count or sides coerces to `NaN`.
 
 ## Example

@@ -1,9 +1,9 @@
 # CBS: `{{tex::latex}}`
 
-- **Layer:** CBS function
-- **Category:** format
-- **Aliases:** `latex`, `katex`
-- **Source:** `Refer/Risuai/src/ts/cbs.ts` (`tex`)
+- Layer: CBS function
+- Category: format
+- Aliases: `latex`, `katex`
+- Source: `Refer/Risuai/src/ts/cbs.ts` (`tex`)
 
 Wraps an expression as display-mode LaTeX/KaTeX math.
 

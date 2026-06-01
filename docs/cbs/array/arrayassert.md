@@ -1,9 +1,9 @@
 # CBS: `{{arrayassert::array::index::value}}`
 
-- **Layer:** CBS function
-- **Category:** array
-- **Aliases:** none
-- **Source:** `Refer/Risuai/src/ts/cbs.ts` (`arrayassert`)
+- Layer: CBS function
+- Category: array
+- Aliases: none
+- Source: `Refer/Risuai/src/ts/cbs.ts` (`arrayassert`)
 
 Ensures a given index exists in a JSON array, extending it if necessary.
 
@@ -23,16 +23,16 @@ Ensures a given index exists in a JSON array, extending it if necessary.
 
 ## Behavior
 
-Parses `array` as JSON. If `index` is **greater than or equal to** the current
+Parses `array` as JSON. If `index` is greater than or equal to the current
 length (i.e. the index does not yet exist), it sets that index to `value`,
 extending the array. Any positions between the old end and `index` become empty
 (`null` when serialized to JSON). If `index` is already within bounds, the array
-is returned unchanged — existing elements are **not** overwritten.
+is returned unchanged — existing elements are not overwritten.
 
 This mirrors the dictionary helper `objectassert` (alias `dictassert`), which
 sets a key only if it is missing; `arrayassert` is the array-index equivalent.
 
-This produces a **new** array string for use downstream; it does not write back
+This produces a new array string for use downstream; it does not write back
 to any variable. To persist the result, pass it to
 [`{{setvar}}`](../variables/setvar.md).
 

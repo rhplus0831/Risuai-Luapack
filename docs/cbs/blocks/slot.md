@@ -1,9 +1,9 @@
 # CBS: `{{slot::name}}`
 
-- **Layer:** CBS function (block slot)
-- **Category:** blocks
-- **Aliases:** none
-- **Source:** `Refer/Risuai/src/ts/cbs.ts` (`slot`, doc-only); substituted in `Refer/Risuai/src/ts/parser/parser.svelte.ts` (the `each` block handling, which `replaceAll`s `{{slot::<name>}}`)
+- Layer: CBS function (block slot)
+- Category: blocks
+- Aliases: none
+- Source: `Refer/Risuai/src/ts/cbs.ts` (`slot`, doc-only); substituted in `Refer/Risuai/src/ts/parser/parser.svelte.ts` (the `each` block handling, which `replaceAll`s `{{slot::<name>}}`)
 
 The current loop/block slot value, used inside [`{{#each}}`](each.md).
 

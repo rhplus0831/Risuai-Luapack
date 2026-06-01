@@ -1,9 +1,9 @@
 # CBS: `{{inlayeddata::id}}`
 
-- **Layer:** CBS function (inlay token)
-- **Category:** assets
-- **Aliases:** none
-- **Source:** `Refer/Risuai/src/ts/parser/parser.svelte.ts` (`parseInlayAssets`)
+- Layer: CBS function (inlay token)
+- Category: assets
+- Aliases: none
+- Source: `Refer/Risuai/src/ts/parser/parser.svelte.ts` (`parseInlayAssets`)
 
 Renders an inlay-store asset by id, styled — and is included in the model
 request.
@@ -20,10 +20,10 @@ request.
 (`parseInlayAssets`) renders it just like [`{{inlayed::id}}`](inlayed.md): media
 HTML wrapped in a `risu-inlay-image` frame.
 
-**Included in the model request (multimodal).** This is the multimodal form: when
+Included in the model request (multimodal). This is the multimodal form: when
 [`LLM`](../../api/LLM.md) / [`axLLM`](../../api/axLLM.md) run with
-`useMultimodal = true`, `inlayeddata` is the **only** inlay form attached for
-**assistant** messages (and it also attaches for user/system messages). The token
+`useMultimodal = true`, `inlayeddata` is the only inlay form attached for
+assistant messages (and it also attaches for user/system messages). The token
 text is stripped from the content and the referenced blob is attached as media.
 Use this token when you want the model to *see* the image in an assistant turn.
 

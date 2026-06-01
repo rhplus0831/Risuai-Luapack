@@ -1,9 +1,9 @@
 # API: `getUserLastMessage(id)`
 
-- **Layer:** Host API (`declareAPI`)
-- **Permission tier:** Always available (no key guard)
-- **Async:** no
-- **Source:** `Refer/Risuai/src/ts/process/scriptings.ts` (`declareAPI('getUserLastMessage', ...)`)
+- Layer: Host API (`declareAPI`)
+- Permission tier: Always available (no key guard)
+- Async: no
+- Source: `Refer/Risuai/src/ts/process/scriptings.ts` (`declareAPI('getUserLastMessage', ...)`)
 
 Returns the data of the most recent user-role message in the chat.
 
@@ -17,7 +17,7 @@ getUserLastMessage(id)
 
 | Param | Type | Description |
 |-------|------|-------------|
-| `id` | [access key](../element/access-key.md) | The key passed to your handler. Accepted for convention; this call carries **no key guard**. |
+| `id` | [access key](../element/access-key.md) | The key passed to your handler. Accepted for convention; this call carries no key guard. |
 
 ## Returns
 

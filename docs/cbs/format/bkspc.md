@@ -1,9 +1,9 @@
 # CBS: `{{bkspc}}`
 
-- **Layer:** CBS function
-- **Category:** format
-- **Aliases:** none
-- **Source:** `Refer/Risuai/src/ts/cbs.ts` (`bkspc`)
+- Layer: CBS function
+- Category: format
+- Aliases: none
+- Source: `Refer/Risuai/src/ts/cbs.ts` (`bkspc`)
 
 Removes the last word from the output produced so far.
 

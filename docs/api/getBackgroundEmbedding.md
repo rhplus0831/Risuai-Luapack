@@ -1,9 +1,9 @@
 # API: `getBackgroundEmbedding(id)`
 
-- **Layer:** Host API (`declareAPI`)
-- **Permission tier:** Safe (blocked in `editDisplay`)
-- **Async:** no
-- **Source:** `Refer/Risuai/src/ts/process/scriptings.ts` (`declareAPI('getBackgroundEmbedding', ...)`)
+- Layer: Host API (`declareAPI`)
+- Permission tier: Safe (blocked in `editDisplay`)
+- Async: no
+- Source: `Refer/Risuai/src/ts/process/scriptings.ts` (`declareAPI('getBackgroundEmbedding', ...)`)
 
 Returns the selected character's background embedding HTML (`char.backgroundHTML`).
 
@@ -26,7 +26,7 @@ getBackgroundEmbedding(id)
 ## Permission
 
 Safe tier — unusually for a getter, this one is guarded: the call no-ops unless
-`id` is in `ScriptingSafeIds`. It is therefore **not** available to
+`id` is in `ScriptingSafeIds`. It is therefore not available to
 [`editDisplay`](../hooks/editDisplay.md) listeners. Available from
 `onStart`/`onInput`/`onOutput`, button/custom modes, and the
 request/input/output edit hooks. See [access key & tiers](../element/access-key.md).

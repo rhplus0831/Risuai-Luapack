@@ -1,9 +1,9 @@
 # CBS: `{{hash::s}}`
 
-- **Layer:** CBS function
-- **Category:** random
-- **Aliases:** none
-- **Source:** `Refer/Risuai/src/ts/cbs.ts` (`hash`)
+- Layer: CBS function
+- Category: random
+- Aliases: none
+- Source: `Refer/Risuai/src/ts/cbs.ts` (`hash`)
 
 Turns a string into a deterministic ~7-digit number.
 
@@ -27,10 +27,10 @@ at least 7 digits with zeros. The result is fully deterministic: the same input
 always yields the same number, with no dependence on time or chat state. It is
 handy as a stable seed-like value for consistent pseudo-randomization.
 
-> **Not the Lua `hash` API.** This CBS function is a deterministic numeric
+> Not the Lua `hash` API. This CBS function is a deterministic numeric
 > stringifier evaluated by the template parser. The Lua host API
 > [`hash(id, value)`](../../api/hash.md) is a different thing: it is an
-> **awaitable** call into Risu's cryptographic-style `hasher` and returns that
+> awaitable call into Risu's cryptographic-style `hasher` and returns that
 > hasher's value, not a 7-digit number. Do not expect the two to agree.
 
 ## Example

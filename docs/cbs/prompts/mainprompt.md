@@ -1,9 +1,9 @@
 # CBS: `{{mainprompt}}`
 
-- **Layer:** CBS function
-- **Category:** prompts
-- **Aliases:** `systemprompt`, `main_prompt`
-- **Source:** `Refer/Risuai/src/ts/cbs.ts` (`mainprompt`)
+- Layer: CBS function
+- Category: prompts
+- Aliases: `systemprompt`, `main_prompt`
+- Source: `Refer/Risuai/src/ts/cbs.ts` (`mainprompt`)
 
 Returns the main system prompt.
 

@@ -1,9 +1,9 @@
 # CBS: `{{floor::n}}`
 
-- **Layer:** CBS function
-- **Category:** math
-- **Aliases:** none
-- **Source:** `Refer/Risuai/src/ts/cbs.ts` (`floor`)
+- Layer: CBS function
+- Category: math
+- Aliases: none
+- Source: `Refer/Risuai/src/ts/cbs.ts` (`floor`)
 
 Rounds a number down to the nearest integer.
 

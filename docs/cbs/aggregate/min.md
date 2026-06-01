@@ -1,9 +1,9 @@
 # CBS: `{{min::...}}`
 
-- **Layer:** CBS function
-- **Category:** aggregate
-- **Aliases:** none
-- **Source:** `Refer/Risuai/src/ts/cbs.ts` (`min`)
+- Layer: CBS function
+- Category: aggregate
+- Aliases: none
+- Source: `Refer/Risuai/src/ts/cbs.ts` (`min`)
 
 Returns the smallest of a set of numbers.
 
@@ -18,7 +18,7 @@ Returns the smallest of a set of numbers.
 
 | # | Name | Required | Description |
 |---|------|----------|-------------|
-| 1.. | values | yes | Two or more numbers, **or** a single JSON array of values. |
+| 1.. | values | yes | Two or more numbers, or a single JSON array of values. |
 
 ## Behavior
 

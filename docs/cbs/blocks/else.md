@@ -1,9 +1,9 @@
 # CBS: `{{:else}}`
 
-- **Layer:** CBS block (clause)
-- **Category:** blocks
-- **Aliases:** none
-- **Source:** `Refer/Risuai/src/ts/cbs.ts` (`:else`, doc-only); handled in `Refer/Risuai/src/ts/parser/parser.svelte.ts` (`blockEndMatcher`, the `newif` / `newif-falsy` cases)
+- Layer: CBS block (clause)
+- Category: blocks
+- Aliases: none
+- Source: `Refer/Risuai/src/ts/cbs.ts` (`:else`, doc-only); handled in `Refer/Risuai/src/ts/parser/parser.svelte.ts` (`blockEndMatcher`, the `newif` / `newif-falsy` cases)
 
 The else clause inside a [`{{#when}}`](when.md) block.
 
@@ -26,10 +26,10 @@ kept; when falsy, only the part after it is kept.
 Placement rules from the parser:
 
 - It works in both single-line and multi-line `{{#when}}` blocks.
-- In a **multi-line** block, `{{:else}}` must sit on its own line with no other
+- In a multi-line block, `{{:else}}` must sit on its own line with no other
   text (the parser finds the line whose trimmed content equals exactly
   `{{:else}}`).
-- It does **not** work when the `{{#when}}` uses the `legacy` operator, because
+- It does not work when the `{{#when}}` uses the `legacy` operator, because
   that path falls back to the old `{{#if}}` handling, which has no else branch.
 
 `{{:else}}` is only meaningful inside a `{{#when}}` block; on its own it has no

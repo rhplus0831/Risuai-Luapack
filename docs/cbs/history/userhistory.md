@@ -1,9 +1,9 @@
 # CBS: `{{userhistory}}`
 
-- **Layer:** CBS function
-- **Category:** history
-- **Aliases:** `usermessages`, `user_history`
-- **Source:** `Refer/Risuai/src/ts/cbs.ts` (`userhistory`)
+- Layer: CBS function
+- Category: history
+- Aliases: `usermessages`, `user_history`
+- Source: `Refer/Risuai/src/ts/cbs.ts` (`userhistory`)
 
 Returns all user messages as a JSON array.
 

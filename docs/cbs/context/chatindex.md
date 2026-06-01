@@ -1,9 +1,9 @@
 # CBS: `{{chatindex}}`
 
-- **Layer:** CBS function
-- **Category:** context
-- **Aliases:** `chat_index`
-- **Source:** `Refer/Risuai/src/ts/cbs.ts` (`chatindex`)
+- Layer: CBS function
+- Category: context
+- Aliases: `chat_index`
+- Source: `Refer/Risuai/src/ts/cbs.ts` (`chatindex`)
 
 Returns the index of the message currently being processed.
 
@@ -22,7 +22,7 @@ Returns the index of the message currently being processed.
 ## Behavior
 
 Returns `matcherArg.chatID` as a string: the 0-based index of the message whose
-context this template is being expanded in. When the template is **not** scoped
+context this template is being expanded in. When the template is not scoped
 to a specific message (for example in prompt-level expansions rather than a
 per-message render), the index is `-1`. Per-message helpers such as
 [`{{messagetime}}`](../datetime/messagetime.md) and

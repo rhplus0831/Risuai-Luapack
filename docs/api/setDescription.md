@@ -1,9 +1,9 @@
 # API: `setDescription(id, desc)`
 
-- **Layer:** Host API (`declareAPI`)
-- **Permission tier:** Safe (blocked in `editDisplay`)
-- **Async:** no
-- **Source:** `Refer/Risuai/src/ts/process/scriptings.ts` (`declareAPI('setDescription', ...)`)
+- Layer: Host API (`declareAPI`)
+- Permission tier: Safe (blocked in `editDisplay`)
+- Async: no
+- Source: `Refer/Risuai/src/ts/process/scriptings.ts` (`declareAPI('setDescription', ...)`)
 
 Sets the description (`desc`) of the currently selected character.
 
@@ -24,13 +24,13 @@ setDescription(id, desc)
 
 Nothing.
 
-**Throws** `Invalid data type` on a type-check failure, and `Character is a
+Throws `Invalid data type` on a type-check failure, and `Character is a
 group` if the selected character is a group chat (`char.type === 'group'`).
 
 ## Permission
 
 Safe tier — the call no-ops unless `id` is in `ScriptingSafeIds`. It is therefore
-**not** available to [`editDisplay`](../hooks/editDisplay.md) listeners. Available
+not available to [`editDisplay`](../hooks/editDisplay.md) listeners. Available
 from `onStart`/`onInput`/`onOutput`, button/custom modes, and the
 request/input/output edit hooks. See [access key & tiers](../element/access-key.md).
 

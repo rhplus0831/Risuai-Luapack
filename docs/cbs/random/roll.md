@@ -1,9 +1,9 @@
 # CBS: `{{roll::XdY}}`
 
-- **Layer:** CBS function
-- **Category:** random
-- **Aliases:** none
-- **Source:** `Refer/Risuai/src/ts/cbs.ts` (`roll`)
+- Layer: CBS function
+- Category: random
+- Aliases: none
+- Source: `Refer/Risuai/src/ts/cbs.ts` (`roll`)
 
 Rolls dice (true random) with sensible defaults and returns the sum.
 
@@ -23,7 +23,7 @@ Rolls dice (true random) with sensible defaults and returns the sum.
 
 ## Behavior
 
-With **no argument** the function returns `"1"`. Otherwise the argument is split
+With no argument the function returns `"1"`. Otherwise the argument is split
 on `d`:
 
 - Two parts (`X`d`Y`): `X` defaults to `1` if blank, `Y` defaults to `6` if

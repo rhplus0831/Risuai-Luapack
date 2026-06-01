@@ -1,9 +1,9 @@
 # CBS: `{{addvar::name::amount}}`
 
-- **Layer:** CBS function
-- **Category:** variables
-- **Aliases:** none
-- **Source:** `Refer/Risuai/src/ts/cbs.ts` (`addvar`)
+- Layer: CBS function
+- Category: variables
+- Aliases: none
+- Source: `Refer/Risuai/src/ts/cbs.ts` (`addvar`)
 
 Adds a number to a persistent chat variable.
 
@@ -27,8 +27,8 @@ numbers, adds them, and saves the sum back as a string. Because the current
 value is read with `Number(...)`, an unset or non-numeric variable counts as
 the JavaScript number it coerces to (e.g. unset reads as empty and becomes `0`).
 
-Like [`{{setvar}}`](setvar.md), the write **only takes effect when the parser
-runs with `runVar` enabled**. With `runVar` off the function returns `null` (no
+Like [`{{setvar}}`](setvar.md), the write only takes effect when the parser
+runs with `runVar` enabled. With `runVar` off the function returns `null` (no
 write); in `rmVar` mode it is stripped to an empty string. On a successful write
 it returns an empty string and emits nothing.
 

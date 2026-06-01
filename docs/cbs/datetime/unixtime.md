@@ -1,11 +1,11 @@
 # CBS: `{{unixtime}}`
 
-- **Layer:** CBS function
-- **Category:** datetime
-- **Aliases:** none
-- **Source:** `Refer/Risuai/src/ts/cbs.ts` (`unixtime`)
+- Layer: CBS function
+- Category: datetime
+- Aliases: none
+- Source: `Refer/Risuai/src/ts/cbs.ts` (`unixtime`)
 
-Returns the current unix time in **seconds**.
+Returns the current unix time in seconds.
 
 ## Syntax
 

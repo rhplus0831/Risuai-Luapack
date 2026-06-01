@@ -1,9 +1,9 @@
 # CBS: `{{trim::s}}`
 
-- **Layer:** CBS function
-- **Category:** string
-- **Aliases:** none
-- **Source:** `Refer/Risuai/src/ts/cbs.ts` (`trim`)
+- Layer: CBS function
+- Category: string
+- Aliases: none
+- Source: `Refer/Risuai/src/ts/cbs.ts` (`trim`)
 
 Strips leading and trailing whitespace from a string.
 
@@ -22,7 +22,7 @@ Strips leading and trailing whitespace from a string.
 ## Behavior
 
 Returns `s` with leading and trailing whitespace removed, using the literal
-JavaScript `String.prototype.trim`. Whitespace **inside** the string is left
+JavaScript `String.prototype.trim`. Whitespace inside the string is left
 untouched; only the outer edges are stripped. "Whitespace" follows the
 JavaScript definition (spaces, tabs, newlines, and other Unicode whitespace).
 

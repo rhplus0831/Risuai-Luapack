@@ -1,18 +1,18 @@
 # Element: Chat variables (per-chat string state)
 
-- **Kind:** Element (data structure)
-- **Source:** `Refer/Risuai/src/ts/parser/chatVar.svelte.ts` (`getChatVar`, `setChatVar`), `Refer/Risuai/src/ts/process/scriptings.ts` (`getChatVar`/`setChatVar` declarations, `getState`/`setState` wrappers)
+- Kind: Element (data structure)
+- Source: `Refer/Risuai/src/ts/parser/chatVar.svelte.ts` (`getChatVar`, `setChatVar`), `Refer/Risuai/src/ts/process/scriptings.ts` (`getChatVar`/`setChatVar` declarations, `getState`/`setState` wrappers)
 
 Persistent per-chat string variables, stored on the current chat and read with
 a defined fallback chain.
 
 ## What it is
 
-A chat variable is a named string saved on the **current chat** under
+A chat variable is a named string saved on the current chat under
 `chat.scriptstate['$' + key]`. Variables persist with the chat between sessions
 and are scoped to that one chat (a different chat, or the same character's other
 chat page, has its own `scriptstate`). All values are stored and returned as
-**strings**.
+strings.
 
 Lua reads and writes them with [`getChatVar`](../api/getChatVar.md) and
 [`setChatVar`](../api/setChatVar.md); CBS reads them with
@@ -35,9 +35,9 @@ precedence over template defaults.
 ## Write
 
 `setChatVar(id, key, value)` writes `value` to `chat.scriptstate['$' + key]`,
-creating `scriptstate` if needed. It is the **only** chat-data mutation allowed
+creating `scriptstate` if needed. It is the only chat-data mutation allowed
 in the restricted `editDisplay` tier: its guard accepts a key in either
-`ScriptingSafeIds` **or** `ScriptingEditDisplayIds`, where every other mutator
+`ScriptingSafeIds` or `ScriptingEditDisplayIds`, where every other mutator
 requires `ScriptingSafeIds` only. (Reads via `getChatVar` carry no guard.)
 
 ## The `getState` / `setState` helpers

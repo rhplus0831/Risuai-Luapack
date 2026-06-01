@@ -1,9 +1,9 @@
 # CBS: `{{ruby::text::ruby}}`
 
-- **Layer:** CBS function
-- **Category:** format
-- **Aliases:** `furigana`
-- **Source:** `Refer/Risuai/src/ts/cbs.ts` (`ruby`)
+- Layer: CBS function
+- Category: format
+- Aliases: `furigana`
+- Source: `Refer/Risuai/src/ts/cbs.ts` (`ruby`)
 
 Renders ruby text (furigana) as HTML.
 

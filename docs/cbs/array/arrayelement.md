@@ -1,9 +1,9 @@
 # CBS: `{{arrayelement::array::index}}`
 
-- **Layer:** CBS function
-- **Category:** array
-- **Aliases:** none
-- **Source:** `Refer/Risuai/src/ts/cbs.ts` (`arrayelement`)
+- Layer: CBS function
+- Category: array
+- Aliases: none
+- Source: `Refer/Risuai/src/ts/cbs.ts` (`arrayelement`)
 
 Returns the element at a given index of a JSON array.
 
@@ -23,7 +23,7 @@ Returns the element at a given index of a JSON array.
 ## Behavior
 
 Parses `array` as JSON and returns the element at `index` using JavaScript
-`Array.prototype.at`, so the index is **0-based** and a negative `index` counts
+`Array.prototype.at`, so the index is 0-based and a negative `index` counts
 back from the end (`-1` is the last element). If the index is out of bounds the
 result is the literal string `"null"`. If the selected element is itself an
 object or array it is re-serialized with `JSON.stringify`; otherwise it is

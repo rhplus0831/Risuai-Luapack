@@ -1,7 +1,7 @@
 # Element: Chat message (`{role, data, time}`)
 
-- **Kind:** Element (data structure)
-- **Source:** `Refer/Risuai/src/ts/storage/database.svelte.ts` (`Message` interface), `Refer/Risuai/src/ts/process/scriptings.ts` (`getChatMain`, `getFullChatMain`, `setFullChatMain`, `addChat`, `insertChat`, `setChat`, `setChatRole`)
+- Kind: Element (data structure)
+- Source: `Refer/Risuai/src/ts/storage/database.svelte.ts` (`Message` interface), `Refer/Risuai/src/ts/process/scriptings.ts` (`getChatMain`, `getFullChatMain`, `setFullChatMain`, `addChat`, `insertChat`, `setChat`, `setChatRole`)
 
 The shape Lua sees for a stored chat message, and how it differs from the
 OpenAI-style request message used by LLM prompts and `editRequest`.
@@ -24,16 +24,16 @@ range `getChatMain` returns `null` (so `getChat` yields `nil`).
 
 | Field | Type | Notes |
 |-------|------|-------|
-| `role` | string | Only ever `"user"` or `"char"`. Stored roles are normalized — see below. |
-| `data` | string | The message text. This is a **plain string**, not a structured object. |
+| `role` | string | Only ever `"user"` or `"char"`. Any role string other than `"user"` is normalized to `"char"`. |
+| `data` | string | The message text. This is a plain string, not a structured object. |
 | `time` | number | Message timestamp; `0` when the stored message has no `time`. |
 
 ## Roles are only `user` or `char`
 
 Risu's `Message.role` type is `'user'|'char'`. Every mutation API normalizes the
 role: `addChat`, `insertChat`, and `setChatRole` compute
-`role === 'user' ? 'user' : 'char'`, so **any role string other than `"user"`
-becomes `"char"`** (including `"assistant"`, `"system"`, `"bot"`, `""`, …).
+`role === 'user' ? 'user' : 'char'`, so any role string other than `"user"`
+becomes `"char"` (including `"assistant"`, `"system"`, `"bot"`, `""`, …).
 
 ```lua
 addChat(id, 'system', 'logged in')   -- stored with role = 'char'
@@ -43,13 +43,13 @@ setChatRole(id, -1, 'assistant')     -- becomes 'char'
 ## `data` is a string, not `{role, content}`
 
 The stored shape and the OpenAI-style request shape are different objects. Do
-**not** pass an OpenAI-style `{role, content}` table to the chat mutators:
+not pass an OpenAI-style `{role, content}` table to the chat mutators:
 
 - `setChat(id, index, value)` writes `value ?? ''` straight into `message.data`.
 - `addChat`/`insertChat` push `{ role, data = value ?? '' }`.
 - `setFullChat(id, value)` (wrapper over `setFullChatMain`) JSON-encodes the
   array and rebuilds each message as `{ role = v.role, data = v.data }` — it
-  reads `data`, **not** `content`, and drops `time`.
+  reads `data`, not `content`, and drops `time`.
 
 Pass a finished string. If you hand a Lua table to `setChat`, it is not a
 portable way to set message text.
@@ -79,7 +79,7 @@ shapes — keep them straight.
 
 ## Indices are 0-based, negative wraps
 
-Chat indices are JavaScript-style and **0-based**. The host uses
+Chat indices are JavaScript-style and 0-based. The host uses
 `message.at(index)`, so negative indices behave like JS `Array.at`:
 `getChat(id, -1)` reads the last message, `setChat(id, -1, value)` rewrites it.
 `cutChat(id, start, end)` keeps the half-open range `[start, end)`.

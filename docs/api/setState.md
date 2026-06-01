@@ -1,9 +1,9 @@
 # API: `setState(id, name, value)`
 
-- **Layer:** Preamble helper (wraps [`setChatVar`](setChatVar.md))
-- **Permission tier:** Safe or edit-display (inherits `setChatVar`)
-- **Async:** no
-- **Source:** `Refer/Risuai/src/ts/process/scriptings.ts` (`luaCodeWrapper`, `function setState`)
+- Layer: Preamble helper (wraps [`setChatVar`](setChatVar.md))
+- Permission tier: Safe or edit-display (inherits `setChatVar`)
+- Async: no
+- Source: `Refer/Risuai/src/ts/process/scriptings.ts` (`luaCodeWrapper`, `function setState`)
 
 Writes a JSON-encoded "state" value into a `__`-prefixed chat variable.
 
@@ -17,7 +17,7 @@ setState(id, name, value)
 
 | Param | Type | Description |
 |-------|------|-------------|
-| `id` | [access key](../element/access-key.md) | The key passed to your handler. Must be in `ScriptingSafeIds` **or** `ScriptingEditDisplayIds` (checked by the underlying `setChatVar`). |
+| `id` | [access key](../element/access-key.md) | The key passed to your handler. Must be in `ScriptingSafeIds` or `ScriptingEditDisplayIds` (checked by the underlying `setChatVar`). |
 | `name` | string | The state name. Stored under the chat variable `'__' .. name`. |
 | `value` | any | Any JSON-encodable Lua value (table, number, boolean, string). |
 
@@ -29,7 +29,7 @@ Nothing.
 
 This is a thin wrapper: the helper calls
 `setChatVar(id, '__' .. name, json.encode(value))`. Because it routes through
-`setChatVar`, it accepts **either** the safe tier or the edit-display tier, so it
+`setChatVar`, it accepts either the safe tier or the edit-display tier, so it
 works from an [`editDisplay`](../hooks/editDisplay.md) listener as well as the
 normal modes. Read it back with [`getState`](getState.md).
 

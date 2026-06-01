@@ -1,11 +1,11 @@
 # API: `getCharacterImageMain(id)`
 
-- **Layer:** Host API (`declareAPI`)
-- **Permission tier:** Always available
-- **Async:** yes (`:await()`)
-- **Source:** `Refer/Risuai/src/ts/process/scriptings.ts` (`declareAPI('getCharacterImageMain', ...)`)
+- Layer: Host API (`declareAPI`)
+- Permission tier: Always available
+- Async: yes (`:await()`)
+- Source: `Refer/Risuai/src/ts/process/scriptings.ts` (`declareAPI('getCharacterImageMain', ...)`)
 
-The **raw** host call behind [`getCharacterImage`](getCharacterImage.md). Loads
+The raw host call behind [`getCharacterImage`](getCharacterImage.md). Loads
 the selected character's image into Risu's inlay store and returns an
 [`{{inlayed::id}}`](../element/inlay-tokens.md) token, or `''`. The preamble
 helper [`getCharacterImage`](getCharacterImage.md) simply awaits this; prefer it
@@ -33,7 +33,7 @@ A Promise. After `:await()`, a string:
 
 ## Permission
 
-Always available — there is **no guard** on this call, so it works for any
+Always available — there is no guard on this call, so it works for any
 access key regardless of tier (including from edit listeners). It is *not*
 gated behind `lowLevelAccess`. See
 [access key & permission tiers](../element/access-key.md).

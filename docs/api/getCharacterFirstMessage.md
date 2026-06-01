@@ -1,9 +1,9 @@
 # API: `getCharacterFirstMessage(id)`
 
-- **Layer:** Host API (`declareAPI`)
-- **Permission tier:** Always available (no key guard)
-- **Async:** no
-- **Source:** `Refer/Risuai/src/ts/process/scriptings.ts` (`declareAPI('getCharacterFirstMessage', ...)`)
+- Layer: Host API (`declareAPI`)
+- Permission tier: Always available (no key guard)
+- Async: no
+- Source: `Refer/Risuai/src/ts/process/scriptings.ts` (`declareAPI('getCharacterFirstMessage', ...)`)
 
 Returns the selected character's first/greeting message (`char.firstMessage`).
 
@@ -17,7 +17,7 @@ getCharacterFirstMessage(id)
 
 | Param | Type | Description |
 |-------|------|-------------|
-| `id` | [access key](../element/access-key.md) | The key passed to your handler. Accepted for convention; this call carries **no key guard**. |
+| `id` | [access key](../element/access-key.md) | The key passed to your handler. Accepted for convention; this call carries no key guard. |
 
 ## Returns
 

@@ -1,9 +1,9 @@
 # CBS: `{{rollp::XdY}}`
 
-- **Layer:** CBS function
-- **Category:** random
-- **Aliases:** `rollpick`
-- **Source:** `Refer/Risuai/src/ts/cbs.ts` (`rollp`)
+- Layer: CBS function
+- Category: random
+- Aliases: `rollpick`
+- Source: `Refer/Risuai/src/ts/cbs.ts` (`rollp`)
 
 Like [`{{roll}}`](roll.md), but hash-stable: the same message rolls the same
 result across re-renders.
@@ -33,7 +33,7 @@ The difference is the random source. Each of the `X` dice is rolled with
 `pickHashRand` seeded by the current message count (offset by `i * 15` for the
 `i`-th die) plus the character id and chat id, rather than `Math.random()`. The
 seed therefore depends on chat/character identity, so the same message yields the
-**same** total every time it is re-parsed or re-rendered — the deterministic
+same total every time it is re-parsed or re-rendered — the deterministic
 counterpart to `{{roll}}`.
 
 ## Example

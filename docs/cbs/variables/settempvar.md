@@ -1,9 +1,9 @@
 # CBS: `{{settempvar::name::value}}`
 
-- **Layer:** CBS function
-- **Category:** variables
-- **Aliases:** none
-- **Source:** `Refer/Risuai/src/ts/cbs.ts` (`settempvar`)
+- Layer: CBS function
+- Category: variables
+- Aliases: none
+- Source: `Refer/Risuai/src/ts/cbs.ts` (`settempvar`)
 
 Sets a temporary variable that lives only during the current parse.
 
@@ -22,8 +22,8 @@ Sets a temporary variable that lives only during the current parse.
 
 ## Behavior
 
-Stores `value` under `name` in the parse-local variable table and **always
-returns an empty string**, so the function emits nothing into the rendered text.
+Stores `value` under `name` in the parse-local variable table and always
+returns an empty string, so the function emits nothing into the rendered text.
 The table is created fresh each parse and discarded when the parse finishes, so
 the value never persists between sends or across separate template strings.
 

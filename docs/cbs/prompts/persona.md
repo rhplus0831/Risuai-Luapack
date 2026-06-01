@@ -1,9 +1,9 @@
 # CBS: `{{persona}}`
 
-- **Layer:** CBS function
-- **Category:** prompts
-- **Aliases:** `userpersona`
-- **Source:** `Refer/Risuai/src/ts/cbs.ts` (`persona`)
+- Layer: CBS function
+- Category: prompts
+- Aliases: `userpersona`
+- Source: `Refer/Risuai/src/ts/cbs.ts` (`persona`)
 
 Returns the user persona prompt text.
 

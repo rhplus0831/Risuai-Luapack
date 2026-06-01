@@ -1,9 +1,9 @@
 # CBS: `{{setvar::name::value}}`
 
-- **Layer:** CBS function
-- **Category:** variables
-- **Aliases:** none
-- **Source:** `Refer/Risuai/src/ts/cbs.ts` (`setvar`)
+- Layer: CBS function
+- Category: variables
+- Aliases: none
+- Source: `Refer/Risuai/src/ts/cbs.ts` (`setvar`)
 
 Sets a persistent chat variable.
 
@@ -27,7 +27,7 @@ chat and persist between sessions, the same store
 [`{{getvar}}`](getvar.md) reads and Lua reaches with
 [`setChatVar`](../../api/setChatVar.md).
 
-The write **only takes effect when the parser runs with `runVar` enabled**. When
+The write only takes effect when the parser runs with `runVar` enabled. When
 `runVar` is off the function returns `null` (no replacement and no write); when
 the parser runs in `rmVar` mode the call is stripped to an empty string without
 writing. On a successful write it returns an empty string, so it emits nothing

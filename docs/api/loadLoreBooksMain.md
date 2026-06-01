@@ -1,11 +1,11 @@
 # API: `loadLoreBooksMain(id, reserve)`
 
-- **Layer:** Host API (`declareAPI`)
-- **Permission tier:** Low-level (requires `lowLevelAccess`)
-- **Async:** yes (`:await()`)
-- **Source:** `Refer/Risuai/src/ts/process/scriptings.ts` (`declareAPI('loadLoreBooksMain', ...)`)
+- Layer: Host API (`declareAPI`)
+- Permission tier: Low-level (requires `lowLevelAccess`)
+- Async: yes (`:await()`)
+- Source: `Refer/Risuai/src/ts/process/scriptings.ts` (`declareAPI('loadLoreBooksMain', ...)`)
 
-The **raw** activated-lore loader behind [`loadLoreBooks`](loadLoreBooks.md).
+The raw activated-lore loader behind [`loadLoreBooks`](loadLoreBooks.md).
 Runs Risu's real lore activation and returns a JSON array of prompt-ready
 entries, honoring a caller-supplied `reserve` token budget. Prefer the
 [`loadLoreBooks`](loadLoreBooks.md) preamble helper, which awaits and decodes
@@ -26,7 +26,7 @@ loadLoreBooksMain(id, reserve)   -- returns a Promise; call :await()
 
 ## Returns
 
-A Promise resolving to a **JSON string** encoding an array of
+A Promise resolving to a JSON string encoding an array of
 `{ "role": <string>, "data": <string> }` entries, where `data` is CBS-parsed
 prompt text and an `assistant` role is mapped to `char`. Decode it with
 `json.decode`. Entries are accumulated in order until adding the next would push
@@ -37,8 +37,8 @@ type `character`, the call returns nothing (`nil`).
 ## Permission
 
 Low-level tier — the call no-ops unless `id` is in `ScriptingLowLevelIds`,
-granted only to safe-mode runs **when the character/module has `lowLevelAccess`
-enabled**. It is **never** available to edit listeners
+granted only to safe-mode runs when the character/module has `lowLevelAccess`
+enabled. It is never available to edit listeners
 ([`editRequest`](../hooks/editRequest.md), [`editInput`](../hooks/editInput.md),
 [`editOutput`](../hooks/editOutput.md), [`editDisplay`](../hooks/editDisplay.md)),
 which run with low-level access forced off. See

@@ -1,9 +1,9 @@
 # CBS: `{{br}}`
 
-- **Layer:** CBS function
-- **Category:** format
-- **Aliases:** `newline`
-- **Source:** `Refer/Risuai/src/ts/cbs.ts` (`br`)
+- Layer: CBS function
+- Category: format
+- Aliases: `newline`
+- Source: `Refer/Risuai/src/ts/cbs.ts` (`br`)
 
 Emits a single literal newline character.
 

@@ -1,9 +1,9 @@
 # CBS: `{{fixnum::n::decimals}}`
 
-- **Layer:** CBS function
-- **Category:** math
-- **Aliases:** `fixnumber`
-- **Source:** `Refer/Risuai/src/ts/cbs.ts` (`fixnum`)
+- Layer: CBS function
+- Category: math
+- Aliases: `fixnumber`
+- Source: `Refer/Risuai/src/ts/cbs.ts` (`fixnum`)
 
 Formats a number to a fixed number of decimal places.
 

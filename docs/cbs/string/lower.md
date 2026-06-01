@@ -1,9 +1,9 @@
 # CBS: `{{lower::s}}`
 
-- **Layer:** CBS function
-- **Category:** string
-- **Aliases:** none
-- **Source:** `Refer/Risuai/src/ts/cbs.ts` (`lower`)
+- Layer: CBS function
+- Category: string
+- Aliases: none
+- Source: `Refer/Risuai/src/ts/cbs.ts` (`lower`)
 
 Converts a string to lowercase.
 

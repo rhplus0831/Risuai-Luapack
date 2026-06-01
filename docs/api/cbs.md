@@ -1,9 +1,9 @@
 # API: `cbs(value)`
 
-- **Layer:** Host API (`declareAPI`)
-- **Permission tier:** Always available (no key guard)
-- **Async:** no
-- **Source:** `Refer/Risuai/src/ts/process/scriptings.ts` (`declareAPI('cbs', ...)`)
+- Layer: Host API (`declareAPI`)
+- Permission tier: Always available (no key guard)
+- Async: no
+- Source: `Refer/Risuai/src/ts/process/scriptings.ts` (`declareAPI('cbs', ...)`)
 
 Expands a CBS `{{...}}` template string in the current character context.
 
@@ -13,7 +13,7 @@ Expands a CBS `{{...}}` template string in the current character context.
 cbs(value)
 ```
 
-Note: `cbs` does **not** take an access key. It runs `risuChatParser(value, {
+Note: `cbs` does not take an access key. It runs `risuChatParser(value, {
 chara = getCurrentCharacter() })` and returns the result.
 
 ## Parameters
@@ -26,7 +26,7 @@ chara = getCurrentCharacter() })` and returns the result.
 
 `string` — the template with all CBS expanded against the current character.
 
-**Variable-writing CBS does not run here.** The parser is invoked without
+Variable-writing CBS does not run here. The parser is invoked without
 `runVar`, so `{{setvar}}`, `{{addvar}}`, `{{setdefaultvar}}` and similar have no
 effect; only reads/expansions take place.
 

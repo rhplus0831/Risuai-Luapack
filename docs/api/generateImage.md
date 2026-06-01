@@ -1,9 +1,9 @@
 # API: `generateImage(id, value, negValue)`
 
-- **Layer:** Host API (`declareAPI`)
-- **Permission tier:** Low-level (requires `lowLevelAccess`)
-- **Async:** yes (`:await()`)
-- **Source:** `Refer/Risuai/src/ts/process/scriptings.ts` (`declareAPI('generateImage', ...)`)
+- Layer: Host API (`declareAPI`)
+- Permission tier: Low-level (requires `lowLevelAccess`)
+- Async: yes (`:await()`)
+- Source: `Refer/Risuai/src/ts/process/scriptings.ts` (`declareAPI('generateImage', ...)`)
 
 Generates an AI image from a prompt (and optional negative prompt), stores it in
 Risu's inlay store, and returns an [`{{inlay::id}}`](../element/inlay-tokens.md)
@@ -33,8 +33,8 @@ A Promise. After `:await()`, a string:
 ## Permission
 
 Low-level tier — the call no-ops unless `id` is in `ScriptingLowLevelIds`,
-granted only to safe-mode runs **when the character/module has `lowLevelAccess`
-enabled**. It is **never** available to edit listeners
+granted only to safe-mode runs when the character/module has `lowLevelAccess`
+enabled. It is never available to edit listeners
 ([`editRequest`](../hooks/editRequest.md), [`editInput`](../hooks/editInput.md),
 [`editOutput`](../hooks/editOutput.md), [`editDisplay`](../hooks/editDisplay.md)),
 which run with low-level access forced off. See

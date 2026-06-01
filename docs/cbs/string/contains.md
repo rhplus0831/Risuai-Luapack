@@ -1,9 +1,9 @@
 # CBS: `{{contains::s::sub}}`
 
-- **Layer:** CBS function
-- **Category:** string
-- **Aliases:** none
-- **Source:** `Refer/Risuai/src/ts/cbs.ts` (`contains`)
+- Layer: CBS function
+- Category: string
+- Aliases: none
+- Source: `Refer/Risuai/src/ts/cbs.ts` (`contains`)
 
 Tests whether a substring appears anywhere within a string.
 
@@ -23,7 +23,7 @@ Tests whether a substring appears anywhere within a string.
 ## Behavior
 
 Returns `"1"` if `sub` occurs anywhere in `s`, `"0"` otherwise. The check is the
-literal JavaScript `String.prototype.includes`, so it is **case-sensitive** and
+literal JavaScript `String.prototype.includes`, so it is case-sensitive and
 matches bytes exactly. An empty `sub` always yields `"1"`.
 
 Unlike [`{{startswith}}`](startswith.md) / [`{{endswith}}`](endswith.md), the

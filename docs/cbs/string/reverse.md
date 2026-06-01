@@ -1,9 +1,9 @@
 # CBS: `{{reverse::s}}`
 
-- **Layer:** CBS function
-- **Category:** string
-- **Aliases:** none
-- **Source:** `Refer/Risuai/src/ts/cbs.ts` (`reverse`)
+- Layer: CBS function
+- Category: string
+- Aliases: none
+- Source: `Refer/Risuai/src/ts/cbs.ts` (`reverse`)
 
 Reverses the input string.
 

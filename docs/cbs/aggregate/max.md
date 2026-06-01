@@ -1,9 +1,9 @@
 # CBS: `{{max::...}}`
 
-- **Layer:** CBS function
-- **Category:** aggregate
-- **Aliases:** none
-- **Source:** `Refer/Risuai/src/ts/cbs.ts` (`max`)
+- Layer: CBS function
+- Category: aggregate
+- Aliases: none
+- Source: `Refer/Risuai/src/ts/cbs.ts` (`max`)
 
 Returns the largest of a set of numbers.
 
@@ -18,7 +18,7 @@ Returns the largest of a set of numbers.
 
 | # | Name | Required | Description |
 |---|------|----------|-------------|
-| 1.. | values | yes | Two or more numbers, **or** a single JSON array of values. |
+| 1.. | values | yes | Two or more numbers, or a single JSON array of values. |
 
 ## Behavior
 

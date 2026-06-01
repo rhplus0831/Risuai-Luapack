@@ -1,9 +1,9 @@
 # CBS: `{{#puredisplay}} ... {{/puredisplay}}`
 
-- **Layer:** CBS block
-- **Category:** blocks
-- **Aliases:** none (the parser also accepts `#pure_display`)
-- **Source:** `Refer/Risuai/src/ts/cbs.ts` (`#puredisplay`, doc-only); evaluated in `Refer/Risuai/src/ts/parser/parser.svelte.ts` (`blockStartMatcher` returning the `pure-display` type, and the `pure-display` handling in the parse loop)
+- Layer: CBS block
+- Category: blocks
+- Aliases: none (the parser also accepts `#pure_display`)
+- Source: `Refer/Risuai/src/ts/cbs.ts` (`#puredisplay`, doc-only); evaluated in `Refer/Risuai/src/ts/parser/parser.svelte.ts` (`blockStartMatcher` returning the `pure-display` type, and the `pure-display` handling in the parse loop)
 
 Renders content without CBS processing, escaping the braces so a later pass
 cannot re-parse them.

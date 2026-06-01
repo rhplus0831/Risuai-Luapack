@@ -1,18 +1,18 @@
 # Hook: `editDisplay` (mode `editDisplay`)
 
-- **Layer:** Hook (edit listener)
-- **Define:** `listenEdit('editDisplay', function(id, value, meta) ... return value end)`
-- **Fires:** during display rendering, on the text about to be shown (stored chat is unchanged)
-- **Permission tier:** Restricted **edit-display** — chat-var writes only; no chat/character mutation, no reload; **never** low-level
-- **Source:** `Refer/Risuai/src/ts/process/scriptings.ts` (`callListenMain` in `luaCodeWrapper`; `runLuaEditTrigger`; `ScriptingEditDisplayIds`)
+- Layer: Hook (edit listener)
+- Define: `listenEdit('editDisplay', function(id, value, meta) ... return value end)`
+- Fires: during display rendering, on the text about to be shown (stored chat is unchanged)
+- Permission tier: Restricted edit-display — chat-var writes only; no chat/character mutation, no reload; never low-level
+- Source: `Refer/Risuai/src/ts/process/scriptings.ts` (`callListenMain` in `luaCodeWrapper`; `runLuaEditTrigger`; `ScriptingEditDisplayIds`)
 
 `editDisplay` transforms what the user sees without changing the stored message.
 
 ## When it fires
 
 `editDisplay` runs at display-render time, on the text about to be shown. It does
-**not** modify stored chat — it only shapes the rendered output. In the display
-pipeline, Lua `editDisplay` runs **first**, then CBS expands, then `editdisplay`
+not modify stored chat — it only shapes the rendered output. In the display
+pipeline, Lua `editDisplay` runs first, then CBS expands, then `editdisplay`
 Regex Scripts run. (See the pipeline overview in
 [`docs/README.md`](../README.md).) The string you return is what the later
 display stages receive.
@@ -20,8 +20,8 @@ display stages receive.
 ## How to handle
 
 Register a handler with `listenEdit('editDisplay', fn)`. You may register
-**multiple** handlers; they chain in registration order, each receiving the
-previous handler's return value. Every handler **must `return` the value** —
+multiple handlers; they chain in registration order, each receiving the
+previous handler's return value. Every handler must `return` the value —
 forgetting `return` passes `nil` down the chain and blanks the displayed text. If
 a handler errors, Risu keeps the original content.
 
@@ -36,25 +36,25 @@ end)
 
 | Arg | Type | Description |
 |-----|------|-------------|
-| `id` | [access key](../element/access-key.md) | Restricted **edit-display** key (goes into `ScriptingEditDisplayIds` only). |
+| `id` | [access key](../element/access-key.md) | Restricted edit-display key (goes into `ScriptingEditDisplayIds` only). |
 | `value` | string | The display text about to be rendered. |
 | `meta` | table | Context Risu has for this run. The regex/display pipeline supplies `index`, the 0-based chat message index, when available. |
 
 ## Return value
 
-**Return the transformed string.** Returning `nil` (or forgetting `return`)
+Return the transformed string. Returning `nil` (or forgetting `return`)
 blanks the displayed text. The returned string becomes the input to the next
 `editDisplay` handler, then CBS, then `editdisplay` regex.
 
-## What you can / cannot do here
+## Capabilities
 
 This hook runs under the restricted edit-display tier — strictly narrower than
 the safe tier the other hooks get.
 
-- **Can:** rewrite the display string, read chat variables, and write chat
+- Can: rewrite the display string, read chat variables, and write chat
   variables via [`setChatVar`](../api/setChatVar.md)/`setState` (the only
   privileged write permitted here).
-- **Cannot:** mutate chat or character data — [`addChat`](../api/addChat.md),
+- Cannot: mutate chat or character data — [`addChat`](../api/addChat.md),
   [`setChat`](../api/setChat.md), [`setName`](../api/setName.md),
   [`setBackgroundEmbedding`](../api/setBackgroundEmbedding.md),
   [`upsertLocalLoreBook`](../api/upsertLocalLoreBook.md) all no-op. Cannot call

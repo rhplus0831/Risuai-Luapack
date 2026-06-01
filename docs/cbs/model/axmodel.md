@@ -1,9 +1,9 @@
 # CBS: `{{axmodel}}`
 
-- **Layer:** CBS function
-- **Category:** model
-- **Aliases:** none
-- **Source:** `Refer/Risuai/src/ts/cbs.ts` (`axmodel`)
+- Layer: CBS function
+- Category: model
+- Aliases: none
+- Source: `Refer/Risuai/src/ts/cbs.ts` (`axmodel`)
 
 Returns the id of the auxiliary / sub model.
 

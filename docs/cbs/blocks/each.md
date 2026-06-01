@@ -1,9 +1,9 @@
 # CBS: `{{#each ARRAY as V}} ... {{/each}}`
 
-- **Layer:** CBS block
-- **Category:** blocks
-- **Aliases:** `:each`
-- **Source:** `Refer/Risuai/src/ts/cbs.ts` (`#each`, doc-only); evaluated in `Refer/Risuai/src/ts/parser/parser.svelte.ts` (`blockStartMatcher` returning the `each` type, and the `each` handling in the block-end loop)
+- Layer: CBS block
+- Category: blocks
+- Aliases: `:each`
+- Source: `Refer/Risuai/src/ts/cbs.ts` (`#each`, doc-only); evaluated in `Refer/Risuai/src/ts/parser/parser.svelte.ts` (`blockStartMatcher` returning the `each` type, and the `each` handling in the block-end loop)
 
 Iterates over a JSON array, rendering the body once per element. The current
 element is read with [`{{slot::V}}`](slot.md).

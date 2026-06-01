@@ -1,9 +1,9 @@
 # CBS: `{{model}}`
 
-- **Layer:** CBS function
-- **Category:** model
-- **Aliases:** none
-- **Source:** `Refer/Risuai/src/ts/cbs.ts` (`model`)
+- Layer: CBS function
+- Category: model
+- Aliases: none
+- Source: `Refer/Risuai/src/ts/cbs.ts` (`model`)
 
 Returns the id of the currently selected AI model.
 

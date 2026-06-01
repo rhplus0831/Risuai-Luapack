@@ -1,9 +1,9 @@
 # API: `insertChat(id, index, role, value)`
 
-- **Layer:** Host API (`declareAPI`)
-- **Permission tier:** Safe (blocked in `editDisplay`)
-- **Async:** no
-- **Source:** `Refer/Risuai/src/ts/process/scriptings.ts` (`declareAPI('insertChat', ...)`)
+- Layer: Host API (`declareAPI`)
+- Permission tier: Safe (blocked in `editDisplay`)
+- Async: no
+- Source: `Refer/Risuai/src/ts/process/scriptings.ts` (`declareAPI('insertChat', ...)`)
 
 Inserts a new message at a given index, shifting later messages down.
 
@@ -19,7 +19,7 @@ insertChat(id, index, role, value)
 |-------|------|-------------|
 | `id` | [access key](../element/access-key.md) | The key passed to your handler. Must be in `ScriptingSafeIds`. |
 | `index` | number | 0-based index at which to insert. |
-| `role` | string | `"user"` stores a user message; **any other value becomes `"char"`** (same coercion as [`addChat`](addChat.md)). |
+| `role` | string | `"user"` stores a user message; any other value becomes `"char"` (same coercion as [`addChat`](addChat.md)). |
 | `value` | string | The message text. `nil` is coerced to an empty string (`value ?? ''`). |
 
 ## Returns
@@ -37,7 +37,7 @@ are 0-based.
 ## Permission
 
 Safe tier — the call no-ops unless `id` is in `ScriptingSafeIds`. It is therefore
-**not** available to [`editDisplay`](../hooks/editDisplay.md) listeners. See
+not available to [`editDisplay`](../hooks/editDisplay.md) listeners. See
 [access key & tiers](../element/access-key.md).
 
 ## Elements used

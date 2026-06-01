@@ -1,9 +1,9 @@
 # CBS: `{{pick::...}}`
 
-- **Layer:** CBS function
-- **Category:** random
-- **Aliases:** none
-- **Source:** `Refer/Risuai/src/ts/cbs.ts` (`pick`, via `randomPickImpl`)
+- Layer: CBS function
+- Category: random
+- Aliases: none
+- Source: `Refer/Risuai/src/ts/cbs.ts` (`pick`, via `randomPickImpl`)
 
 Like [`{{random}}`](random.md), but the choice is hash-stable: it stays the same
 across re-renders of the same message.
@@ -32,7 +32,7 @@ instead of `Math.random()`, `{{pick}}` uses `pickHashRand` seeded by the current
 message count and the character id plus chat id.
 
 Because the seed is derived from chat/character identity rather than wall-clock
-randomness, the same message resolves to the **same** choice every time it is
+randomness, the same message resolves to the same choice every time it is
 re-parsed or re-rendered, whereas `{{random}}` re-rolls each parse. During
 accurate tokenization the first element is chosen.
 

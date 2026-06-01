@@ -1,9 +1,9 @@
 # CBS: `{{bg::name}}`
 
-- **Layer:** CBS function (display token)
-- **Category:** assets
-- **Aliases:** none
-- **Source:** `Refer/Risuai/src/ts/parser/parser.svelte.ts` (`parseAdditionalAssets`)
+- Layer: CBS function (display token)
+- Category: assets
+- Aliases: none
+- Source: `Refer/Risuai/src/ts/parser/parser.svelte.ts` (`parseAdditionalAssets`)
 
 Renders a full-size background div from a named asset — only in background mode.
 

@@ -1,11 +1,11 @@
 # CBS: `{{#if cond}} ... {{/if}}`
 
-- **Layer:** CBS block (deprecated)
-- **Category:** blocks
-- **Aliases:** none
-- **Source:** `Refer/Risuai/src/ts/cbs.ts` (`#if`, doc-only, marked `deprecated`); evaluated in `Refer/Risuai/src/ts/parser/parser.svelte.ts` (`blockStartMatcher`, the `p1.startsWith('#if')` branch)
+- Layer: CBS block (deprecated)
+- Category: blocks
+- Aliases: none
+- Source: `Refer/Risuai/src/ts/cbs.ts` (`#if`, doc-only, marked `deprecated`); evaluated in `Refer/Risuai/src/ts/parser/parser.svelte.ts` (`blockStartMatcher`, the `p1.startsWith('#if')` branch)
 
-Legacy conditional block. **Deprecated** — use [`{{#when}}`](when.md) instead.
+Legacy conditional block. Deprecated — use [`{{#when}}`](when.md) instead.
 
 ## Syntax
 
@@ -28,7 +28,7 @@ If `cond` is exactly `"true"` or `"1"`, the body is parsed and emitted (block
 type `parse`, which trims each line); any other value removes the body (type
 `ignore`). There is no `{{:else}}` branch.
 
-The construct is registered as **deprecated**: *"Due to limitations of adding
+The construct is registered as deprecated: *"Due to limitations of adding
 operators, #if is deprecated and replaced with #when. Use #when instead."* Its
 replacement, [`{{#when}}`](when.md), supports operators, an else clause, and
 configurable whitespace handling. New scripts should use `{{#when}}`.

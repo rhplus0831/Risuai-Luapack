@@ -1,9 +1,9 @@
 # CBS: `{{dictelement::obj::key}}`
 
-- **Layer:** CBS function
-- **Category:** dict
-- **Aliases:** `objectelement`
-- **Source:** `Refer/Risuai/src/ts/cbs.ts` (`dictelement`)
+- Layer: CBS function
+- Category: dict
+- Aliases: `objectelement`
+- Source: `Refer/Risuai/src/ts/cbs.ts` (`dictelement`)
 
 Reads a single value out of a JSON object by key.
 

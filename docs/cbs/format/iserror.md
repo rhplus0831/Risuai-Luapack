@@ -1,9 +1,9 @@
 # CBS: `{{iserror::s}}`
 
-- **Layer:** CBS function
-- **Category:** format
-- **Aliases:** none
-- **Source:** `Refer/Risuai/src/ts/cbs.ts` (`iserror`)
+- Layer: CBS function
+- Category: format
+- Aliases: none
+- Source: `Refer/Risuai/src/ts/cbs.ts` (`iserror`)
 
 Tests whether a string looks like an error message.
 

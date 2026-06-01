@@ -1,9 +1,9 @@
 # CBS: `{{objectassert::obj::key::value}}`
 
-- **Layer:** CBS function
-- **Category:** dict
-- **Aliases:** `dictassert`, `object_assert`
-- **Source:** `Refer/Risuai/src/ts/cbs.ts` (`objectassert`)
+- Layer: CBS function
+- Category: dict
+- Aliases: `dictassert`, `object_assert`
+- Source: `Refer/Risuai/src/ts/cbs.ts` (`objectassert`)
 
 Sets a default on a JSON object: writes the key only if it is not already
 present, then returns the object.
@@ -32,7 +32,7 @@ object's `key` is set to `value`. The (possibly modified) object is then
 returned via `JSON.stringify`. An existing truthy value is left untouched.
 
 Because the guard is a JavaScript truthiness test, a key whose current value is
-an empty string, `0`, or `false` is treated as absent and **will** be
+an empty string, `0`, or `false` is treated as absent and will be
 overwritten. Parsing uses `parseDict`, so a non-object input starts from an
 empty object `{}`.
 

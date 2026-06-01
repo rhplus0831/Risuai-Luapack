@@ -1,9 +1,9 @@
 # CBS: `{{abs::n}}`
 
-- **Layer:** CBS function
-- **Category:** math
-- **Aliases:** none
-- **Source:** `Refer/Risuai/src/ts/cbs.ts` (`abs`)
+- Layer: CBS function
+- Category: math
+- Aliases: none
+- Source: `Refer/Risuai/src/ts/cbs.ts` (`abs`)
 
 Returns the absolute value of a number.
 

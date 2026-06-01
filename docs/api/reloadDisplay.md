@@ -1,9 +1,9 @@
 # API: `reloadDisplay(id)`
 
-- **Layer:** Host API (`declareAPI`)
-- **Permission tier:** Safe (blocked in `editDisplay`)
-- **Async:** no
-- **Source:** `Refer/Risuai/src/ts/process/scriptings.ts` (`declareAPI('reloadDisplay', ...)`)
+- Layer: Host API (`declareAPI`)
+- Permission tier: Safe (blocked in `editDisplay`)
+- Async: no
+- Source: `Refer/Risuai/src/ts/process/scriptings.ts` (`declareAPI('reloadDisplay', ...)`)
 
 Requests a refresh of the whole chat display / GUI.
 
@@ -33,7 +33,7 @@ use [`reloadChat`](reloadChat.md).
 ## Permission
 
 Safe tier — the call no-ops unless `id` is in `ScriptingSafeIds`. It is therefore
-**not** available to [`editDisplay`](../hooks/editDisplay.md) listeners (which
+not available to [`editDisplay`](../hooks/editDisplay.md) listeners (which
 already run as part of the render pipeline). See
 [access key & tiers](../element/access-key.md).
 

@@ -1,9 +1,9 @@
 # API: `similarity(id, source, value)`
 
-- **Layer:** Host API (`declareAPI`)
-- **Permission tier:** Low-level (requires `lowLevelAccess`)
-- **Async:** yes (`:await()`)
-- **Source:** `Refer/Risuai/src/ts/process/scriptings.ts` (`declareAPI('similarity', ...)`)
+- Layer: Host API (`declareAPI`)
+- Permission tier: Low-level (requires `lowLevelAccess`)
+- Async: yes (`:await()`)
+- Source: `Refer/Risuai/src/ts/process/scriptings.ts` (`declareAPI('similarity', ...)`)
 
 Embedding-based similarity search. The candidate strings in `value` are embedded
 with the configured embedding model (via `HypaProcesser`), then ranked against
@@ -32,8 +32,8 @@ the candidate entries ordered by similarity to `source` (most similar first).
 ## Permission
 
 Low-level tier — the call no-ops unless `id` is in `ScriptingLowLevelIds`,
-granted only to safe-mode runs **when the character/module has `lowLevelAccess`
-enabled**. It is **never** available to edit listeners
+granted only to safe-mode runs when the character/module has `lowLevelAccess`
+enabled. It is never available to edit listeners
 ([`editRequest`](../hooks/editRequest.md), [`editInput`](../hooks/editInput.md),
 [`editOutput`](../hooks/editOutput.md), [`editDisplay`](../hooks/editDisplay.md)),
 which run with low-level access forced off. See

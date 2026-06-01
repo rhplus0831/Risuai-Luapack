@@ -1,9 +1,9 @@
 # CBS: `{{file::name::base64}}`
 
-- **Layer:** CBS function
-- **Category:** assets
-- **Aliases:** none
-- **Source:** `Refer/Risuai/src/ts/cbs.ts` (`file`)
+- Layer: CBS function
+- Category: assets
+- Aliases: none
+- Source: `Refer/Risuai/src/ts/cbs.ts` (`file`)
 
 Renders a filename chip in display mode, or decodes embedded base64 content
 otherwise.
@@ -25,10 +25,10 @@ otherwise.
 
 Branches on whether the parser is rendering for display (`matcherArg.displaying`):
 
-- **Display mode:** returns a filename chip
+- Display mode: returns a filename chip
   `<br><div class="risu-file">name</div><br>` — only the `name` is shown, the
   base64 payload is not.
-- **Otherwise** (e.g. prompt building): decodes the second argument from base64
+- Otherwise (e.g. prompt building): decodes the second argument from base64
   and returns it as UTF-8 text (`Buffer.from(base64, 'base64').toString('utf-8')`).
 
 This lets a single token carry a file's text into the model request while

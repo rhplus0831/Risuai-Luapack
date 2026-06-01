@@ -1,9 +1,9 @@
 # CBS: `{{endswith::s::sub}}`
 
-- **Layer:** CBS function
-- **Category:** string
-- **Aliases:** none
-- **Source:** `Refer/Risuai/src/ts/cbs.ts` (`endswith`)
+- Layer: CBS function
+- Category: string
+- Aliases: none
+- Source: `Refer/Risuai/src/ts/cbs.ts` (`endswith`)
 
 Tests whether a string ends with a given substring.
 
@@ -23,7 +23,7 @@ Tests whether a string ends with a given substring.
 ## Behavior
 
 Returns `"1"` if `s` ends with `sub`, `"0"` otherwise. The check is the literal
-JavaScript `String.prototype.endsWith`, so it is **case-sensitive** and matches
+JavaScript `String.prototype.endsWith`, so it is case-sensitive and matches
 bytes exactly. An empty `sub` always yields `"1"`.
 
 The result is the same `"1"`/`"0"` shape used by the comparison and logic CBS

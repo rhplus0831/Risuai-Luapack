@@ -1,11 +1,11 @@
 # API: `setFullChatMain(id, value)`
 
-- **Layer:** Host API (`declareAPI`) — raw form of [`setFullChat`](setFullChat.md)
-- **Permission tier:** Safe (blocked in `editDisplay`)
-- **Async:** no
-- **Source:** `Refer/Risuai/src/ts/process/scriptings.ts` (`declareAPI('setFullChatMain', ...)`)
+- Layer: Host API (`declareAPI`) — raw form of [`setFullChat`](setFullChat.md)
+- Permission tier: Safe (blocked in `editDisplay`)
+- Async: no
+- Source: `Refer/Risuai/src/ts/process/scriptings.ts` (`declareAPI('setFullChatMain', ...)`)
 
-Replaces the entire chat message array from a **JSON string**. This is the raw
+Replaces the entire chat message array from a JSON string. This is the raw
 host call; in Lua prefer the [`setFullChat`](setFullChat.md) preamble helper,
 which JSON-encodes for you.
 
@@ -29,14 +29,14 @@ Nothing.
 ## Permission
 
 Safe tier — the call no-ops unless `id` is in `ScriptingSafeIds`. It is therefore
-**not** available to [`editDisplay`](../hooks/editDisplay.md) listeners. See
+not available to [`editDisplay`](../hooks/editDisplay.md) listeners. See
 [access key & tiers](../element/access-key.md).
 
 ## Behavior
 
 The host runs `JSON.parse(value)` and rebuilds `chat.message` by mapping each
-element to **only** `{ role, data }` — any other fields (such as `time`) are
-**dropped**. Pass an array whose elements carry at least `role` and `data`.
+element to only `{ role, data }` — any other fields (such as `time`) are
+dropped. Pass an array whose elements carry at least `role` and `data`.
 Malformed JSON will throw inside the host.
 
 ## Elements used

@@ -1,16 +1,16 @@
 # API: `loadLoreBooks(id)`
 
-- **Layer:** Preamble helper (defined in `luaCodeWrapper`)
-- **Permission tier:** Low-level (requires `lowLevelAccess`)
-- **Async:** yes (`:await()`)
-- **Source:** `Refer/Risuai/src/ts/process/scriptings.ts` (`function loadLoreBooks` in `luaCodeWrapper`, wrapping `declareAPI('loadLoreBooksMain', ...)`)
+- Layer: Preamble helper (defined in `luaCodeWrapper`)
+- Permission tier: Low-level (requires `lowLevelAccess`)
+- Async: yes (`:await()`)
+- Source: `Refer/Risuai/src/ts/process/scriptings.ts` (`function loadLoreBooks` in `luaCodeWrapper`, wrapping `declareAPI('loadLoreBooksMain', ...)`)
 
 Runs Risu's real activated-lore selection and returns the prompt-ready entries,
 decoded into a Lua array. Unlike [`getLoreBooks`](getLoreBooks.md) (an exact
 `comment` lookup), this performs the actual activation Risu would use when
 building a request. It is the preamble wrapper over the raw
 [`loadLoreBooksMain`](loadLoreBooksMain.md): it awaits the host call and
-`json.decode`s the result. **The helper passes no reserve token budget.**
+`json.decode`s the result. The helper passes no reserve token budget.
 
 ## Signature
 
@@ -45,10 +45,10 @@ Entries whose parsed text is empty are skipped.
 ## Permission
 
 Low-level tier — although `loadLoreBooks` itself is a preamble helper, the raw
-[`loadLoreBooksMain`](loadLoreBooksMain.md) it calls **no-ops unless `id` is in
-`ScriptingLowLevelIds`**, so this requires `lowLevelAccess`. That set is granted
-only to safe-mode runs **when the character/module has `lowLevelAccess`
-enabled**. It is **never** available to edit listeners
+[`loadLoreBooksMain`](loadLoreBooksMain.md) it calls no-ops unless `id` is in
+`ScriptingLowLevelIds`, so this requires `lowLevelAccess`. That set is granted
+only to safe-mode runs when the character/module has `lowLevelAccess`
+enabled. It is never available to edit listeners
 ([`editRequest`](../hooks/editRequest.md), [`editInput`](../hooks/editInput.md),
 [`editOutput`](../hooks/editOutput.md), [`editDisplay`](../hooks/editDisplay.md)),
 which run with low-level access forced off. See

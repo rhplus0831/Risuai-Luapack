@@ -1,9 +1,9 @@
 # CBS: `{{tonumber::s}}`
 
-- **Layer:** CBS function
-- **Category:** string
-- **Aliases:** none
-- **Source:** `Refer/Risuai/src/ts/cbs.ts` (`tonumber`)
+- Layer: CBS function
+- Category: string
+- Aliases: none
+- Source: `Refer/Risuai/src/ts/cbs.ts` (`tonumber`)
 
 Strips everything except digits and decimal points from a string.
 
@@ -26,7 +26,7 @@ Walks `s` character by character and keeps only the characters that are digits
 `.`; every other character is dropped. The kept characters are concatenated, in
 their original order, and returned as a string.
 
-This is a **filter**, not a numeric parse: it does not evaluate or normalize the
+This is a filter, not a numeric parse: it does not evaluate or normalize the
 result. A string containing several separated numbers or multiple `.` characters
 will keep all of the digits and dots, so the output is not guaranteed to be a
 valid number (e.g. `{{tonumber::1.2.3}}` -> `1.2.3`). For arithmetic, feed the

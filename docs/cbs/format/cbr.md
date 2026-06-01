@@ -1,9 +1,9 @@
 # CBS: `{{cbr::n}}`
 
-- **Layer:** CBS function
-- **Category:** format
-- **Aliases:** `cnl`, `cnewline`
-- **Source:** `Refer/Risuai/src/ts/cbs.ts` (`cbr`)
+- Layer: CBS function
+- Category: format
+- Aliases: `cnl`, `cnewline`
+- Source: `Refer/Risuai/src/ts/cbs.ts` (`cbr`)
 
 Emits the escaped two-character sequence `\n`, optionally repeated.
 
@@ -23,7 +23,7 @@ Emits the escaped two-character sequence `\n`, optionally repeated.
 ## Behavior
 
 With no argument, returns the literal two-character string `\n` (a backslash
-followed by `n`) — **not** an actual newline. With an argument, it repeats the
+followed by `n`) — not an actual newline. With an argument, it repeats the
 construct's matched text `Number(n)` times, with a minimum of 1 (any value `< 1`,
 including non-numeric input that coerces to `NaN`/`0`, becomes 1).
 

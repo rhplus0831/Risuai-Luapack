@@ -1,9 +1,9 @@
 # CBS: `{{#when ...}} ... {{/when}}`
 
-- **Layer:** CBS block
-- **Category:** blocks
-- **Aliases:** none
-- **Source:** `Refer/Risuai/src/ts/cbs.ts` (`#when`, doc-only); evaluated in `Refer/Risuai/src/ts/parser/parser.svelte.ts` (`blockStartMatcher`, the `p1.startsWith('#when')` branch, and `blockEndMatcher` for the `newif` / `newif-falsy` types)
+- Layer: CBS block
+- Category: blocks
+- Aliases: none
+- Source: `Refer/Risuai/src/ts/cbs.ts` (`#when`, doc-only); evaluated in `Refer/Risuai/src/ts/parser/parser.svelte.ts` (`blockStartMatcher`, the `p1.startsWith('#when')` branch, and `blockEndMatcher` for the `newif` / `newif-falsy` types)
 
 The current conditional block: renders its body only when the condition is
 truthy. Replaces the deprecated [`{{#if}}`](if.md).
@@ -21,7 +21,7 @@ all `::`-separated.
 
 ## Arguments
 
-A value is **truthy** only when it is exactly `"true"` or `"1"`; everything else
+A value is truthy only when it is exactly `"true"` or `"1"`; everything else
 is falsy. Operators are applied from the right (the parser pops operands/operators
 off the end), reducing the statement to a single truthy/falsy result.
 

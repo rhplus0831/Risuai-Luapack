@@ -1,9 +1,9 @@
 # API: `cutChat(id, start, end)`
 
-- **Layer:** Host API (`declareAPI`)
-- **Permission tier:** Safe (blocked in `editDisplay`)
-- **Async:** no
-- **Source:** `Refer/Risuai/src/ts/process/scriptings.ts` (`declareAPI('cutChat', ...)`)
+- Layer: Host API (`declareAPI`)
+- Permission tier: Safe (blocked in `editDisplay`)
+- Async: no
+- Source: `Refer/Risuai/src/ts/process/scriptings.ts` (`declareAPI('cutChat', ...)`)
 
 Trims the chat to a contiguous range of messages.
 
@@ -28,7 +28,7 @@ Nothing.
 ## Behavior
 
 The host runs `chat.message = chat.message.slice(start, end)`, so it keeps the
-**half-open range `[start, end)`** — `start` is kept, `end` is not. JS `slice`
+half-open range `[start, end)` — `start` is kept, `end` is not. JS `slice`
 semantics apply: indices clamp to the array bounds and negative values count
 from the end. Omitting/over-shooting `end` keeps through the last message. The
 message indices are 0-based.
@@ -36,7 +36,7 @@ message indices are 0-based.
 ## Permission
 
 Safe tier — the call no-ops unless `id` is in `ScriptingSafeIds`. It is therefore
-**not** available to [`editDisplay`](../hooks/editDisplay.md) listeners. See
+not available to [`editDisplay`](../hooks/editDisplay.md) listeners. See
 [access key & tiers](../element/access-key.md).
 
 ## Elements used

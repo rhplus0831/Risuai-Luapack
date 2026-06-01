@@ -1,9 +1,9 @@
 # CBS: `{{button::text::trigger}}`
 
-- **Layer:** CBS function
-- **Category:** assets
-- **Aliases:** none
-- **Source:** `Refer/Risuai/src/ts/cbs.ts` (`button`)
+- Layer: CBS function
+- Category: assets
+- Aliases: none
+- Source: `Refer/Risuai/src/ts/cbs.ts` (`button`)
 
 Emits an HTML button that runs a manual trigger when clicked.
 
@@ -31,7 +31,7 @@ Returns the markup
 The `risu-trigger` attribute names a manual trigger. When the user clicks the
 button, Risu dispatches that trigger. If the trigger is a Lua trigger effect,
 Risu invokes the Lua runtime with the mode set to the trigger name, which falls
-through to a **global** function of that name (see
+through to a global function of that name (see
 [custom modes](../../hooks/custom-modes.md)). So `{{button::Open::OpenMenu}}` is
 handled by `function OpenMenu(id) ... end`.
 

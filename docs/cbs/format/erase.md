@@ -1,9 +1,9 @@
 # CBS: `{{erase}}`
 
-- **Layer:** CBS function
-- **Category:** format
-- **Aliases:** none
-- **Source:** `Refer/Risuai/src/ts/cbs.ts` (`erase`)
+- Layer: CBS function
+- Category: format
+- Aliases: none
+- Source: `Refer/Risuai/src/ts/cbs.ts` (`erase`)
 
 Removes the last sentence from the output produced so far.
 

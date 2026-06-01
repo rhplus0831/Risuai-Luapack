@@ -1,9 +1,9 @@
 # CBS: `{{crypt::s::shift}}`
 
-- **Layer:** CBS function
-- **Category:** encoding
-- **Aliases:** `crypto`, `caesar`, `encrypt`, `decrypt`
-- **Source:** `Refer/Risuai/src/ts/cbs.ts` (`crypt`)
+- Layer: CBS function
+- Category: encoding
+- Aliases: `crypto`, `caesar`, `encrypt`, `decrypt`
+- Source: `Refer/Risuai/src/ts/cbs.ts` (`crypt`)
 
 A Caesar-style shift cipher over UTF-16 code units; with the default shift it is
 its own inverse.
@@ -35,8 +35,8 @@ result wrapped into the 16-bit range (`if(shiftedCode > 65535) shiftedCode -= 65
 and the shifted character is emitted with `String.fromCharCode`.
 
 The default shift of `32768` is exactly half of `65536`, so applying `{{crypt}}`
-twice with the default returns the original text — the same call **encrypts and
-decrypts**, which is why `encrypt` and `decrypt` are aliases of one function.
+twice with the default returns the original text — the same call encrypts and
+decrypts, which is why `encrypt` and `decrypt` are aliases of one function.
 With a custom `shift`, decrypt by running again with the complementary shift
 (`65536 - shift`).
 

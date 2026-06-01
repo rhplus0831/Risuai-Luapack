@@ -1,9 +1,9 @@
 # CBS: `{{trigger_id}}`
 
-- **Layer:** CBS function
-- **Category:** identity
-- **Aliases:** `triggerid`
-- **Source:** `Refer/Risuai/src/ts/cbs.ts` (`trigger_id`)
+- Layer: CBS function
+- Category: identity
+- Aliases: `triggerid`
+- Source: `Refer/Risuai/src/ts/cbs.ts` (`trigger_id`)
 
 Returns the `risu-id` of the element that fired the current manual trigger.
 

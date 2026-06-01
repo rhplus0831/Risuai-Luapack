@@ -1,9 +1,9 @@
 # CBS: `{{calc::expr}}`
 
-- **Layer:** CBS function
-- **Category:** math
-- **Aliases:** none
-- **Source:** `Refer/Risuai/src/ts/cbs.ts` (`calc`)
+- Layer: CBS function
+- Category: math
+- Aliases: none
+- Source: `Refer/Risuai/src/ts/cbs.ts` (`calc`)
 
 Evaluates a math expression and returns the result.
 

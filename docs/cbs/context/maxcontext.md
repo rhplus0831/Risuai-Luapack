@@ -1,9 +1,9 @@
 # CBS: `{{maxcontext}}`
 
-- **Layer:** CBS function
-- **Category:** context
-- **Aliases:** none
-- **Source:** `Refer/Risuai/src/ts/cbs.ts` (`maxcontext`)
+- Layer: CBS function
+- Category: context
+- Aliases: none
+- Source: `Refer/Risuai/src/ts/cbs.ts` (`maxcontext`)
 
 Returns the configured maximum context length.
 

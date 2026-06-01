@@ -1,9 +1,9 @@
 # CBS: `{{tohex::num}}`
 
-- **Layer:** CBS function
-- **Category:** encoding
-- **Aliases:** none
-- **Source:** `Refer/Risuai/src/ts/cbs.ts` (`tohex`)
+- Layer: CBS function
+- Category: encoding
+- Aliases: none
+- Source: `Refer/Risuai/src/ts/cbs.ts` (`tohex`)
 
 Converts a decimal number to its hexadecimal string.
 

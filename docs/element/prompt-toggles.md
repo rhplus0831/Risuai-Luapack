@@ -1,7 +1,7 @@
 # Element: Prompt toggles (`toggle_` globals)
 
-- **Kind:** Element (data structure)
-- **Source:** `Refer/Risuai/src/ts/util.ts` (`parseToggleSyntax`, `sidebarToggle`), `Refer/Risuai/src/lib/SideBars/Toggles.svelte` (sidebar UI + stored value format), `Refer/Risuai/src/ts/process/modules.ts` (`getModuleToggles`)
+- Kind: Element (data structure)
+- Source: `Refer/Risuai/src/ts/util.ts` (`parseToggleSyntax`, `sidebarToggle`), `Refer/Risuai/src/lib/SideBars/Toggles.svelte` (sidebar UI + stored value format), `Refer/Risuai/src/ts/process/modules.ts` (`getModuleToggles`)
 
 User-facing sidebar controls whose state is stored as `toggle_`-prefixed global
 variables, readable from Lua.
@@ -25,11 +25,11 @@ Each line is split on `=` into `key=value=type=options`. The recognized forms:
 | Line form | Control | Stored in `toggle_<key>` |
 |-----------|---------|--------------------------|
 | `key=Label` | checkbox | `"1"` (checked) or `"0"` (unchecked) |
-| `key=Label=select=A,B,C` | dropdown | the **zero-based index** as a string (`"0"`, `"1"`, …) |
+| `key=Label=select=A,B,C` | dropdown | the zero-based index as a string (`"0"`, `"1"`, …) |
 | `key=Label=text` | single-line text | the entered text |
 | `key=Label=textarea` | multi-line text | the entered text |
 
-Decorative rows create **no** stored variable (they only structure the sidebar).
+Decorative rows create no stored variable (they only structure the sidebar).
 They put the type marker in the third field, leaving `key` empty:
 
 | Line form | Effect |

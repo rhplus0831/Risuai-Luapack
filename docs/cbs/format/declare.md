@@ -1,9 +1,9 @@
 # CBS: `{{declare::name}}`
 
-- **Layer:** CBS function
-- **Category:** format
-- **Aliases:** none
-- **Source:** `Refer/Risuai/src/ts/cbs.ts` (`declare`)
+- Layer: CBS function
+- Category: format
+- Aliases: none
+- Source: `Refer/Risuai/src/ts/cbs.ts` (`declare`)
 
 Sets a parser flag that other CBS behavior can read.
 

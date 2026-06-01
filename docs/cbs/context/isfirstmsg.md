@@ -1,9 +1,9 @@
 # CBS: `{{isfirstmsg}}`
 
-- **Layer:** CBS function
-- **Category:** context
-- **Aliases:** `isfirstmessage`
-- **Source:** `Refer/Risuai/src/ts/cbs.ts` (`isfirstmsg`)
+- Layer: CBS function
+- Category: context
+- Aliases: `isfirstmessage`
+- Source: `Refer/Risuai/src/ts/cbs.ts` (`isfirstmsg`)
 
 Returns whether the template is being expanded in a first-message context.
 

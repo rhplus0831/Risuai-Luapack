@@ -1,9 +1,9 @@
 # API: `getChatVar(id, key)`
 
-- **Layer:** Host API (`declareAPI`)
-- **Permission tier:** Always available (no guard)
-- **Async:** no
-- **Source:** `Refer/Risuai/src/ts/process/scriptings.ts` (`declareAPI('getChatVar', ...)`)
+- Layer: Host API (`declareAPI`)
+- Permission tier: Always available (no guard)
+- Async: no
+- Source: `Refer/Risuai/src/ts/process/scriptings.ts` (`declareAPI('getChatVar', ...)`)
 
 Reads the current value of a persistent chat variable as a string.
 
@@ -22,7 +22,7 @@ getChatVar(id, key)
 
 ## Returns
 
-A **string**. The host delegates to Risu's `getChatVar(key)`, which resolves the
+A string. The host delegates to Risu's `getChatVar(key)`, which resolves the
 value by checking, in order: the chat's `scriptstate`, the character's
 `defaultVariables`, then the template default variables. A variable that was
 never set anywhere reads back as the literal string `"null"` (not Lua `nil`).
@@ -31,7 +31,7 @@ missing value to Lua `nil`.
 
 ## Permission
 
-This call carries **no guard** — it works with any `id`, including the restricted
+This call carries no guard — it works with any `id`, including the restricted
 edit-display key. See [access key & tiers](../element/access-key.md). Writing a
 chat variable does require a tier; use [`setChatVar`](setChatVar.md).
 

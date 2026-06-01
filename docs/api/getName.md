@@ -1,9 +1,9 @@
 # API: `getName(id)`
 
-- **Layer:** Host API (`declareAPI`)
-- **Permission tier:** Always available (no key guard)
-- **Async:** no
-- **Source:** `Refer/Risuai/src/ts/process/scriptings.ts` (`declareAPI('getName', ...)`)
+- Layer: Host API (`declareAPI`)
+- Permission tier: Always available (no key guard)
+- Async: no
+- Source: `Refer/Risuai/src/ts/process/scriptings.ts` (`declareAPI('getName', ...)`)
 
 Returns the name of the currently selected character.
 
@@ -17,7 +17,7 @@ getName(id)
 
 | Param | Type | Description |
 |-------|------|-------------|
-| `id` | [access key](../element/access-key.md) | The key passed to your handler. Accepted for convention; this call carries **no key guard**. |
+| `id` | [access key](../element/access-key.md) | The key passed to your handler. Accepted for convention; this call carries no key guard. |
 
 ## Returns
 

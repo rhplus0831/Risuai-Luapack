@@ -1,9 +1,9 @@
 # API: `setCharacterFirstMessage(id, data)`
 
-- **Layer:** Host API (`declareAPI`)
-- **Permission tier:** Safe (blocked in `editDisplay`)
-- **Async:** no
-- **Source:** `Refer/Risuai/src/ts/process/scriptings.ts` (`declareAPI('setCharacterFirstMessage', ...)`)
+- Layer: Host API (`declareAPI`)
+- Permission tier: Safe (blocked in `editDisplay`)
+- Async: no
+- Source: `Refer/Risuai/src/ts/process/scriptings.ts` (`declareAPI('setCharacterFirstMessage', ...)`)
 
 Sets the selected character's first/greeting message (`char.firstMessage`).
 
@@ -28,7 +28,7 @@ not in `ScriptingSafeIds` the call no-ops and returns nothing (`nil`).
 ## Permission
 
 Safe tier — the call no-ops unless `id` is in `ScriptingSafeIds`. It is therefore
-**not** available to [`editDisplay`](../hooks/editDisplay.md) listeners. Available
+not available to [`editDisplay`](../hooks/editDisplay.md) listeners. Available
 from `onStart`/`onInput`/`onOutput`, button/custom modes, and the
 request/input/output edit hooks. See [access key & tiers](../element/access-key.md).
 

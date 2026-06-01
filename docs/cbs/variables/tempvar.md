@@ -1,9 +1,9 @@
 # CBS: `{{tempvar::name}}`
 
-- **Layer:** CBS function
-- **Category:** variables
-- **Aliases:** `gettempvar`
-- **Source:** `Refer/Risuai/src/ts/cbs.ts` (`tempvar`)
+- Layer: CBS function
+- Category: variables
+- Aliases: `gettempvar`
+- Source: `Refer/Risuai/src/ts/cbs.ts` (`tempvar`)
 
 Reads a temporary variable that lives only during the current parse.
 

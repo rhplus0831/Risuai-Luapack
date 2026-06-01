@@ -1,9 +1,9 @@
 # CBS: `{{all::...}}`
 
-- **Layer:** CBS function
-- **Category:** logic
-- **Aliases:** none
-- **Source:** `Refer/Risuai/src/ts/cbs.ts` (`all`)
+- Layer: CBS function
+- Category: logic
+- Aliases: none
+- Source: `Refer/Risuai/src/ts/cbs.ts` (`all`)
 
 Logical AND across many values.
 
@@ -18,11 +18,11 @@ Logical AND across many values.
 
 | # | Name | Required | Description |
 |---|------|----------|-------------|
-| 1.. | values | yes | Two or more boolean values, **or** a single JSON array of values. |
+| 1.. | values | yes | Two or more boolean values, or a single JSON array of values. |
 
 ## Behavior
 
-Returns `"1"` only if **every** value is exactly the string `"1"`, otherwise
+Returns `"1"` only if every value is exactly the string `"1"`, otherwise
 `"0"`. When more than one argument is supplied, the arguments themselves are the
 list; when a single argument is supplied it is parsed as a JSON array and its
 elements are the list. Any element other than `"1"` makes the result `"0"`. This

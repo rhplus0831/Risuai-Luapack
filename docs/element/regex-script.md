@@ -1,7 +1,7 @@
 # Element: Regex Script
 
-- **Kind:** Element (data structure)
-- **Source:** `Refer/Risuai/src/ts/storage/database.svelte.ts` (`customscript` interface), `Refer/Risuai/src/ts/process/scripts.ts` (`processScriptFull`, `executeScript`)
+- Kind: Element (data structure)
+- Source: `Refer/Risuai/src/ts/storage/database.svelte.ts` (`customscript` interface), `Refer/Risuai/src/ts/process/scripts.ts` (`processScriptFull`, `executeScript`)
 
 User-defined find/replace rules that run in Risu's text pipeline. Lua cooperates
 with them by writing marker text; Lua itself has no `editprocess` listener.
@@ -13,8 +13,8 @@ The database `customscript` interface:
 | Field | Type | Description |
 |-------|------|-------------|
 | `comment` | string | Human label for the rule. |
-| `in` | string | An **ECMAScript regex pattern without slash delimiters** (e.g. `\[\[hp=(\d+)\]\]`). |
-| `out` | string | Replacement text (supports the captures below). |
+| `in` | string | An ECMAScript regex pattern without slash delimiters (e.g. `\[\[hp=(\d+)\]\]`). |
+| `out` | string | Replacement text. Supports JavaScript captures plus the Risu shorthands listed in "Replacement captures". |
 | `type` | string | One of `editinput`, `editoutput`, `editprocess`, `editdisplay`. |
 | `flag?` | string | Regex flags (and bracketed action metadata) when `ableFlag` is set. |
 | `ableFlag?` | boolean | When false, Risu forces the flag `g`; when true, `flag` is used. |
@@ -31,9 +31,9 @@ enabled-module regex, in that order.
 | `editprocess` | transforms chat-history text for the model request (not stored/displayed) |
 | `editdisplay` | transforms text for rendering only (does not mutate stored chat) |
 
-Lua edit listeners run **first** within each stage. Note Lua has listeners for
-`editInput`/`editOutput`/`editRequest`/`editDisplay` but **no `editprocess`
-listener** — only Regex Scripts can act at the `editprocess` stage.
+Lua edit listeners run first within each stage. Note Lua has listeners for
+`editInput`/`editOutput`/`editRequest`/`editDisplay` but no `editprocess`
+listener — only Regex Scripts can act at the `editprocess` stage.
 
 ## Flags
 
@@ -69,7 +69,7 @@ expressed as an `out` prefix beginning with `@@`:
 | Directive | Effect |
 |-----------|--------|
 | `<cbs>` | parse the `in` pattern through CBS before building the regex |
-| `<order N>` | set sort order; scripts are sorted by **descending** order number |
+| `<order N>` | set sort order; scripts are sorted by descending order number |
 | `<move_top>` / `<move_bottom>` | remove matches and prepend / append the replacement to the text |
 | `<inject>` or `out` starting `@@inject` | commit the processed text back to the stored message at the current chat index, then remove the match from display |
 | `<repeat_back>` or `out` starting `@@repeat_back` | when the text does not match, copy a previous same-role match (optional position `start` / `end` / `start_nl` / `end_nl`) |

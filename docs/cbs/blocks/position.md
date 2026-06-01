@@ -1,9 +1,9 @@
 # CBS: `{{position::name}}`
 
-- **Layer:** CBS function (doc-only construct)
-- **Category:** blocks
-- **Aliases:** none
-- **Source:** `Refer/Risuai/src/ts/cbs.ts` (`position`, doc-only)
+- Layer: CBS function (doc-only construct)
+- Category: blocks
+- Aliases: none
+- Source: `Refer/Risuai/src/ts/cbs.ts` (`position`, doc-only)
 
 Declares a named position that lorebook `@@position` injection can target.
 

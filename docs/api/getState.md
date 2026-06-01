@@ -1,9 +1,9 @@
 # API: `getState(id, name)`
 
-- **Layer:** Preamble helper (wraps [`getChatVar`](getChatVar.md))
-- **Permission tier:** Always available (inherits `getChatVar`)
-- **Async:** no
-- **Source:** `Refer/Risuai/src/ts/process/scriptings.ts` (`luaCodeWrapper`, `function getState`)
+- Layer: Preamble helper (wraps [`getChatVar`](getChatVar.md))
+- Permission tier: Always available (inherits `getChatVar`)
+- Async: no
+- Source: `Refer/Risuai/src/ts/process/scriptings.ts` (`luaCodeWrapper`, `function getState`)
 
 Reads a JSON-decoded "state" value stored in a `__`-prefixed chat variable.
 

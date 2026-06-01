@@ -1,9 +1,9 @@
 # CBS: `{{jb}}`
 
-- **Layer:** CBS function
-- **Category:** prompts
-- **Aliases:** `jailbreak`
-- **Source:** `Refer/Risuai/src/ts/cbs.ts` (`jb`)
+- Layer: CBS function
+- Category: prompts
+- Aliases: `jailbreak`
+- Source: `Refer/Risuai/src/ts/cbs.ts` (`jb`)
 
 Returns the jailbreak prompt text.
 

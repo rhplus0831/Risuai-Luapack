@@ -1,9 +1,9 @@
 # CBS: `{{notequal::a::b}}`
 
-- **Layer:** CBS function
-- **Category:** logic
-- **Aliases:** `not_equal`
-- **Source:** `Refer/Risuai/src/ts/cbs.ts` (`notequal`)
+- Layer: CBS function
+- Category: logic
+- Aliases: `not_equal`
+- Source: `Refer/Risuai/src/ts/cbs.ts` (`notequal`)
 
 Tests two values for string inequality.
 

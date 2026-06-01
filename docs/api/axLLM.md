@@ -1,11 +1,11 @@
 # API: `axLLM(id, prompt, useMultimodal, options)`
 
-- **Layer:** Preamble helper (defined in `luaCodeWrapper`)
-- **Permission tier:** Low-level (requires `lowLevelAccess`)
-- **Async:** yes (`:await()`)
-- **Source:** `Refer/Risuai/src/ts/process/scriptings.ts` (`function axLLM` in `luaCodeWrapper`, wrapping `declareAPI('axLLMMain', ...)`)
+- Layer: Preamble helper (defined in `luaCodeWrapper`)
+- Permission tier: Low-level (requires `lowLevelAccess`)
+- Async: yes (`:await()`)
+- Source: `Refer/Risuai/src/ts/process/scriptings.ts` (`function axLLM` in `luaCodeWrapper`, wrapping `declareAPI('axLLMMain', ...)`)
 
-Runs a sub-request against the **auxiliary** model and returns the decoded
+Runs a sub-request against the auxiliary model and returns the decoded
 result. Identical in shape to [`LLM`](LLM.md) but routes to the auxiliary model
 (`'otherAx'`) instead of the main one. This is the high-level wrapper over the
 raw [`axLLMMain`](axLLMMain.md): it JSON-encodes the prompt/options, awaits, and
@@ -44,8 +44,8 @@ A Promise. After `:await()`, a Lua table `{ success = <bool>, result = <string> 
 ## Permission
 
 Low-level tier — the raw `axLLMMain` no-ops unless `id` is in
-`ScriptingLowLevelIds`, granted only to safe-mode runs **when the
-character/module has `lowLevelAccess` enabled**. It is **never** available to
+`ScriptingLowLevelIds`, granted only to safe-mode runs when the
+character/module has `lowLevelAccess` enabled. It is never available to
 edit listeners ([`editRequest`](../hooks/editRequest.md),
 [`editInput`](../hooks/editInput.md), [`editOutput`](../hooks/editOutput.md),
 [`editDisplay`](../hooks/editDisplay.md)), which run with low-level access forced

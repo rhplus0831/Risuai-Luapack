@@ -1,9 +1,9 @@
 # CBS: `{{? expression}}`
 
-- **Layer:** CBS function (inline shorthand)
-- **Category:** blocks
-- **Aliases:** none
-- **Source:** `Refer/Risuai/src/ts/cbs.ts` (`?`, doc-only entry); evaluated in `Refer/Risuai/src/ts/parser/parser.svelte.ts` (`matcher`, the `p1.startsWith('? ')` branch) via `calcString` in `Refer/Risuai/src/ts/process/infunctions.ts`
+- Layer: CBS function (inline shorthand)
+- Category: blocks
+- Aliases: none
+- Source: `Refer/Risuai/src/ts/cbs.ts` (`?`, doc-only entry); evaluated in `Refer/Risuai/src/ts/parser/parser.svelte.ts` (`matcher`, the `p1.startsWith('? ')` branch) via `calcString` in `Refer/Risuai/src/ts/process/infunctions.ts`
 
 Inline calculator: evaluates a math expression and returns the result.
 

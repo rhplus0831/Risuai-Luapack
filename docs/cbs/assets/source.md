@@ -1,9 +1,9 @@
 # CBS: `{{source::char}}` / `{{source::user}}`
 
-- **Layer:** CBS function (display token)
-- **Category:** assets
-- **Aliases:** none
-- **Source:** `Refer/Risuai/src/ts/parser/parser.svelte.ts` (`parseAdditionalAssets`)
+- Layer: CBS function (display token)
+- Category: assets
+- Aliases: none
+- Source: `Refer/Risuai/src/ts/parser/parser.svelte.ts` (`parseAdditionalAssets`)
 
 Expands to the character or user profile image URL/path (bare, no HTML tag).
 

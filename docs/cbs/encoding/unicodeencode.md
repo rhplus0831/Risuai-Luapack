@@ -1,9 +1,9 @@
 # CBS: `{{unicodeencode::s::index}}`
 
-- **Layer:** CBS function
-- **Category:** encoding
-- **Aliases:** `unicode_encode`
-- **Source:** `Refer/Risuai/src/ts/cbs.ts` (`unicodeencode`)
+- Layer: CBS function
+- Category: encoding
+- Aliases: `unicode_encode`
+- Source: `Refer/Risuai/src/ts/cbs.ts` (`unicodeencode`)
 
 Returns the UTF-16 code unit of a character in a string.
 

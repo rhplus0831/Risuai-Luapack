@@ -1,9 +1,9 @@
 # CBS: `{{remaind::a::b}}`
 
-- **Layer:** CBS function
-- **Category:** math
-- **Aliases:** none
-- **Source:** `Refer/Risuai/src/ts/cbs.ts` (`remaind`)
+- Layer: CBS function
+- Category: math
+- Aliases: none
+- Source: `Refer/Risuai/src/ts/cbs.ts` (`remaind`)
 
 Returns the remainder of dividing one number by another (modulo).
 

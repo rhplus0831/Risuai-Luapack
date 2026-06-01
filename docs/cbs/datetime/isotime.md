@@ -1,9 +1,9 @@
 # CBS: `{{isotime}}`
 
-- **Layer:** CBS function
-- **Category:** datetime
-- **Aliases:** none
-- **Source:** `Refer/Risuai/src/ts/cbs.ts` (`isotime`)
+- Layer: CBS function
+- Category: datetime
+- Aliases: none
+- Source: `Refer/Risuai/src/ts/cbs.ts` (`isotime`)
 
 Returns the current UTC time (HH:MM:SS).
 
@@ -23,7 +23,7 @@ Returns the current UTC time (HH:MM:SS).
 
 Returns the current time in UTC using the `getUTCHours()`, `getUTCMinutes()` and
 `getUTCSeconds()` getters, joined as `hours:minutes:seconds`. Because the raw
-getters are used, the components are **not zero-padded** despite the
+getters are used, the components are not zero-padded despite the
 "HH:MM:SS" shorthand (e.g. `7:4:9`). Use this for timezone-independent
 timestamps; for the viewer's local clock use [`{{time}}`](time.md).
 

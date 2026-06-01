@@ -1,9 +1,9 @@
 # CBS: `{{return::value}}`
 
-- **Layer:** CBS function
-- **Category:** variables
-- **Aliases:** none
-- **Source:** `Refer/Risuai/src/ts/cbs.ts` (`return`)
+- Layer: CBS function
+- Category: variables
+- Aliases: none
+- Source: `Refer/Risuai/src/ts/cbs.ts` (`return`)
 
 Sets the parser's return value and forces it to stop.
 

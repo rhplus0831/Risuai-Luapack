@@ -1,9 +1,9 @@
 # CBS: `{{blank}}`
 
-- **Layer:** CBS function
-- **Category:** context
-- **Aliases:** `none`
-- **Source:** `Refer/Risuai/src/ts/cbs.ts` (`blank`)
+- Layer: CBS function
+- Category: context
+- Aliases: `none`
+- Source: `Refer/Risuai/src/ts/cbs.ts` (`blank`)
 
 Returns an empty string.
 

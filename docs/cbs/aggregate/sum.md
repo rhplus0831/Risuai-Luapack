@@ -1,9 +1,9 @@
 # CBS: `{{sum::...}}`
 
-- **Layer:** CBS function
-- **Category:** aggregate
-- **Aliases:** none
-- **Source:** `Refer/Risuai/src/ts/cbs.ts` (`sum`)
+- Layer: CBS function
+- Category: aggregate
+- Aliases: none
+- Source: `Refer/Risuai/src/ts/cbs.ts` (`sum`)
 
 Adds up a set of numbers.
 
@@ -18,7 +18,7 @@ Adds up a set of numbers.
 
 | # | Name | Required | Description |
 |---|------|----------|-------------|
-| 1.. | values | yes | One or more numbers, **or** a single JSON array of values. |
+| 1.. | values | yes | One or more numbers, or a single JSON array of values. |
 
 ## Behavior
 

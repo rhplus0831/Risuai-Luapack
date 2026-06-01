@@ -1,9 +1,9 @@
 # API: `sleep(id, time)`
 
-- **Layer:** Host API (`declareAPI`)
-- **Permission tier:** Safe (blocked in `editDisplay`)
-- **Async:** yes (returns a Promise — use `:await()`)
-- **Source:** `Refer/Risuai/src/ts/process/scriptings.ts` (`declareAPI('sleep', ...)`)
+- Layer: Host API (`declareAPI`)
+- Permission tier: Safe (blocked in `editDisplay`)
+- Async: yes (returns a Promise — use `:await()`)
+- Source: `Refer/Risuai/src/ts/process/scriptings.ts` (`declareAPI('sleep', ...)`)
 
 Pauses the handler for a given number of milliseconds.
 
@@ -18,7 +18,7 @@ sleep(id, time):await()
 | Param | Type | Description |
 |-------|------|-------------|
 | `id` | [access key](../element/access-key.md) | The key passed to your handler. Must be in `ScriptingSafeIds`. |
-| `time` | number | Delay in **milliseconds** before the promise resolves. |
+| `time` | number | Delay in milliseconds before the promise resolves. |
 
 ## Returns
 
@@ -30,7 +30,7 @@ and returns nothing.
 ## Permission
 
 Safe tier — the call no-ops unless `id` is in `ScriptingSafeIds`. It is therefore
-**not** available to [`editDisplay`](../hooks/editDisplay.md) listeners. Available
+not available to [`editDisplay`](../hooks/editDisplay.md) listeners. Available
 from `onStart`/`onInput`/`onOutput`, button/custom modes, and the
 request/input/output edit hooks. See [access key & tiers](../element/access-key.md).
 

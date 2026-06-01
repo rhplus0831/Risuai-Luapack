@@ -1,9 +1,9 @@
 # CBS: `{{fromhex::hex}}`
 
-- **Layer:** CBS function
-- **Category:** encoding
-- **Aliases:** none
-- **Source:** `Refer/Risuai/src/ts/cbs.ts` (`fromhex`)
+- Layer: CBS function
+- Category: encoding
+- Aliases: none
+- Source: `Refer/Risuai/src/ts/cbs.ts` (`fromhex`)
 
 Converts a hexadecimal string to its decimal value.
 

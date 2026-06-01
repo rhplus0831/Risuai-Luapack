@@ -1,9 +1,9 @@
 # CBS: `{{video-img::name}}`
 
-- **Layer:** CBS function (display token)
-- **Category:** assets
-- **Aliases:** none
-- **Source:** `Refer/Risuai/src/ts/parser/parser.svelte.ts` (`parseAdditionalAssets`)
+- Layer: CBS function (display token)
+- Category: assets
+- Aliases: none
+- Source: `Refer/Risuai/src/ts/parser/parser.svelte.ts` (`parseAdditionalAssets`)
 
 Renders a muted, looping video — background-style, no controls.
 

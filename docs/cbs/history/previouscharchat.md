@@ -1,9 +1,9 @@
 # CBS: `{{previouscharchat}}`
 
-- **Layer:** CBS function
-- **Category:** history
-- **Aliases:** `lastcharmessage`
-- **Source:** `Refer/Risuai/src/ts/cbs.ts` (`previouscharchat`)
+- Layer: CBS function
+- Category: history
+- Aliases: `lastcharmessage`
+- Source: `Refer/Risuai/src/ts/cbs.ts` (`previouscharchat`)
 
 Returns the most recent character message, falling back to the greeting.
 

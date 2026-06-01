@@ -1,11 +1,11 @@
 # API: `getFullChatMain(id)`
 
-- **Layer:** Host API (`declareAPI`) — raw form of [`getFullChat`](getFullChat.md)
-- **Permission tier:** Always available (no guard)
-- **Async:** no
-- **Source:** `Refer/Risuai/src/ts/process/scriptings.ts` (`declareAPI('getFullChatMain', ...)`)
+- Layer: Host API (`declareAPI`) — raw form of [`getFullChat`](getFullChat.md)
+- Permission tier: Always available (no guard)
+- Async: no
+- Source: `Refer/Risuai/src/ts/process/scriptings.ts` (`declareAPI('getFullChatMain', ...)`)
 
-Returns the whole chat as a **JSON string**: an array of message objects. This
+Returns the whole chat as a JSON string: an array of message objects. This
 is the raw host call; in Lua prefer the [`getFullChat`](getFullChat.md) preamble
 helper, which decodes the JSON for you.
 
@@ -23,13 +23,13 @@ getFullChatMain(id)
 
 ## Returns
 
-A **JSON string** — `JSON.stringify` of `chat.message` mapped to
+A JSON string — `JSON.stringify` of `chat.message` mapped to
 `{ role, data, time }` per message, with `time` falling back to `0`. Decode with
 `json.decode` (the helper does this for you).
 
 ## Permission
 
-This call carries **no guard** — it works with any `id`, including the restricted
+This call carries no guard — it works with any `id`, including the restricted
 edit-display key. See [access key & tiers](../element/access-key.md).
 
 ## Elements used

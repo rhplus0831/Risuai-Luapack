@@ -1,9 +1,9 @@
 # CBS: `{{arrayshift::array}}`
 
-- **Layer:** CBS function
-- **Category:** array
-- **Aliases:** none
-- **Source:** `Refer/Risuai/src/ts/cbs.ts` (`arrayshift`)
+- Layer: CBS function
+- Category: array
+- Aliases: none
+- Source: `Refer/Risuai/src/ts/cbs.ts` (`arrayshift`)
 
 Returns a JSON array with its first element removed.
 
@@ -26,7 +26,7 @@ Parses `array` as JSON, removes the first element (JavaScript
 string. The removed element is discarded, not returned. An empty or invalid
 array yields `[]`.
 
-This produces a **new** array string for use downstream; it does not write back
+This produces a new array string for use downstream; it does not write back
 to any variable. To persist the result, pass it to
 [`{{setvar}}`](../variables/setvar.md).
 

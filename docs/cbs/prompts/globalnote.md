@@ -1,9 +1,9 @@
 # CBS: `{{globalnote}}`
 
-- **Layer:** CBS function
-- **Category:** prompts
-- **Aliases:** `systemnote`, `ujb`
-- **Source:** `Refer/Risuai/src/ts/cbs.ts` (`globalnote`)
+- Layer: CBS function
+- Category: prompts
+- Aliases: `systemnote`, `ujb`
+- Source: `Refer/Risuai/src/ts/cbs.ts` (`globalnote`)
 
 Returns the global note (also called the system note).
 

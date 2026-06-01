@@ -1,9 +1,9 @@
 # CBS: `{{split::s::delim}}`
 
-- **Layer:** CBS function
-- **Category:** string
-- **Aliases:** none
-- **Source:** `Refer/Risuai/src/ts/cbs.ts` (`split`)
+- Layer: CBS function
+- Category: string
+- Aliases: none
+- Source: `Refer/Risuai/src/ts/cbs.ts` (`split`)
 
 Splits a string on a delimiter and returns the parts as a JSON array.
 
@@ -25,7 +25,7 @@ Splits a string on a delimiter and returns the parts as a JSON array.
 Returns a JSON array string built from `s.split(delim)` (JavaScript
 `String.prototype.split`). Each piece between delimiters becomes one element, in
 order; consecutive delimiters produce empty-string elements. The result is a
-**JSON array string** (e.g. `["a","b"]`), the same representation consumed by the
+JSON array string (e.g. `["a","b"]`), the same representation consumed by the
 array CBS functions such as [`{{arrayelement}}`](../array/arrayelement.md) and
 [`{{arraylength}}`](../array/arraylength.md).
 

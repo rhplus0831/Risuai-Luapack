@@ -1,7 +1,7 @@
 # Element: Lorebook entry
 
-- **Kind:** Element (data structure)
-- **Source:** `Refer/Risuai/src/ts/storage/database.svelte.ts` (`loreBook` interface), `Refer/Risuai/src/ts/process/scriptings.ts` (`getLoreBooksMain`, `upsertLocalLoreBook`, `loadLoreBooksMain`), `Refer/Risuai/src/ts/process/lorebook.svelte.ts` (decorator loader)
+- Kind: Element (data structure)
+- Source: `Refer/Risuai/src/ts/storage/database.svelte.ts` (`loreBook` interface), `Refer/Risuai/src/ts/process/scriptings.ts` (`getLoreBooksMain`, `upsertLocalLoreBook`, `loadLoreBooksMain`), `Refer/Risuai/src/ts/process/lorebook.svelte.ts` (decorator loader)
 
 The structured world-info entry Risu activates into prompts, and how Lua reads
 and writes it.
@@ -28,15 +28,15 @@ The database `loreBook` interface (fields most relevant to Lua):
 
 Lorebook entries come from three places, all visible to `getLoreBooks`:
 
-1. **Chat-local**: `chat.localLore` (per current chat).
-2. **Character**: `character.globalLore`.
-3. **Module**: every enabled module's `lorebook` (`getModuleLorebooks()`).
+1. Chat-local: `chat.localLore` (per current chat).
+2. Character: `character.globalLore`.
+3. Module: every enabled module's `lorebook` (`getModuleLorebooks()`).
 
 ## Reading: `getLoreBooks(id, search)`
 
-`getLoreBooks` (wrapper over `getLoreBooksMain`) does an **exact `comment`
-lookup** across all three scopes and returns every match as an array. It does
-**not** run normal key-based activation. Each returned entry's `content` has
+`getLoreBooks` (wrapper over `getLoreBooksMain`) does an exact `comment`
+lookup across all three scopes and returns every match as an array. It does
+not run normal key-based activation. Each returned entry's `content` has
 already been CBS-parsed in the selected-character context.
 
 ```lua
@@ -49,7 +49,7 @@ end
 ## Reading: `loadLoreBooks(id)`
 
 [`loadLoreBooks`](../api/loadLoreBooks.md) (wrapper over `loadLoreBooksMain`,
-**low-level, awaitable**) runs Risu's real activated-lore selection and returns
+low-level, awaitable) runs Risu's real activated-lore selection and returns
 prompt-ready entries shaped `{ role, data }` (the host maps an `assistant` role
 to `char`). The raw host call takes a `reserve` token budget; the high-level
 wrapper passes none. It awaits internally.
@@ -67,8 +67,8 @@ local entry whose `comment` matches `name`, then pushes a fresh entry. Options:
 | `secondKey` | `''` | `secondkey` |
 | `regex` | `false` | `useRegex` |
 
-The new entry is written with `mode = 'normal'`, and **`selective` is set to
-`true` whenever `secondKey` is non-empty** (`selective: !!secondKey`). Only
+The new entry is written with `mode = 'normal'`, and `selective` is set to
+`true` whenever `secondKey` is non-empty (`selective: !!secondKey`). Only
 chat-local lore is writable from Lua — there is no Lua API to edit character or
 module lore.
 

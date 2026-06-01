@@ -1,9 +1,9 @@
 # CBS: `{{comment::text}}`
 
-- **Layer:** CBS function
-- **Category:** format
-- **Aliases:** none
-- **Source:** `Refer/Risuai/src/ts/cbs.ts` (`comment`)
+- Layer: CBS function
+- Category: format
+- Aliases: none
+- Source: `Refer/Risuai/src/ts/cbs.ts` (`comment`)
 
 Renders a visible, styled comment block.
 
@@ -21,9 +21,9 @@ Renders a visible, styled comment block.
 
 ## Behavior
 
-When the parser is running in **display** mode (`matcherArg.displaying`), returns
+When the parser is running in display mode (`matcherArg.displaying`), returns
 `<div class="risu-comment">text</div>` — a styled comment div visible in the chat
-UI. When **not** displaying (for example, while building the model request),
+UI. When not displaying (for example, while building the model request),
 returns an empty string, so the comment is shown to the user but never sent to
 the model.
 

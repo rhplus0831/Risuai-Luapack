@@ -1,9 +1,9 @@
 # API: `alertConfirm(id, value)`
 
-- **Layer:** Host API (`declareAPI`)
-- **Permission tier:** Safe (blocked in `editDisplay`)
-- **Async:** yes (returns a Promise — use `:await()`)
-- **Source:** `Refer/Risuai/src/ts/process/scriptings.ts` (`declareAPI('alertConfirm', ...)`)
+- Layer: Host API (`declareAPI`)
+- Permission tier: Safe (blocked in `editDisplay`)
+- Async: yes (returns a Promise — use `:await()`)
+- Source: `Refer/Risuai/src/ts/process/scriptings.ts` (`declareAPI('alertConfirm', ...)`)
 
 Asks the user a yes/no question and resolves to a boolean.
 
@@ -30,7 +30,7 @@ When `id` is not in `ScriptingSafeIds` the call no-ops and returns nothing.
 ## Permission
 
 Safe tier — the call no-ops unless `id` is in `ScriptingSafeIds`. It is therefore
-**not** available to [`editDisplay`](../hooks/editDisplay.md) listeners. Available
+not available to [`editDisplay`](../hooks/editDisplay.md) listeners. Available
 from `onStart`/`onInput`/`onOutput`, button/custom modes, and the
 request/input/output edit hooks. See [access key & tiers](../element/access-key.md).
 

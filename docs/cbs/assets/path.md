@@ -1,9 +1,9 @@
 # CBS: `{{path::name}}`
 
-- **Layer:** CBS function (display token)
-- **Category:** assets
-- **Aliases:** none
-- **Source:** `Refer/Risuai/src/ts/parser/parser.svelte.ts` (`parseAdditionalAssets`)
+- Layer: CBS function (display token)
+- Category: assets
+- Aliases: none
+- Source: `Refer/Risuai/src/ts/parser/parser.svelte.ts` (`parseAdditionalAssets`)
 
 Expands to the bare URL/path of a named asset (no HTML tag).
 

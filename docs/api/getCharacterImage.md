@@ -1,9 +1,9 @@
 # API: `getCharacterImage(id)`
 
-- **Layer:** Preamble helper (defined in `luaCodeWrapper`)
-- **Permission tier:** Always available
-- **Async:** yes (`:await()`)
-- **Source:** `Refer/Risuai/src/ts/process/scriptings.ts` (`function getCharacterImage` in `luaCodeWrapper`, wrapping `declareAPI('getCharacterImageMain', ...)`)
+- Layer: Preamble helper (defined in `luaCodeWrapper`)
+- Permission tier: Always available
+- Async: yes (`:await()`)
+- Source: `Refer/Risuai/src/ts/process/scriptings.ts` (`function getCharacterImage` in `luaCodeWrapper`, wrapping `declareAPI('getCharacterImageMain', ...)`)
 
 Returns the selected character's image as an
 [`{{inlayed::id}}`](../element/inlay-tokens.md) token, or an empty string if
@@ -40,7 +40,7 @@ A Promise. After `:await()`, a string:
 
 ## Permission
 
-Always available — the underlying `getCharacterImageMain` carries **no guard**,
+Always available — the underlying `getCharacterImageMain` carries no guard,
 so it works for any access key regardless of tier (including from edit
 listeners). Despite producing an image, it is *not* gated behind
 `lowLevelAccess`. See [access key & permission tiers](../element/access-key.md).

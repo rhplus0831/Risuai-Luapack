@@ -1,9 +1,9 @@
 # API: `reloadChat(id, index)`
 
-- **Layer:** Host API (`declareAPI`)
-- **Permission tier:** Safe (blocked in `editDisplay`)
-- **Async:** no
-- **Source:** `Refer/Risuai/src/ts/process/scriptings.ts` (`declareAPI('reloadChat', ...)`)
+- Layer: Host API (`declareAPI`)
+- Permission tier: Safe (blocked in `editDisplay`)
+- Async: no
+- Source: `Refer/Risuai/src/ts/process/scriptings.ts` (`declareAPI('reloadChat', ...)`)
 
 Requests a re-render of a single chat message.
 
@@ -35,7 +35,7 @@ heavier than needed. Indices are 0-based.
 ## Permission
 
 Safe tier — the call no-ops unless `id` is in `ScriptingSafeIds`. It is therefore
-**not** available to [`editDisplay`](../hooks/editDisplay.md) listeners. See
+not available to [`editDisplay`](../hooks/editDisplay.md) listeners. See
 [access key & tiers](../element/access-key.md).
 
 ## Elements used

@@ -1,9 +1,9 @@
 # CBS: `{{makedict::k=v::k2=v2::...}}`
 
-- **Layer:** CBS function
-- **Category:** dict
-- **Aliases:** `dict`, `d`, `makeobject`, `object`, `o`
-- **Source:** `Refer/Risuai/src/ts/cbs.ts` (`makedict`)
+- Layer: CBS function
+- Category: dict
+- Aliases: `dict`, `d`, `makeobject`, `object`, `o`
+- Source: `Refer/Risuai/src/ts/cbs.ts` (`makedict`)
 
 Builds a JSON object from `key=value` arguments.
 
@@ -25,7 +25,7 @@ Builds a JSON object from `key=value` arguments.
 
 ## Behavior
 
-Each argument is split on the **first** `=`: everything before it is the key,
+Each argument is split on the first `=`: everything before it is the key,
 everything after is the value. Arguments with no `=` are skipped (invalid pairs
 are ignored). The collected pairs are returned as a JSON object via
 `JSON.stringify`.

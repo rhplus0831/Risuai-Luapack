@@ -1,9 +1,9 @@
 # CBS: `{{idleduration}}`
 
-- **Layer:** CBS function
-- **Category:** datetime
-- **Aliases:** `idle_duration`
-- **Source:** `Refer/Risuai/src/ts/cbs.ts` (`idleduration`)
+- Layer: CBS function
+- Category: datetime
+- Aliases: `idle_duration`
+- Source: `Refer/Risuai/src/ts/cbs.ts` (`idleduration`)
 
 Returns the time elapsed since the last message in the chat (HH:MM:SS).
 
@@ -21,7 +21,7 @@ Returns the time elapsed since the last message in the chat (HH:MM:SS).
 
 ## Behavior
 
-Takes the **last** message in the current chat (any role) and returns the
+Takes the last message in the current chat (any role) and returns the
 difference between the current time (`new Date()`) and that message's `time`,
 formatted as `H:MM:SS` (hours unpadded, minutes and seconds zero-padded).
 Because it is measured against "now", the result grows the longer the chat sits

@@ -1,7 +1,7 @@
 # Element: Promise / `async()` (awaiting host calls)
 
-- **Kind:** Element (runtime concept)
-- **Source:** `Refer/Risuai/src/ts/process/scriptings.ts` (`luaCodeWrapper` — the injected `async`/`Promise` plumbing and the high-level wrappers; the `async`/`await` host declarations)
+- Kind: Element (runtime concept)
+- Source: `Refer/Risuai/src/ts/process/scriptings.ts` (`luaCodeWrapper` — the injected `async`/`Promise` plumbing and the high-level wrappers; the `async`/`await` host declarations)
 
 Some host calls are asynchronous. Risu's Lua VM injects a `Promise` type and an
 `async()` wrapper so you can await them.
@@ -15,15 +15,15 @@ Risu's wrapper (prepended to every script as `luaCodeWrapper`) exposes:
   a coroutine and returns a `Promise`, resuming the coroutine each time an
   awaited inner promise settles.
 
-An **awaitable host call returns a promise**; you get the result by calling
+An awaitable host call returns a promise; you get the result by calling
 `:await()` on it:
 
 ```lua
 local resultJson = LLMMain(id, json.encode(prompt), false, '{}'):await()
 ```
 
-You almost never call the raw `*Main` form. The high-level helpers do the await
-(and JSON) for you (see below).
+You almost never call the raw `*Main` form. The high-level helpers listed in the
+next section do the await and JSON conversion for you.
 
 ## High-level helpers await for you
 
@@ -60,7 +60,7 @@ need no await.
 
 ## Manual / custom triggers must wrap themselves
 
-The built-in handlers run async automatically, but a **manual / custom trigger**
+The built-in handlers run async automatically, but a manual / custom trigger
 (dispatched by global name) or a button handler that calls an awaitable API must
 wrap its body in `async(...)` itself, or the await has no coroutine to suspend:
 

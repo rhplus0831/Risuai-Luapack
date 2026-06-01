@@ -1,9 +1,9 @@
 # CBS: `{{// comment}}`
 
-- **Layer:** CBS function (doc-only construct)
-- **Category:** blocks
-- **Aliases:** none
-- **Source:** `Refer/Risuai/src/ts/cbs.ts` (`//`)
+- Layer: CBS function (doc-only construct)
+- Category: blocks
+- Aliases: none
+- Source: `Refer/Risuai/src/ts/cbs.ts` (`//`)
 
 A hidden comment whose content is removed entirely.
 
@@ -23,7 +23,7 @@ A hidden comment whose content is removed entirely.
 
 `{{// ...}}` is registered as a `doc_only` construct: the whole `{{...}}` is
 consumed by the parser and replaced with nothing. The comment text appears
-**nowhere** — not in the displayed chat and not in the model request. Use it to
+nowhere — not in the displayed chat and not in the model request. Use it to
 annotate a template for your own reference.
 
 This is the *hidden* counterpart to [`{{comment::text}}`](../format/comment.md),

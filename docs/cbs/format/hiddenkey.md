@@ -1,9 +1,9 @@
 # CBS: `{{hiddenkey::keys}}`
 
-- **Layer:** CBS function
-- **Category:** format
-- **Aliases:** none
-- **Source:** `Refer/Risuai/src/ts/cbs.ts` (`hiddenkey`)
+- Layer: CBS function
+- Category: format
+- Aliases: none
+- Source: `Refer/Risuai/src/ts/cbs.ts` (`hiddenkey`)
 
 Marks lorebook activation keys that never reach the model.
 
@@ -24,7 +24,7 @@ Marks lorebook activation keys that never reach the model.
 The callback always returns an empty string, so the construct contributes nothing
 to the rendered output or the model request. Its purpose is positional: when used
 inside lorebook content, the `keys` text acts as an activation key for lorebook
-scanning (it can trigger lore entries) **without** being included in what is sent
+scanning (it can trigger lore entries) without being included in what is sent
 to the model. In other words, it lets a lore entry be matched by a phrase that
 the model never sees.
 

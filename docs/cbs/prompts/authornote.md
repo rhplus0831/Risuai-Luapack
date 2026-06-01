@@ -1,9 +1,9 @@
 # CBS: `{{authornote}}`
 
-- **Layer:** CBS function
-- **Category:** prompts
-- **Aliases:** `author_note`
-- **Source:** `Refer/Risuai/src/ts/cbs.ts` (`authornote`)
+- Layer: CBS function
+- Category: prompts
+- Aliases: `author_note`
+- Source: `Refer/Risuai/src/ts/cbs.ts` (`authornote`)
 
 Returns the chat's author's note.
 

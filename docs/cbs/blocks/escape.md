@@ -1,9 +1,9 @@
 # CBS: `{{#escape}} ... {{/escape}}`
 
-- **Layer:** CBS block
-- **Category:** blocks
-- **Aliases:** none
-- **Source:** `Refer/Risuai/src/ts/cbs.ts` (`#escape`, doc-only); evaluated in `Refer/Risuai/src/ts/parser/parser.svelte.ts` (`blockStartMatcher` returning the `escape` type, and the `escape` case in `blockEndMatcher` calling `risuEscape`)
+- Layer: CBS block
+- Category: blocks
+- Aliases: none
+- Source: `Refer/Risuai/src/ts/cbs.ts` (`#escape`, doc-only); evaluated in `Refer/Risuai/src/ts/parser/parser.svelte.ts` (`blockStartMatcher` returning the `escape` type, and the `escape` case in `blockEndMatcher` calling `risuEscape`)
 
 Escapes braces and parentheses in its body, treating the content as literal
 text.

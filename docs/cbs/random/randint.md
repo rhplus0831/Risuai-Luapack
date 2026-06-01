@@ -1,9 +1,9 @@
 # CBS: `{{randint::min::max}}`
 
-- **Layer:** CBS function
-- **Category:** random
-- **Aliases:** none
-- **Source:** `Refer/Risuai/src/ts/cbs.ts` (`randint`)
+- Layer: CBS function
+- Category: random
+- Aliases: none
+- Source: `Refer/Risuai/src/ts/cbs.ts` (`randint`)
 
 Returns a random integer in an inclusive range.
 

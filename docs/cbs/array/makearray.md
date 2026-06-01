@@ -1,9 +1,9 @@
 # CBS: `{{makearray::a::b::...}}`
 
-- **Layer:** CBS function
-- **Category:** array
-- **Aliases:** `array`, `a`
-- **Source:** `Refer/Risuai/src/ts/cbs.ts` (`makearray`)
+- Layer: CBS function
+- Category: array
+- Aliases: `array`, `a`
+- Source: `Refer/Risuai/src/ts/cbs.ts` (`makearray`)
 
 Builds a JSON array from the supplied arguments.
 
@@ -24,7 +24,7 @@ Builds a JSON array from the supplied arguments.
 ## Behavior
 
 Collects every argument after the function name and returns them as a JSON array
-string, in order. Each argument is stored as a **string**, so numbers and JSON
+string, in order. Each argument is stored as a string, so numbers and JSON
 fragments become quoted strings rather than numeric or nested-object values.
 With no arguments the result is an empty array `[]`.
 

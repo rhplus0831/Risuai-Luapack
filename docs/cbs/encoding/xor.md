@@ -1,9 +1,9 @@
 # CBS: `{{xor::s}}`
 
-- **Layer:** CBS function
-- **Category:** encoding
-- **Aliases:** `xorencrypt`, `xorencode`, `xore`
-- **Source:** `Refer/Risuai/src/ts/cbs.ts` (`xor`)
+- Layer: CBS function
+- Category: encoding
+- Aliases: `xorencrypt`, `xorencode`, `xore`
+- Source: `Refer/Risuai/src/ts/cbs.ts` (`xor`)
 
 Obfuscates a string by XOR-ing each byte with `0xFF` and base64-encoding the
 result.

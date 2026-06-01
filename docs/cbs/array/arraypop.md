@@ -1,9 +1,9 @@
 # CBS: `{{arraypop::array}}`
 
-- **Layer:** CBS function
-- **Category:** array
-- **Aliases:** none
-- **Source:** `Refer/Risuai/src/ts/cbs.ts` (`arraypop`)
+- Layer: CBS function
+- Category: array
+- Aliases: none
+- Source: `Refer/Risuai/src/ts/cbs.ts` (`arraypop`)
 
 Returns a JSON array with its last element removed.
 
@@ -26,7 +26,7 @@ Parses `array` as JSON, removes the last element (JavaScript
 string. The removed element is discarded, not returned. An empty or invalid
 array yields `[]`.
 
-This produces a **new** array string for use downstream; it does not write back
+This produces a new array string for use downstream; it does not write back
 to any variable. To persist the result, pass it to
 [`{{setvar}}`](../variables/setvar.md).
 

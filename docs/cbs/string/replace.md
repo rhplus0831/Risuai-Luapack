@@ -1,9 +1,9 @@
 # CBS: `{{replace::s::find::to}}`
 
-- **Layer:** CBS function
-- **Category:** string
-- **Aliases:** none
-- **Source:** `Refer/Risuai/src/ts/cbs.ts` (`replace`)
+- Layer: CBS function
+- Category: string
+- Aliases: none
+- Source: `Refer/Risuai/src/ts/cbs.ts` (`replace`)
 
 Replaces every occurrence of a substring with another string.
 
@@ -23,9 +23,9 @@ Replaces every occurrence of a substring with another string.
 
 ## Behavior
 
-Returns `s` with **all** occurrences of `find` replaced by `to`, using the
+Returns `s` with all occurrences of `find` replaced by `to`, using the
 literal JavaScript `String.prototype.replaceAll`. The match is
-**case-sensitive** and treats `find` as a plain string, not a regular
+case-sensitive and treats `find` as a plain string, not a regular
 expression. If `find` is not present, `s` is returned unchanged.
 
 ## Example

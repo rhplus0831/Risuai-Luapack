@@ -1,9 +1,9 @@
 # CBS: `{{prefillsupported}}`
 
-- **Layer:** CBS function
-- **Category:** model
-- **Aliases:** `prefill_supported`, `prefill`
-- **Source:** `Refer/Risuai/src/ts/cbs.ts` (`prefillsupported`)
+- Layer: CBS function
+- Category: model
+- Aliases: `prefill_supported`, `prefill`
+- Source: `Refer/Risuai/src/ts/cbs.ts` (`prefillsupported`)
 
 Returns whether the current model supports response prefill.
 

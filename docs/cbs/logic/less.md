@@ -1,9 +1,9 @@
 # CBS: `{{less::a::b}}`
 
-- **Layer:** CBS function
-- **Category:** logic
-- **Aliases:** none
-- **Source:** `Refer/Risuai/src/ts/cbs.ts` (`less`)
+- Layer: CBS function
+- Category: logic
+- Aliases: none
+- Source: `Refer/Risuai/src/ts/cbs.ts` (`less`)
 
 Numeric "less than" comparison.
 

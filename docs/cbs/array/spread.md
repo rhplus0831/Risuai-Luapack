@@ -1,9 +1,9 @@
 # CBS: `{{spread::array}}`
 
-- **Layer:** CBS function
-- **Category:** array
-- **Aliases:** none
-- **Source:** `Refer/Risuai/src/ts/cbs.ts` (`spread`)
+- Layer: CBS function
+- Category: array
+- Aliases: none
+- Source: `Refer/Risuai/src/ts/cbs.ts` (`spread`)
 
 Joins a JSON array with `::` so it can be spread into another CBS call's
 arguments.
@@ -28,8 +28,8 @@ Parses `array` as JSON and joins its elements with the literal separator `::`
 as an empty array and yields an empty string.
 
 Because CBS splits a function's arguments on `::`, the output of `{{spread}}` can
-be embedded inside another call so the array elements become **separate
-arguments**. For example, building an array and spreading it lets a variadic
+be embedded inside another call so the array elements become separate
+arguments. For example, building an array and spreading it lets a variadic
 function such as [`{{makearray}}`](makearray.md) receive each element
 individually. (Whether the surrounding parser re-splits the result depends on
 how the enclosing template is evaluated.)

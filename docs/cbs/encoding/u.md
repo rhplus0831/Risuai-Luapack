@@ -1,11 +1,11 @@
 # CBS: `{{u::hex}}`
 
-- **Layer:** CBS function
-- **Category:** encoding
-- **Aliases:** `unicodedecodefromhex`
-- **Source:** `Refer/Risuai/src/ts/cbs.ts` (`u`)
+- Layer: CBS function
+- Category: encoding
+- Aliases: `unicodedecodefromhex`
+- Source: `Refer/Risuai/src/ts/cbs.ts` (`u`)
 
-Returns the character for a **hexadecimal** code unit.
+Returns the character for a hexadecimal code unit.
 
 ## Syntax
 

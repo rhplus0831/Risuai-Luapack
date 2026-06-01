@@ -1,9 +1,9 @@
 # CBS: `{{moduleenabled::namespace}}`
 
-- **Layer:** CBS function
-- **Category:** modules
-- **Aliases:** `module_enabled`
-- **Source:** `Refer/Risuai/src/ts/cbs.ts` (`moduleenabled`)
+- Layer: CBS function
+- Category: modules
+- Aliases: `module_enabled`
+- Source: `Refer/Risuai/src/ts/cbs.ts` (`moduleenabled`)
 
 Tests whether a module is currently enabled.
 

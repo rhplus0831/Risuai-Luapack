@@ -1,11 +1,11 @@
 # Element: Asset display tokens (`{{img::}}`, `{{video::}}`, …)
 
-- **Kind:** Element (display token)
-- **Source:** `Refer/Risuai/src/ts/parser/parser.svelte.ts` (`assetRegex`, `parseAdditionalAssets`)
+- Kind: Element (display token)
+- Source: `Refer/Risuai/src/ts/parser/parser.svelte.ts` (`assetRegex`, `parseAdditionalAssets`)
 
 Tokens the display parser expands into image/video/audio/background HTML when it
-renders chat text and background embedding. These are **display helpers, not
-multimodal attachments** — contrast [inlay tokens](inlay-tokens.md).
+renders chat text and background embedding. These are display helpers, not
+multimodal attachments — contrast [inlay tokens](inlay-tokens.md).
 
 ## What it is
 
@@ -40,7 +40,7 @@ setting.
 | `{{video-img::name}}` | `<video autoplay muted loop><source src="p" type="video/mp4"></video>` |
 | `{{audio::name}}` | `<audio controls autoplay loop><source src="p" type="audio/mpeg"></audio>` |
 | `{{asset::name}}` | `<video …>` if the asset extension is a video type, else `<img …>` |
-| `{{bg::name}}` | a full-size background `<div style="…background:…url(p)…">` — **only in background mode**; expands to empty in normal chat |
+| `{{bg::name}}` | a full-size background `<div style="…background:…url(p)…">` — only in background mode; expands to empty in normal chat |
 | `{{bgm::name}}` | `<div risu-ctrl="bgm___auto___p" style="display:none;"></div>` (hidden BGM control) |
 | `{{emotion::name}}` | `<img src="…" alt="…" style="…"/>` from `emotionImages` |
 | `{{source::char}}` | the selected character image URL/path (bare) |
@@ -53,7 +53,7 @@ empty.
 
 ## Not multimodal
 
-These tokens produce HTML for the screen only. They are **not** attached to
+These tokens produce HTML for the screen only. They are not attached to
 LLM/`axLLM` requests, even with `useMultimodal=true`. For multimodal attachments
 use [inlay tokens](inlay-tokens.md) (`{{inlay::}}` / `{{inlayed::}}` /
 `{{inlayeddata::}}`), which Risu can strip from text and attach as media.

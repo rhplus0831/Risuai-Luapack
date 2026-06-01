@@ -1,9 +1,9 @@
 # API: `hash(id, value)`
 
-- **Layer:** Host API (`declareAPI`)
-- **Permission tier:** Always available (no key guard)
-- **Async:** yes (returns a Promise — use `:await()`)
-- **Source:** `Refer/Risuai/src/ts/process/scriptings.ts` (`declareAPI('hash', ...)`)
+- Layer: Host API (`declareAPI`)
+- Permission tier: Always available (no key guard)
+- Async: yes (returns a Promise — use `:await()`)
+- Source: `Refer/Risuai/src/ts/process/scriptings.ts` (`declareAPI('hash', ...)`)
 
 Hashes a string using Risu's `hasher`.
 
@@ -17,7 +17,7 @@ hash(id, value):await()
 
 | Param | Type | Description |
 |-------|------|-------------|
-| `id` | [access key](../element/access-key.md) | The key passed to your handler. Accepted for convention; this call carries **no key guard**. |
+| `id` | [access key](../element/access-key.md) | The key passed to your handler. Accepted for convention; this call carries no key guard. |
 | `value` | string | The string to hash. It is UTF-8 encoded (`new TextEncoder().encode(value)`) before hashing. |
 
 ## Returns

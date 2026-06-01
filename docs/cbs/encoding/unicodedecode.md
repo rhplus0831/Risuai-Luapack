@@ -1,9 +1,9 @@
 # CBS: `{{unicodedecode::codepoint}}`
 
-- **Layer:** CBS function
-- **Category:** encoding
-- **Aliases:** `unicode_decode`
-- **Source:** `Refer/Risuai/src/ts/cbs.ts` (`unicodedecode`)
+- Layer: CBS function
+- Category: encoding
+- Aliases: `unicode_decode`
+- Source: `Refer/Risuai/src/ts/cbs.ts` (`unicodedecode`)
 
 Returns the character for a decimal code unit.
 

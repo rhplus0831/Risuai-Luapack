@@ -1,9 +1,9 @@
 # CBS: `{{capitalize::s}}`
 
-- **Layer:** CBS function
-- **Category:** string
-- **Aliases:** none
-- **Source:** `Refer/Risuai/src/ts/cbs.ts` (`capitalize`)
+- Layer: CBS function
+- Category: string
+- Aliases: none
+- Source: `Refer/Risuai/src/ts/cbs.ts` (`capitalize`)
 
 Capitalizes the first character of a string.
 

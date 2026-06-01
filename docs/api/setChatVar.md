@@ -1,9 +1,9 @@
 # API: `setChatVar(id, key, value)`
 
-- **Layer:** Host API (`declareAPI`)
-- **Permission tier:** Safe or edit-display
-- **Async:** no
-- **Source:** `Refer/Risuai/src/ts/process/scriptings.ts` (`declareAPI('setChatVar', ...)`)
+- Layer: Host API (`declareAPI`)
+- Permission tier: Safe or edit-display
+- Async: no
+- Source: `Refer/Risuai/src/ts/process/scriptings.ts` (`declareAPI('setChatVar', ...)`)
 
 Writes a persistent chat variable.
 
@@ -17,7 +17,7 @@ setChatVar(id, key, value)
 
 | Param | Type | Description |
 |-------|------|-------------|
-| `id` | [access key](../element/access-key.md) | The key passed to your handler. Must be in `ScriptingSafeIds` **or** `ScriptingEditDisplayIds`. |
+| `id` | [access key](../element/access-key.md) | The key passed to your handler. Must be in `ScriptingSafeIds` or `ScriptingEditDisplayIds`. |
 | `key` | string | The chat-variable name to write. |
 | `value` | string | The value to store. Persisted in the chat's `scriptstate`. |
 
@@ -27,7 +27,7 @@ Nothing.
 
 ## Permission
 
-Unusually for a mutating call, `setChatVar` accepts **either** tier: the guard
+Unusually for a mutating call, `setChatVar` accepts either tier: the guard
 is `ScriptingSafeIds.has(id) || ScriptingEditDisplayIds.has(id)`. It is therefore
 the one write available from an [`editDisplay`](../hooks/editDisplay.md)
 listener, which holds only the restricted edit-display key and cannot mutate

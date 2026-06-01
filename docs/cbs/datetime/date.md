@@ -1,9 +1,9 @@
 # CBS: `{{date::format::timestamp}}`
 
-- **Layer:** CBS function
-- **Category:** datetime
-- **Aliases:** `datetimeformat`
-- **Source:** `Refer/Risuai/src/ts/cbs.ts` (`date`)
+- Layer: CBS function
+- Category: datetime
+- Aliases: `datetimeformat`
+- Source: `Refer/Risuai/src/ts/cbs.ts` (`date`)
 
 Formats a date/time with a custom format string.
 
@@ -19,13 +19,13 @@ Formats a date/time with a custom format string.
 
 | # | Name | Required | Description |
 |---|------|----------|-------------|
-| 1 | `format` | no | A format string (see tokens below). With no arguments at all, a default date is returned instead. |
-| 2 | `timestamp` | no | A unix timestamp in **milliseconds** to format instead of "now". Non-numeric values fall back to the current time. |
+| 1 | `format` | no | A format string using the supported tokens listed in "Behavior". With no arguments at all, a default date is returned instead. |
+| 2 | `timestamp` | no | A unix timestamp in milliseconds to format instead of "now". Non-numeric values fall back to the current time. |
 
 ## Behavior
 
-With **no arguments**, returns the current local date as `year-month-day`
-(`YYYY-M-D`, month and day **not** zero-padded), e.g. `2026-6-5`.
+With no arguments, returns the current local date as `year-month-day`
+(`YYYY-M-D`, month and day not zero-padded), e.g. `2026-6-5`.
 
 With a `format` argument, the string is passed to Risu's `dateTimeFormat` helper
 along with the optional `timestamp` (converted from milliseconds to seconds

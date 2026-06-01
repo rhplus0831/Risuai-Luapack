@@ -1,9 +1,9 @@
 # CBS: `{{risu::size}}`
 
-- **Layer:** CBS function
-- **Category:** assets
-- **Aliases:** none
-- **Source:** `Refer/Risuai/src/ts/cbs.ts` (`risu`)
+- Layer: CBS function
+- Category: assets
+- Aliases: none
+- Source: `Refer/Risuai/src/ts/cbs.ts` (`risu`)
 
 Emits the Risu logo as an `<img>`.
 

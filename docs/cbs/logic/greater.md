@@ -1,9 +1,9 @@
 # CBS: `{{greater::a::b}}`
 
-- **Layer:** CBS function
-- **Category:** logic
-- **Aliases:** none
-- **Source:** `Refer/Risuai/src/ts/cbs.ts` (`greater`)
+- Layer: CBS function
+- Category: logic
+- Aliases: none
+- Source: `Refer/Risuai/src/ts/cbs.ts` (`greater`)
 
 Numeric "greater than" comparison.
 

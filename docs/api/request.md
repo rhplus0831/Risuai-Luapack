@@ -1,11 +1,11 @@
 # API: `request(id, url)`
 
-- **Layer:** Host API (`declareAPI`)
-- **Permission tier:** Low-level (requires `lowLevelAccess`)
-- **Async:** yes (`:await()`)
-- **Source:** `Refer/Risuai/src/ts/process/scriptings.ts` (`declareAPI('request', ...)`)
+- Layer: Host API (`declareAPI`)
+- Permission tier: Low-level (requires `lowLevelAccess`)
+- Async: yes (`:await()`)
+- Source: `Refer/Risuai/src/ts/process/scriptings.ts` (`declareAPI('request', ...)`)
 
-Performs an HTTPS **GET** request and returns the response as a JSON string.
+Performs an HTTPS GET request and returns the response as a JSON string.
 Heavily restricted: HTTPS only, short URLs only, rate-limited, and a few hosts
 are blocked outright.
 
@@ -20,11 +20,11 @@ request(id, url)   -- returns a Promise; call :await()
 | Param | Type | Description |
 |-------|------|-------------|
 | `id` | [access key](../element/access-key.md) | The key passed to your handler. Must be in `ScriptingLowLevelIds`. |
-| `url` | string | The target URL. Must start with `https://` and be **at most 120 characters**. |
+| `url` | string | The target URL. Must start with `https://` and be at most 120 characters. |
 
 ## Returns
 
-A Promise resolving to a **JSON string** `{"status": <number>, "data": <string>}`.
+A Promise resolving to a JSON string `{"status": <number>, "data": <string>}`.
 Decode it with `json.decode`. `data` is the response body on success, or an
 error message on failure. Notable statuses the host returns itself:
 
@@ -36,21 +36,21 @@ error message on failure. Notable statuses the host returns itself:
 
 ## Constraints
 
-- **HTTPS only** — non-`https://` URLs return `400`.
-- **URL <= 120 characters** — longer URLs return `413`.
-- **Rate-limited** — the counter resets every 60 seconds; once more than 5
+- HTTPS only — non-`https://` URLs return `400`.
+- URL <= 120 characters — longer URLs return `413`.
+- Rate-limited — the counter resets every 60 seconds; once more than 5
   requests have been made in the window the next returns `429` (roughly 5-6 per
   minute).
-- **Blocked hosts** — URLs starting with `https://realm.risuai.net`,
+- Blocked hosts — URLs starting with `https://realm.risuai.net`,
   `https://risuai.net`, or `https://risuai.xyz` return `400`.
-- **GET only** — there is no way to send a body, custom headers, or another
+- GET only — there is no way to send a body, custom headers, or another
   method.
 
 ## Permission
 
 Low-level tier — the call no-ops unless `id` is in `ScriptingLowLevelIds`,
-granted only to safe-mode runs **when the character/module has `lowLevelAccess`
-enabled**. It is **never** available to edit listeners
+granted only to safe-mode runs when the character/module has `lowLevelAccess`
+enabled. It is never available to edit listeners
 ([`editRequest`](../hooks/editRequest.md), [`editInput`](../hooks/editInput.md),
 [`editOutput`](../hooks/editOutput.md), [`editDisplay`](../hooks/editDisplay.md)),
 which run with low-level access forced off. See

@@ -1,9 +1,9 @@
 # CBS: `{{join::array::sep}}`
 
-- **Layer:** CBS function
-- **Category:** array
-- **Aliases:** none
-- **Source:** `Refer/Risuai/src/ts/cbs.ts` (`join`)
+- Layer: CBS function
+- Category: array
+- Aliases: none
+- Source: `Refer/Risuai/src/ts/cbs.ts` (`join`)
 
 Joins the elements of a JSON array into one string with a separator.
 

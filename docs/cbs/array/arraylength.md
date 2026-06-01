@@ -1,9 +1,9 @@
 # CBS: `{{arraylength::array}}`
 
-- **Layer:** CBS function
-- **Category:** array
-- **Aliases:** none
-- **Source:** `Refer/Risuai/src/ts/cbs.ts` (`arraylength`)
+- Layer: CBS function
+- Category: array
+- Aliases: none
+- Source: `Refer/Risuai/src/ts/cbs.ts` (`arraylength`)
 
 Returns the number of elements in a JSON array.
 

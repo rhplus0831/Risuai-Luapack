@@ -1,9 +1,9 @@
 # CBS: `{{charhistory}}`
 
-- **Layer:** CBS function
-- **Category:** history
-- **Aliases:** `charmessages`, `char_history`
-- **Source:** `Refer/Risuai/src/ts/cbs.ts` (`charhistory`)
+- Layer: CBS function
+- Category: history
+- Aliases: `charmessages`, `char_history`
+- Source: `Refer/Risuai/src/ts/cbs.ts` (`charhistory`)
 
 Returns all character messages as a JSON array.
 

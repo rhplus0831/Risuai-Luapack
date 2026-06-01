@@ -1,9 +1,9 @@
 # CBS: `{{getglobalvar::name}}`
 
-- **Layer:** CBS function
-- **Category:** variables
-- **Aliases:** none
-- **Source:** `Refer/Risuai/src/ts/cbs.ts` (`getglobalvar`)
+- Layer: CBS function
+- Category: variables
+- Aliases: none
+- Source: `Refer/Risuai/src/ts/cbs.ts` (`getglobalvar`)
 
 Reads a global chat variable, shared across all chats and characters.
 
@@ -27,7 +27,7 @@ per-chat store read by [`{{getvar}}`](getvar.md). This is the same value Lua
 reads with [`getGlobalVar`](../../api/getGlobalVar.md). If `name` is not set, the
 function returns an empty string.
 
-`{{getglobalvar}}` only **reads**; there is no CBS counterpart that writes a
+`{{getglobalvar}}` only reads; there is no CBS counterpart that writes a
 global variable.
 
 ## Example

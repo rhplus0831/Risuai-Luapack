@@ -1,9 +1,9 @@
 # API: `removeChat(id, index)`
 
-- **Layer:** Host API (`declareAPI`)
-- **Permission tier:** Safe (blocked in `editDisplay`)
-- **Async:** no
-- **Source:** `Refer/Risuai/src/ts/process/scriptings.ts` (`declareAPI('removeChat', ...)`)
+- Layer: Host API (`declareAPI`)
+- Permission tier: Safe (blocked in `editDisplay`)
+- Async: no
+- Source: `Refer/Risuai/src/ts/process/scriptings.ts` (`declareAPI('removeChat', ...)`)
 
 Removes a single message from the chat.
 
@@ -34,7 +34,7 @@ nothing. Indices are 0-based.
 ## Permission
 
 Safe tier — the call no-ops unless `id` is in `ScriptingSafeIds`. It is therefore
-**not** available to [`editDisplay`](../hooks/editDisplay.md) listeners. See
+not available to [`editDisplay`](../hooks/editDisplay.md) listeners. See
 [access key & tiers](../element/access-key.md).
 
 ## Elements used

@@ -1,9 +1,9 @@
 # CBS: `{{moduleassetlist::namespace}}`
 
-- **Layer:** CBS function
-- **Category:** assets
-- **Aliases:** `module_assetlist`
-- **Source:** `Refer/Risuai/src/ts/cbs.ts` (`moduleassetlist`)
+- Layer: CBS function
+- Category: assets
+- Aliases: `module_assetlist`
+- Source: `Refer/Risuai/src/ts/cbs.ts` (`moduleassetlist`)
 
 Returns a JSON array of a module's asset names.
 
@@ -26,7 +26,7 @@ Searches the enabled modules (`getModules()`) for the one whose `namespace`
 equals the first argument. If no module matches, it returns an empty string.
 
 Otherwise it returns a JSON array (`makeArray`) of that module's `assets`, using
-only the **first element of each entry** — the asset name. Module assets are
+only the first element of each entry — the asset name. Module assets are
 stored as `[name, path, ...]`, so the result is `["icon","frame",...]`.
 
 Module assets are part of the same asset library that the display tokens resolve

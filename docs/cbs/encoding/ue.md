@@ -1,12 +1,12 @@
 # CBS: `{{ue::hex}}`
 
-- **Layer:** CBS function
-- **Category:** encoding
-- **Aliases:** `unicodeencodefromhex`
-- **Source:** `Refer/Risuai/src/ts/cbs.ts` (`ue`)
+- Layer: CBS function
+- Category: encoding
+- Aliases: `unicodeencodefromhex`
+- Source: `Refer/Risuai/src/ts/cbs.ts` (`ue`)
 
 Returns the character for a hexadecimal code unit. Despite the "encode" name,
-its behavior is **identical** to [`{{u}}`](u.md) (a *decode*).
+its behavior is identical to [`{{u}}`](u.md) (a *decode*).
 
 ## Syntax
 
@@ -25,7 +25,7 @@ its behavior is **identical** to [`{{u}}`](u.md) (a *decode*).
 
 In the source `ue`'s callback is exactly the same as `u`'s:
 `String.fromCharCode(parseInt(hex, 16))`. It parses the hex argument and returns
-the matching character. It does **not** convert a character to hex — the name
+the matching character. It does not convert a character to hex — the name
 notwithstanding, it decodes a hex code unit to a character just like
 [`{{u}}`](u.md).
 

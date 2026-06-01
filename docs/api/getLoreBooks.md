@@ -1,11 +1,11 @@
 # API: `getLoreBooks(id, search)`
 
-- **Layer:** Preamble helper (defined in `luaCodeWrapper`)
-- **Permission tier:** Always available
-- **Async:** no
-- **Source:** `Refer/Risuai/src/ts/process/scriptings.ts` (`function getLoreBooks` in `luaCodeWrapper`, wrapping `declareAPI('getLoreBooksMain', ...)`)
+- Layer: Preamble helper (defined in `luaCodeWrapper`)
+- Permission tier: Always available
+- Async: no
+- Source: `Refer/Risuai/src/ts/process/scriptings.ts` (`function getLoreBooks` in `luaCodeWrapper`, wrapping `declareAPI('getLoreBooksMain', ...)`)
 
-Finds lorebook entries whose `comment` **exactly** matches `search`, across all
+Finds lorebook entries whose `comment` exactly matches `search`, across all
 three lore scopes, and returns them as a Lua array. This is the preamble wrapper
 over [`getLoreBooksMain`](getLoreBooksMain.md): it calls the raw function and
 `json.decode`s the result for you.
@@ -29,13 +29,13 @@ end
 | Param | Type | Description |
 |-------|------|-------------|
 | `id` | [access key](../element/access-key.md) | The key passed to your handler. No permission set is checked. |
-| `search` | string | The `comment` to match. Matching is **exact** (not key-based activation). |
+| `search` | string | The `comment` to match. Matching is exact (not key-based activation). |
 
 ## Returns
 
 A Lua array of matching [lorebook entries](../element/lorebook-entry.md). Each
 entry is the stored `loreBook` shape (`comment`, `content`, `key`, `secondkey`,
-`insertorder`, …) with its `content` already **CBS-parsed** in the
+`insertorder`, …) with its `content` already CBS-parsed in the
 selected-character context. Entries are gathered from, in order:
 
 1. Chat-local lore (`chat.localLore`).
@@ -47,7 +47,7 @@ call returns nothing.
 
 ## Permission
 
-Always available — the underlying `getLoreBooksMain` carries **no guard**, so it
+Always available — the underlying `getLoreBooksMain` carries no guard, so it
 works for any access key regardless of tier (including from edit listeners). It
 is *not* gated behind `lowLevelAccess`. See
 [access key & permission tiers](../element/access-key.md).

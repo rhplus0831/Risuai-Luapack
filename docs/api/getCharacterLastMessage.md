@@ -1,9 +1,9 @@
 # API: `getCharacterLastMessage(id)`
 
-- **Layer:** Host API (`declareAPI`)
-- **Permission tier:** Always available (no key guard)
-- **Async:** no
-- **Source:** `Refer/Risuai/src/ts/process/scriptings.ts` (`declareAPI('getCharacterLastMessage', ...)`)
+- Layer: Host API (`declareAPI`)
+- Permission tier: Always available (no key guard)
+- Async: no
+- Source: `Refer/Risuai/src/ts/process/scriptings.ts` (`declareAPI('getCharacterLastMessage', ...)`)
 
 Returns the data of the most recent char-role message in the chat.
 
@@ -17,12 +17,12 @@ getCharacterLastMessage(id)
 
 | Param | Type | Description |
 |-------|------|-------------|
-| `id` | [access key](../element/access-key.md) | The key passed to your handler. Accepted for convention; this call carries **no key guard**. |
+| `id` | [access key](../element/access-key.md) | The key passed to your handler. Accepted for convention; this call carries no key guard. |
 
 ## Returns
 
 `string` — the `data` of the last message whose `role` is `'char'`, found by
-scanning the chat backward from the end. If the chat has **no** char message, it
+scanning the chat backward from the end. If the chat has no char message, it
 falls back to the selected character's first message (`selchar.firstMessage`).
 Returns `''` only when there is no active chat.
 

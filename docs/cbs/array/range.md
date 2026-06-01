@@ -1,9 +1,9 @@
 # CBS: `{{range::spec}}`
 
-- **Layer:** CBS function
-- **Category:** array
-- **Aliases:** none
-- **Source:** `Refer/Risuai/src/ts/cbs.ts` (`range`)
+- Layer: CBS function
+- Category: array
+- Aliases: none
+- Source: `Refer/Risuai/src/ts/cbs.ts` (`range`)
 
 Generates a JSON array of a numeric sequence.
 
@@ -17,7 +17,7 @@ Generates a JSON array of a numeric sequence.
 
 | # | Name | Required | Description |
 |---|------|----------|-------------|
-| 1 | `spec` | yes | A JSON array describing the sequence (see below). |
+| 1 | `spec` | yes | A JSON array in one of these forms: `[N]`, `[start,end]`, or `[start,end,step]`. |
 
 ## Behavior
 
@@ -28,7 +28,7 @@ Generates a JSON array of a numeric sequence.
 - `[start, end, step]` (three entries) -> yields `start, start+step, ...` while
   `i < end`.
 
-The loop is `for (i = start; i < end; i += step)`, so `end` is **exclusive** and
+The loop is `for (i = start; i < end; i += step)`, so `end` is exclusive and
 each produced value is converted to a string. Because the condition is strictly
 `i < end`, a non-positive `step` (or a `start` already past `end`) produces an
 empty array `[]` rather than looping. If `spec` is not valid JSON it parses to an

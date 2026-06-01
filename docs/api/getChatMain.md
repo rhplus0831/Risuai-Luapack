@@ -1,11 +1,11 @@
 # API: `getChatMain(id, index)`
 
-- **Layer:** Host API (`declareAPI`) — raw form of [`getChat`](getChat.md)
-- **Permission tier:** Always available (no guard)
-- **Async:** no
-- **Source:** `Refer/Risuai/src/ts/process/scriptings.ts` (`declareAPI('getChatMain', ...)`)
+- Layer: Host API (`declareAPI`) — raw form of [`getChat`](getChat.md)
+- Permission tier: Always available (no guard)
+- Async: no
+- Source: `Refer/Risuai/src/ts/process/scriptings.ts` (`declareAPI('getChatMain', ...)`)
 
-Returns one chat message as a **JSON string**. This is the raw host call; in Lua
+Returns one chat message as a JSON string. This is the raw host call; in Lua
 prefer the [`getChat`](getChat.md) preamble helper, which decodes the JSON for
 you.
 
@@ -24,7 +24,7 @@ getChatMain(id, index)
 
 ## Returns
 
-A **JSON string**. When a message exists at `index`, it is
+A JSON string. When a message exists at `index`, it is
 `JSON.stringify({ role, data, time })` where `time` falls back to `0`. When the
 index is out of range, the host returns `JSON.stringify(null)` — the four
 characters `null`. Decode with `json.decode` (the helper does this and yields
@@ -32,7 +32,7 @@ Lua `nil` for the out-of-range case).
 
 ## Permission
 
-This call carries **no guard** — it works with any `id`, including the restricted
+This call carries no guard — it works with any `id`, including the restricted
 edit-display key. See [access key & tiers](../element/access-key.md).
 
 ## Elements used

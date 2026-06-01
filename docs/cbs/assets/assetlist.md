@@ -1,9 +1,9 @@
 # CBS: `{{assetlist}}`
 
-- **Layer:** CBS function
-- **Category:** assets
-- **Aliases:** none
-- **Source:** `Refer/Risuai/src/ts/cbs.ts` (`assetlist`)
+- Layer: CBS function
+- Category: assets
+- Aliases: none
+- Source: `Refer/Risuai/src/ts/cbs.ts` (`assetlist`)
 
 Returns a JSON array of the current character's additional asset names.
 
@@ -20,7 +20,7 @@ This token takes no arguments.
 ## Behavior
 
 Reads the selected character's `additionalAssets` and returns a JSON array
-(`makeArray`) of the **first element of each entry** — the asset name only, not
+(`makeArray`) of the first element of each entry — the asset name only, not
 the path or extension. `additionalAssets` is stored as `[name, path, ext]`
 triples, so the result is `["sword","map",...]`.
 

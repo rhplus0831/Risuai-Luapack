@@ -1,9 +1,9 @@
 # API: `setFullChat(id, value)`
 
-- **Layer:** Preamble helper (wraps [`setFullChatMain`](setFullChatMain.md))
-- **Permission tier:** Safe (inherits `setFullChatMain`; blocked in `editDisplay`)
-- **Async:** no
-- **Source:** `Refer/Risuai/src/ts/process/scriptings.ts` (`luaCodeWrapper`, `function setFullChat`)
+- Layer: Preamble helper (wraps [`setFullChatMain`](setFullChatMain.md))
+- Permission tier: Safe (inherits `setFullChatMain`; blocked in `editDisplay`)
+- Async: no
+- Source: `Refer/Risuai/src/ts/process/scriptings.ts` (`luaCodeWrapper`, `function setFullChat`)
 
 Replaces the entire chat from a Lua array of `{role, data}` tables.
 
@@ -27,14 +27,14 @@ Nothing.
 ## Behavior
 
 This is a thin wrapper: the helper calls `setFullChatMain(id, json.encode(value))`.
-The host then rebuilds `chat.message` keeping **only** `role` and `data` per
+The host then rebuilds `chat.message` keeping only `role` and `data` per
 message (any `time` or other field is dropped). Roles are stored as-is by the
 JSON round-trip; supply `'user'` or `'char'` (the host does not re-coerce here,
 so an unexpected role string is stored verbatim).
 
 ## Permission
 
-Safe tier — no-ops unless `id` is in `ScriptingSafeIds`, so it is **not**
+Safe tier — no-ops unless `id` is in `ScriptingSafeIds`, so it is not
 available to [`editDisplay`](../hooks/editDisplay.md) listeners. See
 [access key & tiers](../element/access-key.md).
 

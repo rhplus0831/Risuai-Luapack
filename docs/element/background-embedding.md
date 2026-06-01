@@ -1,7 +1,7 @@
 # Element: Background embedding (`backgroundHTML`)
 
-- **Kind:** Element (data structure)
-- **Source:** `Refer/Risuai/src/ts/process/scriptings.ts` (`getBackgroundEmbedding`, `setBackgroundEmbedding`), `Refer/Risuai/src/lib/ChatScreens/BackgroundDom.svelte` (render), `Refer/Risuai/src/ts/process/modules.ts` (`moduleBackgroundEmbedding`), `Refer/Risuai/src/ts/parser/parser.svelte.ts` (display parsing)
+- Kind: Element (data structure)
+- Source: `Refer/Risuai/src/ts/process/scriptings.ts` (`getBackgroundEmbedding`, `setBackgroundEmbedding`), `Refer/Risuai/src/lib/ChatScreens/BackgroundDom.svelte` (render), `Refer/Risuai/src/ts/process/modules.ts` (`moduleBackgroundEmbedding`), `Refer/Risuai/src/ts/parser/parser.svelte.ts` (display parsing)
 
 Persistent HTML rendered behind the chat. Risu's UI calls it "background
 embedding", but the character field Lua touches is `backgroundHTML`.
@@ -10,8 +10,8 @@ embedding", but the character field Lua touches is `backgroundHTML`.
 
 Two separate sources feed the background layer:
 
-- **Character**: `character.backgroundHTML`.
-- **Modules**: each enabled module's `backgroundEmbedding`, concatenated by
+- Character: `character.backgroundHTML`.
+- Modules: each enabled module's `backgroundEmbedding`, concatenated by
   `moduleUpdate` into the `moduleBackgroundEmbedding` store.
 
 `BackgroundDom.svelte` renders the concatenation:
@@ -26,10 +26,10 @@ through `ParseMarkdown(..., 'back')` (background display mode).
 
 [`getBackgroundEmbedding(id)`](../api/getBackgroundEmbedding.md) and
 [`setBackgroundEmbedding(id, html)`](../api/setBackgroundEmbedding.md) read and
-write **only the selected character's `backgroundHTML`.** They do not see or
+write only the selected character's `backgroundHTML`. They do not see or
 modify the module `backgroundEmbedding` half of the rendered output.
 
-Both calls are **Safe tier** — guarded on `ScriptingSafeIds`. They are *not*
+Both calls are Safe tier — guarded on `ScriptingSafeIds`. They are *not*
 `editDisplay`-capable: an `editDisplay` listener holds only an edit-display key,
 so these calls no-op there. (This is the same Safe tier as `setName`,
 `addChat`, etc.)
@@ -50,8 +50,8 @@ end
 
 The background HTML goes through the display pipeline in background mode:
 
-- **CBS** is parsed first (`risuChatParser`), so `{{getvar::hp}}` etc. expand.
-- **Asset tokens** are expanded in **background mode** — notably `{{bg::name}}`
+- CBS is parsed first (`risuChatParser`), so `{{getvar::hp}}` etc. expand.
+- Asset tokens are expanded in background mode — notably `{{bg::name}}`
   only renders here (see [Asset display tokens](asset-tokens.md)).
 - The result is sanitized like all [display HTML](display-html.md): `<style>` is
   allowed but each class selector is rewritten with an `x-risu-` prefix and
