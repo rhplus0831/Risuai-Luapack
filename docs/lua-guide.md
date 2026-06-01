@@ -171,6 +171,36 @@ local items = getState(id, 'inventory')            -- back to a Lua table
 `getState` on a name that was never set will error (it decodes an empty string),
 so initialise before reading.
 
+`getGlobalVar(id, key)` reads global chat variables. Risu's custom prompt
+toggles are stored there under `toggle_<key>`; module toggles are appended to the
+same toggle list. The sidebar toggle parser understands these forms:
+
+```text
+key=Label                  checkbox; value toggles between "1" and "0"
+key=Label=select=A,B,C     select; value is the zero-based option index string
+key=Label=text             one-line text input
+key=Label=textarea         multi-line text input
+```
+
+Decorative toggle rows also exist (`caption`, `divider`, `group`, `groupEnd`),
+but they do not create a stored value. Missing chat/global variables read back as
+`"null"` in Risu; scripts often normalize both `"null"` and an empty string when
+they are written to run in the emulator too.
+
+## Lorebooks from Lua
+
+`getLoreBooks(id, search)` is a direct comment lookup, not the normal activation
+scan. It returns entries from the current chat's local lore, the selected
+character's global lore, and enabled module lorebooks when `entry.comment ==
+search`. Returned entries keep lorebook fields such as `comment`, `content`,
+`key`, `secondkey`, `insertorder`, `alwaysActive`, `selective`, `useRegex`, and
+`mode`; the returned `content` has already been CBS-parsed in the selected
+character context.
+
+Use `getLoreBooks` for named configuration/preset entries. Use `loadLoreBooks`
+when you need the currently activated lore after Risu's key/regex/priority/token
+budget selection logic.
+
 ## CBS from Lua
 
 Use `cbs("Hello, {{user}}")` to expand a CBS template string from Lua. It runs
@@ -221,6 +251,15 @@ assistant role. Pass `true` as the third argument to enable multimodal inlay
 extraction; pass `{ streaming = true }` as the fourth argument to force
 streaming and receive the collected final text.
 
+With multimodal extraction enabled, `LLM`/`axLLM` scan message text for
+`{{inlay::...}}`, `{{inlayed::...}}`, and `{{inlayeddata::...}}`, remove those
+tokens from the text, and attach the matching inlay assets to the request. For
+assistant-role messages, only `{{inlayeddata::...}}` is attached; for user and
+system messages, all three inlay token names are attached. CBS display helpers
+for normal character assets, such as `{{image::...}}`, `{{img::...}}`, and
+`{{emotion::...}}`, are display helpers and are not extracted by the Lua LLM
+helpers.
+
 `simpleLLM(id, prompt):await()` is the raw host shortcut for a one-message user
 prompt and returns a result object directly. `request(id, url):await()` returns
 a JSON string, so decode it with `json.decode`.
@@ -238,11 +277,17 @@ global — that's how Risu finds them.
 
 - **Chat indices are 0-based.** `getChat(id, 0)` is the first message — they map
   straight to a JS array, unusual for Lua. Negative indices follow
-  JavaScript's `Array.at`: `getChat(id, -1)` reads the last message.
+  JavaScript's `Array.at`: `getChat(id, -1)` reads the last message. `setChat`
+  and `setChatRole` also use `Array.at`, so `-1` targets the last message.
 - **Chat mutation uses JavaScript array semantics.** `cutChat(start, end)` keeps
   `[start, end)`, while `insertChat` and `removeChat` use JS `splice`. Message
   roles are only `user` or `char`; any other role passed to `addChat`,
   `insertChat`, or `setChatRole` becomes `char`.
+- **Display HTML is sanitized.** Risu lets chat text include useful HTML such as
+  buttons, but the display parser sanitizes tags and attributes. If you store
+  private marker tags for your own scripts, treat them as raw chat-data markers,
+  not as guaranteed rendered HTML. `<Thoughts>...</Thoughts>` is a special case:
+  Risu converts it to a collapsible details block for display.
 - **`request` is restricted:** HTTPS only, URL ≤ 120 chars, Risu's current code
   allows 6 calls/minute before returning 429, and some hosts are banned. It
   returns a JSON string `{status, data}` — decode it. The luapack emulator

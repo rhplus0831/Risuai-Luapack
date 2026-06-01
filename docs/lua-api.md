@@ -29,12 +29,12 @@ Provided by Risu's preamble. Prefer these over the raw `*Main` host calls when t
 
 | Helper | What it does |
 |--------|--------------|
-| `LLM(id, prompt, useMultimodal, options)` | Run a sub-request against the main model (low-level); roles accept `system`/`sys`, `user`, `assistant`/`bot`/`char`. |
+| `LLM(id, prompt, useMultimodal, options)` | Run a sub-request against the main model (low-level); roles accept `system`/`sys`, `user`, `assistant`/`bot`/`char`; optional multimodal extraction handles inlay tokens. |
 | `axLLM(id, prompt, useMultimodal, options)` | Run a sub-request against the auxiliary model (low-level); same prompt/options shape as `LLM`. |
 | `getCharacterImage(id)` | Return `{{inlayed::...}}` for the character image, or an empty string. Awaitable. |
 | `getChat(id, index)` | Get one chat message as a table `{role, data, time}` (0-based; negative indexes work like JS `Array.at`). |
 | `getFullChat(id)` | Get the whole chat as an array of `{role, data, time}`. |
-| `getLoreBooks(id, search)` | Find lorebook entries whose comment matches `search`. |
+| `getLoreBooks(id, search)` | Find local, character-global, and enabled-module lorebook entries whose `comment` exactly matches `search`; returned `content` is CBS-parsed. |
 | `getPersonaImage(id)` | Return `{{inlayed::...}}` for the persona image, or an empty string. Awaitable. |
 | `getState(id, name)` | Read a JSON-decoded state value (chat var, `__`-prefixed). |
 | `listenEdit(type, func)` | Register a chained edit-trigger handler (editRequest/Input/Output/Display). |
@@ -60,7 +60,7 @@ Injected globals. Most calls take the access-key `id` as their first argument (e
 | `getChatMain(id, index)` | Raw `getChat` (returns a JSON string). |
 | `getChatVar(id, key)` | Read a chat variable (string). |
 | `getFullChatMain(id)` | Raw `getFullChat` (returns a JSON string). |
-| `getGlobalVar(id, key)` | Read a global chat variable. |
+| `getGlobalVar(id, key)` | Read a global chat variable, including custom toggle values stored as `toggle_<key>`. |
 | `getLoreBooksMain(id, search)` | Raw `getLoreBooks` (returns a JSON string). |
 | `getName(id)` | Character name. |
 | `getPersonaDescription(id)` | Persona (user) description, CBS-parsed. |
@@ -90,8 +90,8 @@ Injected globals. Most calls take the access-key `id` as their first argument (e
 | `removeChat(id, index)` | Remove the message at an index with JS `splice` semantics. |
 | `setBackgroundEmbedding(id, data)` | Set the character background HTML. |
 | `setCharacterFirstMessage(id, data)` | Set the character's first message. |
-| `setChat(id, index, value)` | Replace the text of the message at an index. |
-| `setChatRole(id, index, value)` | Set role to `user`; any other value becomes `char`. |
+| `setChat(id, index, value)` | Replace the text of the message at an index; negative indexes work like JS `Array.at`. |
+| `setChatRole(id, index, value)` | Set role to `user`; any other value becomes `char`; negative indexes work like JS `Array.at`. |
 | `setDescription(id, desc)` | Set the character description. |
 | `setFullChatMain(id, value)` | Raw `setFullChat` (takes a JSON string). |
 | `setName(id, name)` | Set the character name. |
