@@ -10,7 +10,6 @@ content with luapack. Every page is derived from the RisuAI source under
 | [`hooks/`](hooks/) | The event/edit entry points Risu calls: when each fires, what it receives, what it returns, and which permissions it gets. |
 | [`api/`](api/) | The Lua host functions (`declareAPI`) and the preamble helpers, grouped by permission tier. |
 | [`cbs/`](cbs/) | The `{{...}}` Callback System functions, grouped by category. |
-| [`index.json`](index.json) | Machine-oriented index for agents. Paths are relative to `docs/`; each item includes title, kind, metadata, signature, aliases, and summary when available. |
 
 ## How Risu runs your script
 
